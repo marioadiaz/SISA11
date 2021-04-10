@@ -1,0 +1,41 @@
+<%= form_for(@tecnico) do |f| %>
+    <div>
+    	<%= f.label :dni %>
+        <%= f.text_field :dni %>
+    </div>
+    <div>
+      	<%= f.label :apellido %>
+        <%= f.text_field :apellido %>
+      </div>
+    <div>
+      	<%= f.label :nombre %>
+        <%= f.text_field :nombre %>
+    </div>
+    <div>
+        <%= f.label :domicilio %>
+        <%= f.text_field :domicilio %>
+    </div>
+    <div>
+      	<%= f.label :barrio %>
+        <%= f.text_field :barrio %>
+    </div>
+    <div>
+      	<%= f.label :celular %>
+        <%= f.text_field :celular %>
+    </div>
+    <div>
+    	<%= f.label :telefono %>
+     	<%= f.text_field :telefono%>
+    </div>
+    <div>
+      	<%= f.label :correo %>
+        <%= f.text_field :correo %>
+    </div>
+    <div>
+      	<%= f.label :observaciones_tecnico %>
+        <%= f.text_field :observaciones_tecnico %>
+    </div>
+    <div>
+    	<%= f.button :submit%>
+    </div>
+<% end %>

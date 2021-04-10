@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="card-header d-flex justify-content-between">
+      <div><h2 class="my-0 font-size:8vw">Detalle de la OT</h2></div>
+      <div> <%= link_to 'Editar Cliente', edit_cliente_path(@cliente), class: "btn btn-primary mr-3" %></div>
+    </div>
+  <div class="card-body">
+    <ul class="list-unstyled mt-3 mb-4 text-center">
+
+      <h3>
+        <strong>Nombre:</strong>
+        <%= @cliente.nombre %>
+      </h3>
+      <h3>
+        <strong>Apellido:</strong>
+        <%= @cliente.apellido %>
+      </h3>
+
+      <h3>
+        <strong>Cuit:</strong>
+        <%= @cliente.cuit %>
+      </h3>
+
+
+      <h3>
+        <strong>Rubro:</strong>
+        <%= @cliente.rubro %>
+      </h3>
+
+      <h3>
+        <strong>Domicilio:</strong>
+        <%= @cliente.domicilio %>
+      </h3>
+
+
+      <h3>
+        <strong>Barrio:</strong>
+        <%= @cliente.barrio %>
+      </h3>
+
+      <h3>
+        <strong>Celular:</strong>
+        <%= @cliente.celular %>
+      </h3>
+
+      <h3>
+        <strong>Telefono:</strong>
+        <%= @cliente.telefono %>
+      </h3>
+
+      <h3>
+        <strong>Correo:</strong>
+        <%= @cliente.correo %>
+      </h3>
+
+      <h3>
+        <strong>Observaciones:</strong>
+        <%= @cliente.observaciones_cliente %>
+      </h3>
+      <h3>
+        <strong>Tipo Cliente:</strong>
+        <%= @cliente.tipo_cliente %>
+      </h3>
+      <h3>
+        <strong>Calificación:</strong>
+        <%= @cliente.calificacion %>
+      </h3>
+    </ul>
+
+    <a  class="btn btn-lg btn-block btn-dark" href="/clientes">Atrás</a>
+  </div>
+</div>

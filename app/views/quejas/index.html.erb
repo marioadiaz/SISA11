@@ -1,0 +1,32 @@
+<h1>Listado de Quejas</h1>
+<%= link_to "Crear Queja", quejas_new_path %>
+<table>
+  <tr>
+    <thead>
+   		<th>Cliente</th>
+   		<th>Tecnico</th>
+   		<th>NroQueja</th>
+      	<th>NroCertificado</th>
+        <th>FechaQueja</th>
+      	<th>Observaciones</th>
+      	<th>Estado</th>
+      	
+    </thead>
+  </tr>
+  <% @quejas.each do |queja| %>
+  	<%if queja.baja == true %>
+	  	<tr>
+	    	<td><%= queja.orden_fumigacion.cliente.apellido %></td>
+	        <td><%= queja.orden_fumigacion.tecnico.apellido%></td>
+	        <td><%= queja.nro_queja %></td>
+	        <td><%= queja.fecha_queja %></td>
+	        <td><%= queja.observaciones_queja %></td>
+	        <td><%= queja.estado %></td>
+	        <td>
+	        	<%= link_to 'Editar', edit_queja_path(queja) %>
+	        	<%= link_to 'Eliminar', queja, method: :delete, data: { confirm: "¿Estás seguro/a?" }  %>
+	        </td>
+	  	</tr>
+	<% end %>  	
+  <% end %>
+</table>

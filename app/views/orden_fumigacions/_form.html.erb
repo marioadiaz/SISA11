@@ -1,0 +1,80 @@
+<%= simple_form_for(@orden_fumigacion) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="center-block form-inputs orden_fumigacion-new-form">
+
+    <div class="row">
+      <div class="col-sm">
+        <div><%= f.input :cliente_id %></div>
+
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#buscador_cliente">
+          Buscar cliente
+        </button>
+
+        <div id="cliente_ap_orden_fumigacion" class="apellido-cliente col-md-3" > 
+          <%= "Cliente: #{@cliente.present? ? @cliente.apellido : "Cliente general"}" %>
+        </div>
+        <div id="cliente_id_orden_fumigacion" class="apellido-cliente col-md-3" > 
+          <%= "Cliente_id: #{@cliente.present? ? @cliente.cliente_id : "Cliente id"}" %>
+
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :tecnico_id %></div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :nro_ordfumigacion %></div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :nro_certificado %></div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :tipo_certificado %></div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :fecha_aplicacion %></div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :hora_aplicacion %></div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :tratamiento %></div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :vector %></div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :superficie %></div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :veneno %></div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :droga %></div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :observaciones_ordfumigacion %></div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :fecha_vencimiento %></div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :proximo_tratamiento %></div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :importe %></div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :estado %></div>
+      </div>
+    </div>
+    
+  <!-- div form-inputs cliente-new-form -->
+   <div class= "d-flex my-3">
+     <div> <%= f.button :submit,name="Confirmar",:class => "btn btn-success"  %> </div>
+  </div>
+<% end %>
+
+<%= render 'buscador_cliente' %>
+
+
+

@@ -1,0 +1,74 @@
+<%= form_for(@orden_fumigacion) do |f| %>
+    <div>
+    	<%= f.label :cliente_id %>
+    	<%= collection_select(:orden_fumigacion, :cliente_id, Cliente.all.order(:apellido), :id, :apellido, {:selected => @orden_fumigacion.cliente_id} ) %>
+    </div>
+    <div>
+    	<%= f.label :tecnico_id %>
+    	<%= collection_select(:orden_fumigacion, :tecnico_id, Tecnico.all.order(:apellido), :id, :apellido, {:selected => @orden_fumigacion.tecnico_id} ) %>
+    </div>
+    <div>
+      	<%= f.label :nro_ordfumigacion %>
+        <%= f.text_field :nro_ordfumigacion %>
+      </div>
+    <div>
+      	<%= f.label :nro_certificado %>
+        <%= f.text_field :nro_certificado %>
+    </div>
+    <div>
+      	<%= f.label :tipo_certificado %>
+        <%= f.text_field :tipo_certificado %>
+    </div>
+    <div>
+      	<%= f.label :fecha_aplicacion %>
+        <%= f.text_field :fecha_aplicacion %>
+    </div>
+    <div>
+    	<%= f.label :hora_aplicacion %>
+     	<%= f.text_field :hora_aplicacion%>
+    </div>
+    <div>
+      	<%= f.label :tratamiento %>
+        <%= f.text_field :tratamiento %>
+    </div>
+    <div>
+      	<%= f.label :vector %>
+        <%= f.text_field :vector %>
+    </div>
+    <div>
+    	<%= f.label :superficie %>
+      	<%= f.text_field :superficie %>
+  	</div>
+  	<div>
+    	<%= f.label :veneno %>
+      	<%= f.text_field :veneno %>
+  	</div>
+	<div>
+    	<%= f.label :droga %>
+      	<%= f.text_field :droga %>
+  	</div>
+	<div>
+    	<%= f.label :observaciones_ordfumigacion %>
+      	<%= f.text_field :observaciones_ordfumigacion %>
+  	</div>
+	<div>
+    	<%= f.label :fecha_vencimiento %>
+      	<%= f.text_field :fecha_vencimiento %>
+  	</div>
+	<div>
+    	<%= f.label :proximo_tratamiento %>
+      	<%= f.text_field :proximo_tratamiento %>
+  	</div>
+	<div>
+    	<%= f.label :importe %>
+      	<%= f.text_field :importe %>
+  	</div>
+	<div>
+    	<%= f.label :estado %>
+      	<%= f.text_field :estado %>
+  	</div>  	
+
+    <div>
+    	<%= f.button :submit%>
+    </div>
+<% end %>

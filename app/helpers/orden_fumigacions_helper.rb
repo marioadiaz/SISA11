@@ -1,0 +1,2 @@
+module OrdenFumigacionsHelper
+end

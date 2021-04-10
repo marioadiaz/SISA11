@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  orden_fumigacion: one
+  nro_queja: 1
+  fecha_queja: 2021-04-07
+  observaciones_queja: MyString
+  estado: MyString
+  baja: false
+
+two:
+  orden_fumigacion: two
+  nro_queja: 1
+  fecha_queja: 2021-04-07
+  observaciones_queja: MyString
+  estado: MyString
+  baja: false

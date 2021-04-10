@@ -1,0 +1,73 @@
+rails new SISA11 -d postgresql
+cd SISA11
+yarn add bootstrap jquery popper.js
+
+configuracion environment.js
+
+const { environment } = require('@rails/webpacker')
+
+const webpack = require('webpack')
+
+environment.plugins.append('Provide', new webpack.ProvidePlugin({
+  $: 'jquery',
+  jQuery: 'jquery',
+  Popper: ['popper.js', 'default']
+}))
+
+module.exports = environment
+
+fin configuracion environment.js
+
+configuracion application.js
+
+import "bootstrap"
+import "../stylesheets/application"
+
+/*****ESTO ES DE TEST***/
+document.addEventListener("turbolinks:load", function() {
+
+	$('[data-toggle="tooltip"]').tooltip()
+	$('[data-toggle="popover"]').popover()
+
+});
+
+
+fin configuracion application.js
+
+configuracion archivo javascript/stylesheets/application.scss
+
+@import "~bootstrap/scss/bootstrap";
+
+fin configuracion
+
+
+Generate Model
+    rails new SISA01 -d postgresql
+
+ALTA DE CLIENTES
+    rails generate model Cliente cuit:string rubro:string apellido:string nombre:string domicilio:string barrio:string celular:string telefono:string correo:string observaciones_cliente:string tipo_cliente:integer calificacion:integer baja:boolean
+
+ALTA DE TECNICOS
+    rails generate model Tecnico dni:string apellido:string nombre:string domicilio:string barrio:string celular:string telefono:string correo:string observaciones_tecnico:string baja:boolean
+
+ALTA DE ORDEN_FUMICAGION (CERTIFICADOS)
+
+    rails generate model OrdenFumigacion cliente:references tecnico:references nro_ordfumigacion:integer nro_certificado:integer tipo_certificado:string fecha_aplicacion:date hora_aplicacion:time tratamiento:string vector:string superficie:string veneno:string droga:string observaciones_ordfumigacion:string fecha_vencimiento:date proximo_tratamiento:date importe:integer estado:string baja:boolean
+
+ALTA DE QUEJAS
+    rails generate model Queja orden_fumigacion:references nro_queja:integer fecha_queja:date observaciones_queja:string estado:string baja:boolean
+
+CREACION Y MIGRACION DEL MODELO DE DATOS A LA BD
+
+  rails db:create
+  rails db:migrate
+
+AGREGAR CONTROLADORES
+
+  rails generate controller Clientes new index show create edit update destroy
+  
+  rails generate controller Tecnicos new index show create edit update destroy
+
+  rails generate controller Quejas new index show create edit update destroy
+
+  rails generate controller OrdenFumigacions new index show create edit update destroy

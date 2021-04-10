@@ -1,0 +1,37 @@
+<h1>Listado de tecnicos</h1>
+<%= link_to "Crear Tecnico", tecnicos_new_path %>
+<table>
+  <tr>
+    <thead>
+   		<th>DNI</th>
+      	<th>Apellido</th>
+      	<th>Nombre</th>
+        <th>Domicilio</th>
+      	<th>Barrio</th>
+      	<th>Celular</th>
+      	<th>Telefono</th>
+      	<th>Correo</th>
+      	<th>Observaciones</th>
+      	
+    </thead>
+  </tr>
+  <% @tecnicos.each do |tecnico| %>
+  	<%if tecnico.baja == true %>
+	  	<tr>
+	    	<td><%= tecnico.dni %></td>
+	        <td><%= tecnico.apellido %></td>
+	        <td><%= tecnico.nombre %></td>
+	        <td><%= tecnico.domicilio %></td>
+	        <td><%= tecnico.barrio %></td>
+	        <td><%= tecnico.celular %></td>
+	        <td><%= tecnico.telefono %></td>
+	        <td><%= tecnico.correo %></td>
+	        <td><%= tecnico.observaciones_tecnico %></td>
+	        <td>
+	        	<%= link_to 'Editar', edit_tecnico_path(tecnico) %>
+	        	<%= link_to 'Eliminar', tecnico, method: :delete, data: { confirm: "¿Estás seguro/a?" }  %>
+	        </td>
+	  	</tr>
+	<% end %>  	
+  <% end %>
+</table>

@@ -1,0 +1,53 @@
+<h1>Listado de Ordenes de Fumigacion</h1>
+<%= link_to "Crear Orden de Fumigacion", orden_fumigacions_new_path %>
+<table>
+  <tr>
+    <thead>
+   		<th>Cliente</th>
+   		<th>Tecnico</th>
+   		<th>NroOrdFumigacion</th>
+      	<th>NroCertificado</th>
+        <th>TipoCertificado</th>
+      	<th>FechaAplicacion</th>
+      	<th>HoraAplicacion</th>
+      	<th>Tratamiento</th>
+      	<th>Vector</th>
+      	<th>Superficie</th>
+      	<th>Veneno</th>
+      	<th>Droga</th>
+      	<th>ObsOrdFumigacion</th>
+      	<th>FechaVencimiento</th>
+      	<th>ProximoTratamiento</th>
+      	<th>Importe</th>
+      	<th>Estado</th>
+      	
+    </thead>
+  </tr>
+  <% @orden_fumigacions.each do |orden_fumigacion| %>
+  	<%if orden_fumigacion.baja == true %>
+	  	<tr>
+	    	<td><%= orden_fumigacion.cliente.apellido %></td>
+	        <td><%= orden_fumigacion.tecnico.apellido%></td>
+	        <td><%= orden_fumigacion.nro_ordfumigacion %></td>
+	        <td><%= orden_fumigacion.nro_certificado %></td>
+	        <td><%= orden_fumigacion.tipo_certificado %></td>
+	        <td><%= orden_fumigacion.fecha_aplicacion %></td>
+	        <td><%= orden_fumigacion.hora_aplicacion %></td>
+	        <td><%= orden_fumigacion.tratamiento %></td>
+	        <td><%= orden_fumigacion.vector %></td>
+	        <td><%= orden_fumigacion.superficie %></td>
+	        <td><%= orden_fumigacion.veneno %></td>
+	        <td><%= orden_fumigacion.droga %></td>
+	        <td><%= orden_fumigacion.observaciones_ordfumigacion %></td>
+	        <td><%= orden_fumigacion.fecha_vencimiento %></td>
+	        <td><%= orden_fumigacion.proximo_tratamiento %></td>
+	        <td><%= orden_fumigacion.importe %></td>
+	        <td><%= orden_fumigacion.estado %></td>
+	        <td>
+	        	<%= link_to 'Editar', edit_orden_fumigacion_path(orden_fumigacion) %>
+	        	<%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a?" }  %>
+	        </td>
+	  	</tr>
+	<% end %>  	
+  <% end %>
+</table>

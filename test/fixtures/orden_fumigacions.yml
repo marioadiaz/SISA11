@@ -1,0 +1,41 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cliente: one
+  tecnico: one
+  nro_ordfumigacion: 1
+  nro_certificado: 1
+  tipo_certificado: MyString
+  fecha_aplicacion: 2021-04-07
+  hora_aplicacion: 2021-04-07 20:13:35
+  tratamiento: MyString
+  vector: MyString
+  superficie: MyString
+  veneno: MyString
+  droga: MyString
+  observaciones_ordfumigacion: MyString
+  fecha_vencimiento: 2021-04-07
+  proximo_tratamiento: 2021-04-07
+  importe: 1
+  estado: MyString
+  baja: false
+
+two:
+  cliente: two
+  tecnico: two
+  nro_ordfumigacion: 1
+  nro_certificado: 1
+  tipo_certificado: MyString
+  fecha_aplicacion: 2021-04-07
+  hora_aplicacion: 2021-04-07 20:13:35
+  tratamiento: MyString
+  vector: MyString
+  superficie: MyString
+  veneno: MyString
+  droga: MyString
+  observaciones_ordfumigacion: MyString
+  fecha_vencimiento: 2021-04-07
+  proximo_tratamiento: 2021-04-07
+  importe: 1
+  estado: MyString
+  baja: false

@@ -1,0 +1,25 @@
+<%= form_for(@queja) do |f| %>
+	<div>
+    	<%= f.label :orden_fumigacion_id %>
+    	<%= collection_select(:queja, :orden_fumigacion_id, OrdenFumigacion.all.order(:nro_certificado), :id, :nro_certificado, {:selected => @queja.orden_fumigacion_id} ) %>
+    </div>
+    <div>
+      	<%= f.label :nro_queja %>
+        <%= f.text_field :nro_queja %>
+    </div>
+    <div>
+    	<%= f.label :fecha_queja %>
+     	<%= f.text_field :fecha_queja%>
+    </div>
+    <div>
+      	<%= f.label :observaciones_queja %>
+        <%= f.text_field :observaciones_queja %>
+    </div>
+    <div>
+      	<%= f.label :estado %>
+        <%= f.text_field :estado %>
+    </div>
+    <div>
+    	<%= f.button :submit%>
+    </div>
+<% end %>
