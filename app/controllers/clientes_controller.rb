@@ -1,5 +1,5 @@
 class ClientesController < ApplicationController
-
+before_action :set_cliente, only: [:show, :edit, :update, :delete]
   def index
       @clientes = Cliente.all.order(:apellido)
       respond_to do |format|

@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   get 'buscador_clientes/:termino', to: 'clientes#buscador'
   post '/add_cliente_orden_fumigacion/', to: 'orden_fumigacions#add_cliente'
   get 'buscador_tecnicos/:termino', to: 'tecnicos#buscador'
+  post '/add_tecnico_orden_fumigacion/', to: 'orden_fumigacions#add_tecnico'
 
   #QUEJAS
   get '/quejas', to: 'quejas#index'
@@ -44,4 +45,7 @@ Rails.application.routes.draw do
   patch '/queja/:id', to: 'quejas#update'
   put '/queja/:id', to: 'quejas#update'
   delete '/queja/:id', to: 'quejas#delete'
+
+
+  get 'tasks/new', to: 'tasks#new'
 end

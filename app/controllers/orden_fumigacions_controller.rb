@@ -26,7 +26,7 @@ class OrdenFumigacionsController < ApplicationController
     @orden_fumigacion.update baja: true
 
     respond_to do |format|
-      if @orden_fumigacion.save
+      if @orden_fumigacion.save!
         format.html { redirect_to orden_fumigacions_path, notice: 'La orden_fumigacion fue exitosamente creada.' }
         format.json { render :show, status: :created, location: @orden_fumigacion }
       else
@@ -60,11 +60,12 @@ class OrdenFumigacionsController < ApplicationController
   end
 
   def add_cliente 
-    @cliente = Cliente.find(params[:cliente_id])
     
+    @cliente = Cliente.find(params[:cliente_id])
+  
     if @cliente.present?
       
-        result = { apellido: @cliente.try(:apellido) }
+        result = { apellido: @cliente.try(:apellido)}
         puts "result: "
         puts result
         respond_to do |format|
@@ -74,9 +75,29 @@ class OrdenFumigacionsController < ApplicationController
             format.json { render json: @cliente.errors.full_messages, status: :unprocessable_entity }
           end
         end
-      
     else
       render json: { message: "El cliente no se encontró" }, status: :not_found
+    end
+  end
+
+  def add_tecnico
+    
+    @tecnico = Tecnico.find(params[:tecnico_id])
+
+    if @tecnico.present?
+      
+        result = { apellido: @tecnico.try(:apellido) }
+        puts "result: "
+        puts result
+        respond_to do |format|
+        if @tecnico.valid?
+            format.json { render json: result }
+          else
+            format.json { render json: @tecnico.errors.full_messages, status: :unprocessable_entity }
+          end
+        end
+    else
+      render json: { message: "El tecnico no se encontró" }, status: :not_found
     end
   end
 

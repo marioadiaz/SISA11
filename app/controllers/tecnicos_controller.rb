@@ -61,8 +61,7 @@ class TecnicosController < ApplicationController
     @resultados = Tecnico.buscador(params[:termino]).map do |tecnico|
       {
           id: tecnico.id,
-          cuit_tecnico: tecnico.cuit,
-          apellido_tecnico: tecnico.apellido
+          apellido: tecnico.apellido
       }
     end
 
