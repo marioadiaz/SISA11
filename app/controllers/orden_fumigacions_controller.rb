@@ -1,8 +1,8 @@
 class OrdenFumigacionsController < ApplicationController
-  before_action only: [:new, :show, :edit, :delete, :add_cliente]
+before_action :set_orden_fumigacion, only: [ :show, :edit, :update, :delete, :add_cliente]
 
   def index
-    @orden_fumigacions = OrdenFumigacion.all.order(:nro_ordfumigacion)
+    @orden_fumigacions = OrdenFumigacion.all.order(:nro_certificado)
       respond_to do |format|
       format.html
       format.json
@@ -18,6 +18,7 @@ class OrdenFumigacionsController < ApplicationController
 
   def show
     # No lo usamos en este modelo
+    @orden_fumigacion = OrdenFumigacion.find(params[:id])
   end
 
   def create

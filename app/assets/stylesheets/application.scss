@@ -10,6 +10,8 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+@import 'bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+@import url('https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700');
