@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users
+
+root 'pages#home'
+
+
+devise_for :users
+devise_scope :user do
+  get '/users/sign_out' => 'devise/sessions#destroy'
+end
+ get '/pages/home', to: 'pages#home'
   #CLIENTES
   get '/clientes', to: 'clientes#index'
   get 'clientes/new', to: 'clientes#new'
@@ -23,7 +31,7 @@ Rails.application.routes.draw do
 
   #ORDEN FUMIGACION
   get '/orden_fumigacions', to: 'orden_fumigacions#index'
-  
+
   get 'orden_fumigacions/new', to: 'orden_fumigacions#new'
   post '/orden_fumigacions', to: 'orden_fumigacions#create'
 
@@ -33,7 +41,7 @@ Rails.application.routes.draw do
   patch '/orden_fumigacion/:id', to: 'orden_fumigacions#update'
   put '/orden_fumigacion/:id', to: 'orden_fumigacions#update'
   delete '/orden_fumigacion/:id', to: 'orden_fumigacions#delete'
-  
+
 
   get 'buscador_clientes/:termino', to: 'clientes#buscador'
   post '/add_cliente_orden_fumigacion/', to: 'orden_fumigacions#add_cliente'

@@ -1,0 +1,52 @@
+
+    <div class="container">
+      <div class="my-5">
+          <a class="weatherwidget-io" href="https://forecast7.com/es/n24d78n65d42/salta/" data-label_1="SALTA" data-label_2="WEATHER" data-theme="original" >Clima Salta</a>
+        <script>
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+        </script>
+      </div>
+
+
+
+
+<div class="container">
+  <h3 class="text-center card-header my-2"><strong>Fumigaciones que vencen hoy</strong></h3>
+    <table class=" table-striped table table-responsive">
+    <thead  class="thead-dark">
+      <tr>
+          <th>Nro de Certificado</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Domicilio</th>
+          <th>Barrio</th>
+          <th>Telefono</th>
+          <th>Tratamiento</th>
+          <th>Vectores</th>
+          <th>Veneno</th>
+          <th>Detalle</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @orden_fumigacions.each do |orden_fumigacion| %>
+          <%if orden_fumigacion.estado == true &&  orden_fumigacion.fecha_vencimiento == Date.today%>
+            <tr>
+              <td><%= orden_fumigacion.nro_certificado %></td>
+              <td><%= orden_fumigacion.cliente.nombre %></td>
+              <td><%= orden_fumigacion.cliente.apellido %></td>
+              <td> <%= orden_fumigacion.cliente.domicilio %></td>
+              <td><%= orden_fumigacion.cliente.barrio %></td>
+              <td><%= orden_fumigacion.cliente.telefono %></td>
+              <td><%= orden_fumigacion.tratamiento %></td>
+              <td><%= orden_fumigacion.vector %></td>
+              <td><%= orden_fumigacion.droga  %></td>
+              <td><%= link_to 'Detalle', orden_fumigacion, class:"text-info"%></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+</div>
+</table>
+</div>
