@@ -20,15 +20,15 @@ ActiveStorage.start()
 
 
 $(document).on('turbolinks:load', function() {
-  
+
   $( "#BuscarCliente" ).click(function() {
     console.log( "<%= j render buscador_cliente %>" );
-    
+
   });
 
   $("#buscador_clientes").keyup(function(event){
     let termino = $(this).val();
-    
+
     if(termino.length == 0) {
       console.log("termino.length",termino.length);
       $("#tabla_buscador_clientes tbody").empty();
@@ -64,18 +64,18 @@ $(document).on('turbolinks:load', function() {
         }
       });
     }
-    
+
   });
 
   $( "#BuscarTecnico" ).click(function() {
     console.log( "<%= j render buscador_tecnico %>" );
-    
+
 
   });
 
   $("#buscador_tecnicos").keyup(function(event){
     let termino = $(this).val();
-    
+
     if(termino.length == 0) {
       console.log("termino.length",termino.length);
       $("#tabla_buscador_tecnicos tbody").empty();
@@ -111,7 +111,7 @@ $(document).on('turbolinks:load', function() {
         }
       });
     }
-    
+
   });
 
 
@@ -122,7 +122,7 @@ function seleccionarCliente(id_cliente){
 
   let request_url = getRootUrl() + "/add_cliente_orden_fumigacion/";
   let info = { cliente_id: id_cliente };
-  
+
 
   $.ajax({
       url: request_url,
@@ -130,10 +130,10 @@ function seleccionarCliente(id_cliente){
       data: JSON.stringify(info),
       contentType: 'application/json; charset=utf-8',
       success: function(result){
-        var clickado = 0; 
+        var clickado = 0;
         if(result != null) {
           const boton = document.querySelector("#miBotonC"+id_cliente);
-      
+
           boton.addEventListener("click", function(evento){
             // Aquí todo el código que se ejecuta cuando se da click al botón
             let apellido = result.apellido;
@@ -164,7 +164,7 @@ function seleccionarTecnico(id_tecnico){
 
   let request_url = getRootUrl() + "/add_tecnico_orden_fumigacion/";
   let info = { tecnico_id: id_tecnico };
-  
+
 
   $.ajax({
       url: request_url,
@@ -172,10 +172,10 @@ function seleccionarTecnico(id_tecnico){
       data: JSON.stringify(info),
       contentType: 'application/json; charset=utf-8',
       success: function(result){
-        var clickado = 0; 
+        var clickado = 0;
         if(result != null) {
           const boton = document.querySelector("#miBotonT"+id_tecnico);
-      
+
           boton.addEventListener("click", function(evento){
             // Aquí todo el código que se ejecuta cuando se da click al botón
             let apellido = result.apellido;
