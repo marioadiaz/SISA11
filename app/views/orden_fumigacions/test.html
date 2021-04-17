@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= @certificado.cliente.apellido %> </title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  </head>
+  <body>
+    <div id="container">
+      <div class="company-name">
+          <span>SISA-Fumigaciones</span>
+      </div>
+        <div class="border-1">
+          <div class="company-subtitle my-3">
+            <h1><strong>SISTEMA INTEGRAL DE SANEAMIENTO AMBIENTAL</strong></h1>
+          </div>
+          <div class="company-info">
+            <div><p>PADRON N°68.023/03 - CAM-LSA 50 429/03 CUIT: 27-02898301-3 20-22583332-0</p></div>
+            <div><p>ADMINISTRACIÓN & VENTAS: MANZANA N°748 LOTE N°8</p></div>
+            <div><p>BARRIO SANTA ANA II - CP 4400-SALTA CAPITAL</p></div>
+            <div><p>TELEFONOS: (0387) 4291082 - (0387) 4248560</p></div>
+            <br>
+            <div class="nro_certificado">
+              <h1><strong>N° de Certificado:  <%= @certificado.nro_certificado %></strong></h1>
+            </div>
+            <div class="turno">
+              <h1><strong>  <%= @certificado.turno %></strong></h1>
+            </div>
+          </div>
+      </div>
+
+      <section id="invoice-cliente">
+        <div class="datos-cliente">
+          <br>
+          <span><strong>Fecha de aplicación:</strong> <%= @certificado.fecha_aplicacion %></span>
+          <span><strong>Apellido y nombre:</strong>  <%= @certificado.cliente.apellido %> <%= @certificado.cliente.nombre%></span>
+          <span><strong>Domicilio:</strong>  <%= @certificado.cliente.domicilio %></span>
+          <span><strong>Barrio:</strong>  <%= @certificado.cliente.domicilio %></span>
+        </div>
+
+        <div class="datos-cliente">
+          <br>
+          <span><strong>Hora Aplicación:</strong>  <%= @certificado.hora_aplicacion.strftime("%H:%M") %></span>
+          <span><strong>Telefono:</strong> <%= @certificado.cliente.telefono %></span>
+          <span><strong>Celular:</strong>  <%= @certificado.cliente.celular %></span>
+          <span><br></span>
+          <br>
+        </div>
+        <div class="datos-cliente">
+          <br>
+          <span><strong><%= @certificado.codigo %></strong> </span>
+        </div>
+      </section>
+
+       <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th class="no"><strong>Detalles</strong></th>
+            <th class="desc"></th>
+          </tr>
+          <tr>
+            <th class="no"><strong>Rubro</strong></th>
+            <th class="unit"><strong><%= @certificado.cliente.rubro.upcase %></strong></th>
+          </tr>
+          <tr>
+            <th class="no"><strong>Tipo de Rubro</strong></th>
+            <th class="unit"><strong><%= @certificado.cliente.cliente_tipo %></strong></th>
+          </tr>
+          <tr>
+            <th class="no"><strong>Tratamiento</strong></th>
+            <th class="unit"><strong><%= @certificado.tratamiento %></strong></th>
+          </tr>
+          <tr>
+            <th class="no"><strong>Vector Tratado</strong></th>
+            <th class="unit"><strong><%= @certificado.vector %></strong></th>
+          </tr>
+          <tr>
+            <th class="no"><strong>Superficie tratada</strong></th>
+            <th class="unit"><strong><%= @certificado.superficie %></strong></th>
+          </tr>
+          <tr>
+            <th class="no"><strong>Droga Usada</strong></th>
+            <th class="unit"><strong><%= @certificado.droga %></strong></th>
+          </tr>
+         </thead>
+      </table>
+
+      <div class="container-antidoto" style="font-size: 15px">
+        <p>Antídoto: 1 Piretroydes: Tratamietno Sintomático - Bromadilone: Vitamina K1 -DDVP:Sulfato de Atropina.
+        Recomendaciones: 1 -mantener cerrado el ambiente tratado mínimo 4 horas, ventilar y lavar(sin lavandina) las superficies de uso culinario, etc.</p>
+      </div>
+<br>
+<br>
+      <div class="advertencia" >
+        <h1><strong>La firma brinda garantía de satisfacción, validez 30 días corridosposteriores al servicio, sin excepción.</strong></h1>
+        <p>GARANTÍA SUJETA A INSPECCIONES TECNICAS, A LAS CONDICIONES DE HIGIENE, EDILICIAS, CLIMATICAS, AL GRADO DE INFESTACION Y AL TIPO DE PLAGA - LA EFECTIVIDAD DEL SERVICIO NO DEPENDE DE LAS FECHAS DE APLICACIÓN Y VENCIMIENTO DE ESTE CERTIFICADO, SOLO DEL PLAN DE TRABAJO ACORDADO, COMERCIOS DONDE SE EXPENDA, ELABORE, FRACCIONES Y AMACENE ALIMENTOS, LA CERTIFICACIÓN DE SERVICIOS NO SERA SUPERIOR A LOS 60 DÍAS, SEGÚN ORDENANZA N°12.157/04 -DECRETO N°917/98 DE LA MUNICIPALIDAD DE LA CIUDAD DE SALTA.</p>
+      </div>
+<br>
+<br>
+      <div class="observaciones">
+        <h1 class="border my-3 pb-5" style="font-size:15px"><strong>OBSERVACIONES:</strong></h1>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+
+  <div class="container">
+    <div class="d-flex justify-content-between">
+      <section id="firma">
+        <div class="col-3 k">
+            <h1><strong style="font-size:15px">FECHA DE VENCIMIENTO</strong></h1>
+            <h1><strong style="font-size:15px"><%= @certificado.fecha_vencimiento %></strong></h1>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h1 class="border-top" style="font-size:15px"><strong>RECIBE CONFORME</strong></h1>
+          </div>
+          <div class="col-3 k">
+            <h1><strong style="font-size:15px">FECHA DE VENCIMIENTO</strong></h1>
+            <h1><strong style="font-size:15px"><%= @certificado.fecha_vencimiento %></strong></h1>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h1 class="border-top" style="font-size:15px"><strong>Por S.I.S.A Gerente o Técnico</strong></h1>
+          </div>
+        </section>
+        </div>
+      </div>
+  </div>
+  </body>
+</html>
+<style type="text/css">
+  
+    #container {
+  font: normal 13px/1.4em 'Open Sans', Sans-serif;
+  margin: 0 auto;
+
+}
+ .nro_certificado h1{
+ position: absolute;
+ right: 90px;
+ top: 17px;
+ margin-top: 5px;
+ margin-bottom: 40px;
+ font-size: 18px;
+ color: white;
+  }
+
+ .turno h1{
+ position: absolute;
+ right: 90px;
+ top: 90px;
+ margin-top: 5px;
+ margin-bottom: 40px;
+ font-size: 30px;
+ color: black;
+  }
+
+.company-name {
+  background: #67BA2A 560px center no-repeat;
+  background-size: 100px auto;
+  padding: 15px 20px;
+  position: relative;
+/*  margin: 20px;*/
+}
+ .company-name span {
+  color: white;
+  display: inline-block;
+  min-width: 20px;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1em;
+}
+ .company-name .right-arrow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100px;
+  background: url("../img/right-arrow.png") right center no-repeat;
+  background-size: auto 70px;
+}
+
+ .company-subtitle h1 {
+/*  margin-left: 20px;*/
+  font-size: 20px;
+  color: 000;
+  margin-bottom: 15px;
+}
+
+ .company-info {
+/*  margin-left: 20px;*/
+  font-size: 15px;
+  color: 000;
+}
+ .company-info div {
+  margin-bottom: 3px;
+  min-width: 20px;
+}
+ .company-info span {
+  min-width: 20px;
+}
+
+.datos-cliente span {
+/*  margin-left: 20px;*/
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+#firma {
+  float: left;
+   width: 120%;
+}
+#firma > div {
+  float: left;
+}
+#firma div span  {
+  display: block;
+  white-space: nowrap;
+  min-width: 60px;
+  min-height: 18px;
+  margin-bottom: 3px;
+  margin-right: 80px;
+}
+#firma > div:last-child {
+  margin-left: 300px;
+}
+
+
+#invoice-cliente {
+  float: left;
+   border-top: solid 1px;
+   width: 120%;
+}
+#invoice-cliente > div {
+  float: left;
+}
+#invoice-cliente div span  {
+  display: block;
+  white-space: nowrap;
+  min-width: 60px;
+  min-height: 18px;
+  margin-bottom: 3px;
+  margin-right: 80px;
+}
+#invoice-cliente > div:last-child {
+  margin-left: 300px;
+}
+
+#client-info {
+  float: right;
+  margin: 5px 20px 0 0;
+  min-width: 220px;
+  text-align: right;
+}
+
+
+#client-info > div {
+  margin-bottom: 3px;
+  min-width: 20px;
+}
+#client-info span {
+  display: block;
+  min-width: 20px;
+}
+
+#invoice-title-number {
+  text-align: center;
+  margin: 20px 0;
+}
+#invoice-title-number span {
+  display: inline-block;
+  min-width: 50px;
+}
+#invoice-title-number #title {
+  margin-right: 15px;
+  text-align: right;
+  font-size: 20px;
+  font-weight: bold;
+}
+#invoice-title-number #number {
+  font-size: 15px;
+  text-align: left;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+table th,
+table td {
+  padding: 20px;
+  background: #EEEEEE;
+  text-align: center;
+  border-bottom: 1px solid #FFFFFF;
+}
+
+table th {
+  white-space: nowrap;
+  font-weight: normal;
+}
+
+table td {
+  text-align: right;
+}
+
+table td h3{
+  color: #57B223;
+  font-size: 1.2em;
+  font-weight: normal;
+  margin: 0 0 0.2em 0;
+}
+
+table .no {
+  color: #FFFFFF;
+  font-size: 1.6em;
+  background: #57B223;
+}
+
+table .desc {
+  text-align: left;
+}
+
+table .unit {
+  background: #DDDDDD;
+}
+
+table .qty {
+}
+
+table .total {
+  background: #57B223;
+  color: #FFFFFF;
+}
+
+table td.unit,
+table td.qty,
+table td.total {
+  font-size: 1.2em;
+}
+
+table tbody tr:last-child td {
+  border: none;
+}
+
+table tfoot td {
+  padding: 10px 20px;
+  background: #FFFFFF;
+  border-bottom: none;
+  font-size: 1.2em;
+  white-space: nowrap;
+  border-top: 1px solid #AAAAAA;
+}
+
+table tfoot tr:first-child td {
+  border-top: none;
+}
+
+table tfoot tr:last-child td {
+  color: #57B223;
+  font-size: 1.4em;
+  border-top: 1px solid #57B223;
+
+}
+
+table tfoot tr td:first-child {
+  border: none;
+}
+
+.advertencia h1 {
+  color:rgba(242, 38, 19, 1);
+  text-align: center;
+  font-size: 18px;
+   text-decoration: underline;
+}
+
+.advertencia p {
+  font-size: 15px;
+  padding: 5px;
+}
+/**
+ * If the printed invoice is not looking as expected you may tune up
+ * the print styles (you can use !important to override styles)
+ */
+@media print {
+  /* Here goes your print styles */
+}
+</style>
