@@ -71,3 +71,25 @@ AGREGAR CONTROLADORES
   rails generate controller Quejas new index show create edit update destroy
 
   rails generate controller OrdenFumigacions new index show create edit update destroy
+
+
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/marioadiaz/SISA10.git
+git push -u origin main
+
+a5LWwskfxSqzBcA
+sistemas en git
+
+
+function renderizar_modal() {
+  $('btn btn-info').on('click', function() {
+    $('<%= j render "buscador_cliente" %>').modal();
+  }
+}
+
+     <button type="button" OnClick="BuscarCliente()" id="BuscarCliente" class="btn btn-info" data-toggle="modal" data-target="#buscador_cliente">
+          Buscar cliente
+        </button>

@@ -2,6 +2,7 @@
   "name": "sisa11",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
@@ -9,6 +10,7 @@
     "boostrap": "^2.0.0",
     "bootstrap": "^4.6.0",
     "jquery": "^3.6.0",
+    "jquery-ui": "^1.12.1",
     "popper.js": "^1.16.1",
     "turbolinks": "^5.2.0"
   },
