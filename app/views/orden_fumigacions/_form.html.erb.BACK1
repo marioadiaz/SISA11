@@ -1,0 +1,119 @@
+<%= simple_form_for(@orden_fumigacion) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="center-block form-inputs cliente-new-form">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="well well-sm">
+                  <form class="form-horizontal" method="post">
+                      <fieldset>
+                          
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= collection_select :orden_fumigacion, :cliente_id, Cliente.all.order(:apellido).collect { |t| [ t.id, "#{t.apellido} - #{t.nombre} - #{t.cuit}" ] }, :first, :last, { prompt: "Seleccionar un Cliente" }, {class: "form-control"} %>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= collection_select :orden_fumigacion, :tecnico_id, Tecnico.all.order(:apellido).collect { |t| [ t.id, "#{t.apellido} - #{t.nombre} - #{t.dni}" ] }, :first, :last, { prompt: "Seleccionar un Tecnico" }, {class: "form-control"} %>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :nro_certificado, :label => false, :input_html => { :class => "form-control", :placeholder => "Nro Certificado"}%>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :tipo_certificado, :label => false, :input_html => { :class => "form-control", :placeholder => "Tipo Certificado"}%>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :fecha_aplicacion, :class => 'datepicker', as: :date, html5: true, :input_html => { :class => "form-control"} %>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :hora_aplicacion, :class => 'datepicker', as: :time, html5: true, :input_html => { :class => "form-control"} %>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :tratamiento, :label => false, :input_html => { :class => "form-control", :placeholder => "Tratamiento"}%>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :vector, :label => false, :input_html => { :class => "form-control", :placeholder => "Vector"}%>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :superficie, :label => false, :input_html => { :class => "form-control", :placeholder => "Superficie"}%>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :veneno, :label => false, :input_html => { :class => "form-control", :placeholder => "Veneno"}%>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :droga, :label => false, :input_html => { :class => "form-control", :placeholder => "Droga"}%>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :fecha_vencimiento, :class => 'datepicker', as: :date, html5: true, :input_html => { :class => "form-control"} %>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :proximo_tratamiento, :class => 'datepicker', as: :date, html5: true, :input_html => { :class => "form-control"} %>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :importe, :label => false, :input_html => { :class => "form-control", :placeholder => "Importe"}%>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :estado, :label => false, :input_html => { :class => "form-control", :placeholder => "Estado"}%>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :observaciones_ordfumigacion, :label => false, :input_html => { :class => "form-control", :placeholder => "Observaciones"}%>
+                              </div>
+                          </div>
+                      </fieldset>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- div form-inputs cliente-new-form -->
+   
+    <div>
+      <%= f.button :submit%>
+    </div>
+  
+<% end %>

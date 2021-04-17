@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= wicked_pdf_stylesheet_pack_tag %>
+    <%= wicked_pdf_javascript_pack_tag %>
+    <title>SISA11</title>
+</head>
+<body>
+	<div class="container">
+	<h1>Listado Fumigaciones</h1>
+	<%= link_to "Crear Orden de Fumigacion", orden_fumigacions_new_path %>
+	<table class=" table-striped table table-responsive">
+	  <tr>
+	    <thead  class="thead-dark">
+	   		<th>Cliente</th>
+	   		<th>Tecnico</th>
+	   		<th>NroCertificado</th>
+	      <th>TipoCertificado</th>
+	      <th>FechaAplicacion</th>
+	      <th>HoraAplicacion</th>
+	      <th>Tratamiento</th>
+	      <th>Vector</th>
+	      <th>Superficie</th>
+	      <th>Veneno</th>
+	      <th>Droga</th>
+	      <th>ObsOrdFumigacion</th>
+	      <th>FechaVencimiento</th>
+	      <th>ProximoTratamiento</th>
+	      <th>Importe</th>
+	      <th>Estado</th>
+	      <th colspan="3"></th>
+	      	
+	    </thead>
+	  </tr>
+	  <% @orden_fumigacions.each do |orden_fumigacion| %>
+	  	<%if orden_fumigacion.baja == true %>
+		  	<tr>
+		    	<td><%= orden_fumigacion.cliente.apellido%></td>
+	        <td><%= orden_fumigacion.tecnico.apellido%></td>
+		      <td><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
+		      <td><%= orden_fumigacion.tipo_certificado %></td>
+		      <td><%= orden_fumigacion.fecha_aplicacion %></td>
+		      <td><%= orden_fumigacion.hora_aplicacion %></td>
+		      <td><%= orden_fumigacion.tratamiento %></td>
+		      <td><%= orden_fumigacion.vector %></td>
+		      <td><%= orden_fumigacion.superficie %></td>
+		      <td><%= orden_fumigacion.veneno %></td>
+		      <td><%= orden_fumigacion.droga %></td>
+		      <td><%= orden_fumigacion.observaciones_ordfumigacion %></td>
+		      <td><%= orden_fumigacion.fecha_vencimiento %></td>
+		      <td><%= orden_fumigacion.proximo_tratamiento %></td>
+		      <td><%= orden_fumigacion.importe %></td>
+		      <td><%= orden_fumigacion.estado %></td>
+		      <td>
+	            <%= link_to '', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a?" }, :class => 'fas fa-trash'  %>
+	        </td>
+		  	</tr>
+		  <% end %>  	
+	  <% end %>
+	</table>
+	</div>
+</body>
+</html>

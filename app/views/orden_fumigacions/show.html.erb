@@ -1,2 +1,90 @@
-<h1>OrdenFumigacions#show</h1>
-<p>Find me in app/views/orden_fumigacions/show.html.erb</p>
+<div class="container">
+	<div class="card-header d-flex justify-content-between">
+    	<div><h2 class="my-0 font-size:8vw">Detalle Fumigacion</h2></div>
+    	<div> <%= link_to 'Editar', edit_orden_fumigacion_path, class: "btn btn-primary mr-3" %></div>
+    </div>
+	<div class="card-body">
+	    <ul class="list-unstyled mt-3 mb-4 text-center">
+			<h3>
+	        	<strong>Cliente:</strong>
+	        	<%= @orden_fumigacion.cliente.apellido %>
+	      	</h3>
+	    	<h3>
+	        	<strong>Tecnico:</strong>
+	        	<%= @orden_fumigacion.tecnico.apellido %>
+	      	</h3>
+	      	<h3>
+	        	<strong>NroCertificado:</strong>
+	        	<%= @orden_fumigacion.nro_certificado%>
+	      	</h3>
+	      	<h3>
+	        	<strong>Tipo Certificado:</strong>
+	        	<%= @orden_fumigacion.tipo_certificado%>
+	      	</h3>
+	      	<h3>
+	        	<strong>Fecha Aplicacion:</strong>
+	        	<%= @orden_fumigacion.fecha_aplicacion%>
+	      	</h3>
+	      	<h3>
+	        	<strong>Tratamiento:</strong>
+	        	<%= @orden_fumigacion.tratamiento%>
+	      	</h3>
+	      	<h3>
+	        	<strong>Vector:</strong>
+	        	<%= @orden_fumigacion.vector%>
+	      	</h3>
+	      	<h3>
+	        	<strong>Superficie:</strong>
+	        	<%= @orden_fumigacion.superficie%>
+	      	</h3>
+	      	<h3>
+	        	<strong>Veneno:</strong>
+	        	<%= @orden_fumigacion.veneno%>
+	      	</h3>
+	      	<h3>
+	        	<strong>Droga:</strong>
+	        	<%= @orden_fumigacion.droga%>
+	      	</h3>
+	      	<h3>
+	        	<strong>Fecha Vencimiento:</strong>
+	        	<%= @orden_fumigacion.fecha_vencimiento%>
+	      	</h3>
+	      	<h3>
+	        	<strong>Proximo Tratamiento:</strong>
+	        	<%= @orden_fumigacion.proximo_tratamiento%>
+	      	</h3>
+	      	<h3>
+	        	<strong>Importe:</strong>
+	        	<%= @orden_fumigacion.importe%>
+	      	</h3>
+	      	<h3>
+	        	<strong>Estado:</strong>
+	        	<%= @orden_fumigacion.estado%>
+	      	</h3>
+	      	<h3>
+	        	<strong>Observaciones:</strong>
+	        	<%= @orden_fumigacion.observaciones_ordfumigacion%>
+	      	</h3>
+	    </ul>
+	    <table class="default">
+		  <tr>
+		    <td>
+		    	<button type="button" id="Imprimir Certificado" class="btn btn-info" >
+		          Imprimir Certificado
+		        </button>
+		    </td>
+		    <td>
+		    	<button type="button" id="Imprimir Certificado" class="btn btn-info" >
+		          Imprimir Faja
+		        </button>
+		    </td>
+		    <td><button type="button" id="Imprimir Certificado" class="btn btn-info" >
+		          Imprimir Remito
+		        </button>
+		    </td>
+		  </tr>
+  		</table>
+
+		<a class="btn btn-lg btn-block btn-dark" href="/orden_fumigacions">Atrás</a>
+	</div>
+</div>
