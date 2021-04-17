@@ -4,7 +4,9 @@ root 'pages#home'
 
 
 devise_for :users
-
+devise_scope :user do
+  get '/users/sign_out' => 'devise/sessions#destroy'
+end
  get '/pages/home', to: 'pages#home'
   #CLIENTES
   get '/clientes', to: 'clientes#index'
