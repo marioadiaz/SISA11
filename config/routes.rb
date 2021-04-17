@@ -23,15 +23,17 @@ Rails.application.routes.draw do
 
   #ORDEN FUMIGACION
   get '/orden_fumigacions', to: 'orden_fumigacions#index'
+  
   get 'orden_fumigacions/new', to: 'orden_fumigacions#new'
   post '/orden_fumigacions', to: 'orden_fumigacions#create'
 
   get '/orden_fumigacion/:id', to: 'orden_fumigacions#show', as: 'orden_fumigacion'
+
   get '/orden_fumigacions/:id/edit', to: 'orden_fumigacions#edit', as: 'edit_orden_fumigacion'
-  #get '/orden_fumigacion/:id', to: 'orden_fumigacions#edit', as: 'edit_orden_fumigacion'
   patch '/orden_fumigacion/:id', to: 'orden_fumigacions#update'
   put '/orden_fumigacion/:id', to: 'orden_fumigacions#update'
   delete '/orden_fumigacion/:id', to: 'orden_fumigacions#delete'
+  
 
   get 'buscador_clientes/:termino', to: 'clientes#buscador'
   post '/add_cliente_orden_fumigacion/', to: 'orden_fumigacions#add_cliente'

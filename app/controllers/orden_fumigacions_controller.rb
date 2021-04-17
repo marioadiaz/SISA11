@@ -3,11 +3,14 @@ before_action :set_orden_fumigacion, only: [ :show, :edit, :update, :delete, :ad
 
   def index
     @orden_fumigacions = OrdenFumigacion.all.order(:nro_certificado)
-      respond_to do |format|
+    respond_to do |format|
       format.html
       format.json
       format.pdf do
-      render template: 'orden_fumigacions/pdf', pdf: 'Reporte'
+        render pdf: "indexa",
+        orientation: "Landscape", # default Portrait
+        page_size: "A4", 
+        template: "orden_fumigacions/index.html.erb"
       end
     end
   end
@@ -19,6 +22,13 @@ before_action :set_orden_fumigacion, only: [ :show, :edit, :update, :delete, :ad
   def show
     # No lo usamos en este modelo
     @orden_fumigacion = OrdenFumigacion.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf do
+        render pdf: 'orden_fumigacions/pdf', pdf: 'reporteordenfumigacion'
+      end  
+    end
   end
 
   def create

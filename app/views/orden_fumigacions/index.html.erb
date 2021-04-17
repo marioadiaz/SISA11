@@ -1,6 +1,9 @@
 <div class="container">
 <h1>Listado Fumigaciones</h1>
 <%= link_to "Crear Orden de Fumigacion", orden_fumigacions_new_path %>
+
+<div class="col-sm ml-5"><h3><%= link_to 'Crear PDF', orden_fumigacions_path(format: 'pdf') %></h3></div>
+
 <table class=" table-striped table table-responsive">
   <tr>
     <thead  class="thead-dark">
