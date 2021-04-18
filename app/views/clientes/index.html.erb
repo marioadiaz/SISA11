@@ -27,7 +27,7 @@
 	      <td><%= cliente.telefono %></td>
 	      <td><%= cliente.tipo_cliente %></td>
 	      <td>
-	        	<%= link_to '', cliente, method: :delete, data: { confirm: "¿Estás seguro/a?" }, :class => 'fas fa-trash'  %>
+	        	<%= link_to 'Eliminar', cliente, method: :delete, data: { confirm: "¿Estás seguro/a?" } %>
 	      </td>
 	  	</tr>
 	  <% end %>

@@ -1,37 +1,30 @@
-<h1>Listado de tecnicos</h1>
-<%= link_to "Crear Tecnico", tecnicos_new_path %>
-<table>
+ <div class="container">
+<h1>Listado de técnicos</h1>
+<%= link_to "Crear Tecnico", tecnicos_new_path, :class => 'btn btn-warning my-3'%>
+<table class=" table-striped table table-responsive">
   <tr>
-    <thead>
-   		<th>DNI</th>
+    <thead  class="thead-dark">
       	<th>Apellido</th>
       	<th>Nombre</th>
         <th>Domicilio</th>
-      	<th>Barrio</th>
       	<th>Celular</th>
-      	<th>Telefono</th>
       	<th>Correo</th>
-      	<th>Observaciones</th>
-      	
+      <th colspan="3"></th>
+
     </thead>
   </tr>
   <% @tecnicos.each do |tecnico| %>
   	<%if tecnico.baja == true %>
 	  	<tr>
-	    	<td><%= tecnico.dni %></td>
-	        <td><%= tecnico.apellido %></td>
-	        <td><%= tecnico.nombre %></td>
+	        <td><%= link_to "#{tecnico.apellido}", tecnico_path(tecnico) %></td>
+          <td><%= link_to "#{tecnico.nombre}" ,tecnico_path(tecnico) %></td>
 	        <td><%= tecnico.domicilio %></td>
-	        <td><%= tecnico.barrio %></td>
 	        <td><%= tecnico.celular %></td>
-	        <td><%= tecnico.telefono %></td>
 	        <td><%= tecnico.correo %></td>
-	        <td><%= tecnico.observaciones_tecnico %></td>
 	        <td>
-	        	<%= link_to 'Editar', edit_tecnico_path(tecnico) %>
 	        	<%= link_to 'Eliminar', tecnico, method: :delete, data: { confirm: "¿Estás seguro/a?" }  %>
 	        </td>
 	  	</tr>
-	<% end %>  	
+	<% end %>
   <% end %>
 </table>
