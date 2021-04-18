@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 gem 'simple_form'
 gem 'devise'
-
+gem 'jquery-rails'
 gem 'font_awesome5_rails'
 
 gem 'wicked_pdf'
