@@ -1,4 +1,5 @@
 class TecnicosController < ApplicationController
+before_action :set_tecnico, only: [:show, :edit, :update, :delete]
 
   def index
       @tecnicos = Tecnico.all.order(:apellido)
@@ -72,7 +73,7 @@ class TecnicosController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_cliente
+    def set_tecnico
       @tecnico = Tecnico.find(params[:id])
     end
 

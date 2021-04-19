@@ -1,56 +1,55 @@
 <div class="container">
+  <div class="d-flex justify-content-between">
 <h1>Listado Fumigaciones</h1>
-<%= link_to "Crear Orden de Fumigacion", orden_fumigacions_new_path %>
+<div class=" mx-auto"><h3><%= link_to 'Crear PDF', orden_fumigacions_path(format: 'pdf'), :class => 'btn btn-success my-3' %></h3></div>
+</div>
+<%= link_to "Crear Certificado", orden_fumigacions_new_path , :class => 'btn btn-warning my-3'%>
 
-<div class="col-sm ml-5"><h3><%= link_to 'Crear PDF', orden_fumigacions_path(format: 'pdf') %></h3></div>
 
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+
+<input class="ml-3 w-25" id="myInput" type="text" placeholder="Buscar..">
 <table class=" table-striped table table-responsive">
   <tr>
     <thead  class="thead-dark">
+   		<th>Nro Certificado</th>
    		<th>Cliente</th>
    		<th>Tecnico</th>
-   		<th>NroCertificado</th>
-      <th>TipoCertificado</th>
-      <th>FechaAplicacion</th>
-      <th>HoraAplicacion</th>
       <th>Tratamiento</th>
-      <th>Vector</th>
-      <th>Superficie</th>
-      <th>Veneno</th>
       <th>Droga</th>
-      <th>ObsOrdFumigacion</th>
-      <th>FechaVencimiento</th>
-      <th>ProximoTratamiento</th>
-      <th>Importe</th>
-      <th>Estado</th>
+      <th>Fecha Vencimiento</th>
+      <th>Proximo Tratamiento</th>
       <th colspan="3"></th>
-      	
+
     </thead>
   </tr>
+   <tbody id="myTable" >
   <% @orden_fumigacions.each do |orden_fumigacion| %>
   	<%if orden_fumigacion.baja == true %>
 	  	<tr>
-	    	<td><%= orden_fumigacion.cliente.apellido%></td>
-        <td><%= orden_fumigacion.tecnico.apellido%></td>
 	      <td><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
-	      <td><%= orden_fumigacion.tipo_certificado %></td>
-	      <td><%= orden_fumigacion.fecha_aplicacion %></td>
-	      <td><%= orden_fumigacion.hora_aplicacion %></td>
+	    	<td><%= link_to "#{orden_fumigacion.cliente.apellido}", orden_fumigacion_path(orden_fumigacion)%></td>
+	      <td><%= orden_fumigacion.tecnico.apellido %></td>
 	      <td><%= orden_fumigacion.tratamiento %></td>
-	      <td><%= orden_fumigacion.vector %></td>
-	      <td><%= orden_fumigacion.superficie %></td>
-	      <td><%= orden_fumigacion.veneno %></td>
 	      <td><%= orden_fumigacion.droga %></td>
-	      <td><%= orden_fumigacion.observaciones_ordfumigacion %></td>
 	      <td><%= orden_fumigacion.fecha_vencimiento %></td>
 	      <td><%= orden_fumigacion.proximo_tratamiento %></td>
-	      <td><%= orden_fumigacion.importe %></td>
-	      <td><%= orden_fumigacion.estado %></td>
 	      <td>
-            <%= link_to '', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a?" }, :class => 'fas fa-trash'  %>
+            <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a?" } %>
         </td>
 	  	</tr>
-	  <% end %>  	
+	  <% end %>
   <% end %>
+</tbody>
 </table>
 </div>

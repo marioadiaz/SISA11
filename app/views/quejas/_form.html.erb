@@ -1,0 +1,33 @@
+
+
+<%= simple_form_for(@queja) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="center-block form-inputs cliente-new-form">
+
+    <div class="row">
+      <div class="col-sm">
+        <div >
+      <%= f.label  'Nro Certificado' %>
+      <%= collection_select(:queja, :orden_fumigacion_id, OrdenFumigacion.all.order(:orden_fumigacions), :id, :nro_certificado, {:selected => @queja.orden_fumigacion_id} ) %>
+
+
+        </div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :fecha_queja %></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <div><%= f.input :observaciones_queja %> </div>
+      </div>
+      <div class="col-sm">
+        <div><%= f.input :estado %></div>
+      </div>
+    </div>
+  <!-- div form-inputs cliente-new-form -->
+   <div class= "d-flex my-3">
+     <div> <%= f.button :submit,name="Confirmar",:class => "btn btn-success"  %> </div>
+  </div>
+<% end %>

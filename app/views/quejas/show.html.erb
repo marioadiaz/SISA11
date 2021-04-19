@@ -1,2 +1,31 @@
-<h1>Quejas#show</h1>
-<p>Find me in app/views/quejas/show.html.erb</p>
+<div class="container">
+  <div class="card-header d-flex justify-content-between">
+      <div><h2 class="my-0 font-size:8vw">Detalle Reclamo</h2></div>
+      <div> <%= link_to 'Editar', edit_queja_path, class: "btn btn-primary mr-3" %></div>
+    </div>
+  <div class="card-body">
+      <ul class="list-unstyled mt-3 mb-4 text-center">
+
+          <h3>
+            <strong>Nro Reclamo:</strong>
+            <%= @queja.id%>
+          </h3>
+        <h3>
+            <strong>Nro Certificado:</strong>
+            <%= @queja.orden_fumigacion.nro_certificado %>
+          </h3>
+
+          <h3>
+            <strong>Fecha de reclamo:</strong>
+            <%= @queja.fecha_queja%>
+          </h3>
+          <h3>
+            <strong>Observaciones:</strong>
+            <%= @queja.observaciones_queja%>
+          </h3>
+      </ul>
+    <a class="btn btn-lg btn-block btn-dark" href="/quejas">Atrás</a>
+  </div>
+</div>
+
+

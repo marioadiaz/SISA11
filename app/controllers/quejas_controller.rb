@@ -1,4 +1,6 @@
 class QuejasController < ApplicationController
+before_action :set_queja, only: [:show, :edit, :update, :delete]
+
   def index
       @quejas = Queja.all.order(:nro_queja)
       respond_to do |format|
