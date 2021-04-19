@@ -1,6 +1,19 @@
 <div class="container">
 <h1>Listado de Reclamos</h1>
 <%= link_to "Generar Reclamo", quejas_new_path, :class => 'btn btn-warning my-3'%>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+
+<input class="ml-3 w-25" id="myInput" type="text" placeholder="Buscar..">
 <table class=" table-striped table table-responsive">
   <tr>
     <thead  class="thead-dark">
@@ -12,6 +25,8 @@
         <th colspan="3"></th>
     </thead>
   </tr>
+
+  <tbody id="myTable">
   <% @quejas.each do |queja| %>
   	<%if queja.baja == true %>
 	  	<tr>
@@ -26,4 +41,5 @@
 	  	</tr>
   <% end %>
   <% end %>
+  </tbody>
 </table>

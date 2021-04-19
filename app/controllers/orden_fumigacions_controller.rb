@@ -4,13 +4,12 @@ before_action :set_orden_fumigacion, only: [ :show, :edit, :update, :delete, :ad
   def index
     @orden_fumigacions = OrdenFumigacion.all.order(:nro_certificado)
     respond_to do |format|
-      format.html
-      format.json
-      format.pdf do
-        render pdf: "indexa",
-        orientation: "Landscape", # default Portrait
-        page_size: "A4", 
-        template: "orden_fumigacions/index.html.erb"
+format.html
+      format.js
+      format.json { render json: @orden_fumigacion}
+             format.pdf do
+        render pdf: 'listado/pdf', pdf: 'Listado'
+
       end
     end
   end
@@ -27,7 +26,7 @@ before_action :set_orden_fumigacion, only: [ :show, :edit, :update, :delete, :ad
       format.json
       format.pdf do
         render pdf: 'orden_fumigacions/pdf', pdf: 'reporteordenfumigacion'
-      end  
+      end
     end
   end
 
@@ -70,12 +69,12 @@ before_action :set_orden_fumigacion, only: [ :show, :edit, :update, :delete, :ad
     end
   end
 
-  def add_cliente 
-    
+  def add_cliente
+
     @cliente = Cliente.find(params[:cliente_id])
-  
+
     if @cliente.present?
-      
+
         result = { apellido: @cliente.try(:apellido)}
         puts "result: "
         puts result
@@ -92,11 +91,11 @@ before_action :set_orden_fumigacion, only: [ :show, :edit, :update, :delete, :ad
   end
 
   def add_tecnico
-    
+
     @tecnico = Tecnico.find(params[:tecnico_id])
 
     if @tecnico.present?
-      
+
         result = { apellido: @tecnico.try(:apellido) }
         puts "result: "
         puts result

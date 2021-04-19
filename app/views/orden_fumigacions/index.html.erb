@@ -1,13 +1,27 @@
 <div class="container">
+  <div class="d-flex justify-content-between">
 <h1>Listado Fumigaciones</h1>
-<%= link_to "Crear Orden de Fumigacion", orden_fumigacions_new_path , :class => 'btn btn-warning my-3'%>
+<div class=" mx-auto"><h3><%= link_to 'Crear PDF', orden_fumigacions_path(format: 'pdf'), :class => 'btn btn-success my-3' %></h3></div>
+</div>
+<%= link_to "Crear Certificado", orden_fumigacions_new_path , :class => 'btn btn-warning my-3'%>
 
-<div class="col-sm ml-5"><h3><%= link_to 'Crear PDF', orden_fumigacions_path(format: 'pdf'), :class => 'btn btn-success my-3' %></h3></div>
 
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+
+<input class="ml-3 w-25" id="myInput" type="text" placeholder="Buscar..">
 <table class=" table-striped table table-responsive">
   <tr>
     <thead  class="thead-dark">
-
    		<th>Nro Certificado</th>
    		<th>Cliente</th>
    		<th>Tecnico</th>
@@ -19,6 +33,7 @@
 
     </thead>
   </tr>
+   <tbody id="myTable" >
   <% @orden_fumigacions.each do |orden_fumigacion| %>
   	<%if orden_fumigacion.baja == true %>
 	  	<tr>
@@ -35,5 +50,6 @@
 	  	</tr>
 	  <% end %>
   <% end %>
+</tbody>
 </table>
 </div>

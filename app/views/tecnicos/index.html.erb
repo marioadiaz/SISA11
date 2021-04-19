@@ -1,6 +1,19 @@
  <div class="container">
 <h1>Listado de técnicos</h1>
 <%= link_to "Crear Tecnico", tecnicos_new_path, :class => 'btn btn-warning my-3'%>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+
+<input class="ml-3 w-25" id="myInput" type="text" placeholder="Buscar..">
 <table class=" table-striped table table-responsive">
   <tr>
     <thead  class="thead-dark">
@@ -13,6 +26,7 @@
 
     </thead>
   </tr>
+  <tbody id="myTable">
   <% @tecnicos.each do |tecnico| %>
   	<%if tecnico.baja == true %>
 	  	<tr>
@@ -27,4 +41,5 @@
 	  	</tr>
 	<% end %>
   <% end %>
+  </tbody>
 </table>
