@@ -17,18 +17,20 @@
     <div id="container">
       	<div class="company-name">
           <span>SISA-FUMIGACIONES</span>
-            <div class="company-subtitle my-3">
+            <div class="company-subtitle my-1">
             	<h1><strong>SISTEMA INTEGRAL DE SANEAMIENTO AMBIENTAL</strong></h1>
           	</div>
      	</div>
+     	<div style="position:absolute;right:180px;top:49.12px" class="tipo_certificado"><span class="tipo_certificado"><%=@orden_fumigacion.tipo_certificado%></span>
+     	</div>
       	<div class="company-info">
-            <span>PADRON N°68.023/03 - CAM-LSA 50 429/03 CUIT: 27-02898301-3 20-22583332-0</span>
-            <span>ADMINISTRACIÓN & VENTAS: MANZANA N°748 LOTE N°8</span>
-            <span>BARRIO SANTA ANA II - CP 4400-SALTA CAPITAL</span>
-            <span>TELEFONOS: (0387) 4291082 - (0387) 4248560</span>
+            <div class="company-info"><span>PADRON N°68.023/03 - CAM-LSA 50 429/03 CUIT: 27-02898301-3 20-22583332-0</span></div>
+            <div class="company-info"><span>ADMINISTRACIÓN & VENTAS: MANZANA N°748 LOTE N°8</span></div>
+            <div class="company-info"><span>BARRIO SANTA ANA II - CP 4400-SALTA CAPITAL</span></div>
+            <div class="company-info"><span>TELEFONOS: (0387) 4291082 - (0387) 4248560</span></div>
             <br>
             <div class="nro_certificado">
-              	<h1><strong>N° de Certificado:  <%= @orden_fumigacion.nro_certificado %></strong></h1>
+              	<h1><strong><span style="color:green">CERTIFICADO Nª  </span><span style="color:black"><%= @orden_fumigacion.nro_certificado %></span></strong></h1>
             </div>
         </div>
       
@@ -41,19 +43,24 @@
           <span><strong>Barrio:</strong>  <%= @orden_fumigacion.cliente.domicilio %></span>
         </div>
 
-        <div class="datos-cliente">
+        <div class="datos-cliente my-1">
           <br>
           <span><strong>Hora Aplicación:</strong>  <%= @orden_fumigacion.hora_aplicacion.strftime("%H:%M") %></span>
           <span><strong>Telefono:</strong> <%= @orden_fumigacion.cliente.telefono %></span>
           <span><strong>Celular:</strong>  <%= @orden_fumigacion.cliente.celular %></span>
           <span><br></span>
           <br>
-        </div>
-        
+        </div> 
+   
       </section>
+  
+      	        <div class="row">
+        	<p><hr height=1px>WWF's Symbol</hr></p>
+		</div>  
 
        <table border="0" cellspacing="0" cellpadding="0">
-        <thead>
+        <thead class="thead-dark">
+
           <tr>
             <th class="no"><strong>Detalles</strong></th>
             <th class="desc"></th>
@@ -84,104 +91,35 @@
           </tr>
          </thead>
       </table>
-</div>
-      <div class="container-antidoto" style="font-size: 15px">
-        <p>Antídoto: 1 Piretroydes: Tratamietno Sintomático - Bromadilone: Vitamina K1 -DDVP:Sulfato de Atropina.
-        Recomendaciones: 1 -mantener cerrado el ambiente tratado mínimo 4 horas, ventilar y lavar(sin lavandina) las superficies de uso culinario, etc.</p>
-      </div>
-
-	<div class="card-body">
-	    <ul class="list-unstyled mt-3 mb-4 text-center">
-			<h3>
-	        	<strong>Cliente:</strong>
-	        	<%= @orden_fumigacion.cliente.apellido %>
-	      	</h3>
-	    	<h3>
-	        	<strong>Tecnico:</strong>
-	        	<%= @orden_fumigacion.tecnico.apellido %>
-	      	</h3>
-	      	<h3>
-	        	<strong>NroCertificado:</strong>
-	        	<%= @orden_fumigacion.nro_certificado%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Tipo Certificado:</strong>
-	        	<%= @orden_fumigacion.tipo_certificado%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Fecha Aplicacion:</strong>
-	        	<%= @orden_fumigacion.fecha_aplicacion%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Tratamiento:</strong>
-	        	<%= @orden_fumigacion.tratamiento%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Vector:</strong>
-	        	<%= @orden_fumigacion.vector%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Superficie:</strong>
-	        	<%= @orden_fumigacion.superficie%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Veneno:</strong>
-	        	<%= @orden_fumigacion.veneno%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Droga:</strong>
-	        	<%= @orden_fumigacion.droga%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Fecha Vencimiento:</strong>
-	        	<%= @orden_fumigacion.fecha_vencimiento%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Proximo Tratamiento:</strong>
-	        	<%= @orden_fumigacion.proximo_tratamiento%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Importe:</strong>
-	        	<%= @orden_fumigacion.importe%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Estado:</strong>
-	        	<%= @orden_fumigacion.estado%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Observaciones:</strong>
-	        	<%= @orden_fumigacion.observaciones_ordfumigacion%>
-	      	</h3>
-	    </ul>
-	    <table class="default">
-		  <tr>
-		    <td>
-		    	<button type="button" id="Imprimir Certificado" class="btn btn-info" >
-		          Imprimir Certificado
-		        </button>
-		    </td>
-		    <td>
-		    	<button type="button" id="Imprimir Certificado" class="btn btn-info" >
-		          Imprimir Faja
-		        </button>
-		    </td>
-		    <td><button type="button" id="Imprimir Certificado" class="btn btn-info" >
-		          Imprimir Remito
-		        </button>
-		    </td>
-		  </tr>
-  		</table>
-
-		<a class="btn btn-lg btn-block btn-dark" href="/orden_fumigacions">Atrás</a>
 	</div>
-</div>
 </body>
 </html>
 
 <style>
-  #container {
-  font: normal 13px/1.4em 'Arial', Arial;
-  margin: 0 auto;
+
+#container {
+	font: normal 13px/1.4em 'Arial', Arial;
+    width: 595px;
+    height: 841px;
+    background: #d8d8d8;
+    border: 1px solid;
+}
+
+span.tipo_certificado{
+	font-family:Arial,Arial;
+	font-size:25px;
+	color:rgb(0,128,0);
+	font-weight:normal;
+	font-style:normal;
+	text-decoration: none
+}
+div.tipo_certificado{
+	font-family:Arial,Arial;
+	font-size:25px;
+	color:rgb(0,128,0);
+	font-weight:normal;
+	font-style:normal;
+	text-decoration: none
 }
 
 .nro_certificado div{
@@ -192,29 +130,19 @@
  color: white;
   }
 
- .nro_certificado h1{
+.nro_certificado h1{
  position: absolute;
  right: 90px;
  top: 17px;
  font-size: 18px;
- color: white;
-  }
-
-  .nro_certificado span{
- position: absolute;
- right: 90px;
- top: 17px;
- font-size: 18px;
- color: white;
   }
 
 .company-name {
-  background: #67BA2A 560px center no-repeat;
-  padding: 5px 0px;
-  
+  background: #edf6ee 560px center no-repeat;
+  padding: 10px 10px 10px 10px;
 }
  .company-name span {
-  color: white;
+  color: #FF0000;
   display: inline-block;
   min-width: 20px;
   font-size: 36px;
@@ -224,31 +152,30 @@
  
  .company-subtitle h1 {
   font-size: 18px;
-  color: 000;
+  color: #000000;
 }
 
  .company-info div {
   font-size: 15px;
-  
+  padding: 5px 10px 0px 10px;
+  color: #008000;
 }
 
- .company-info span {
-  font-size: 15px;
-  padding: 50px 20px 20px 50px;
-}
+.detalle-cliente hr {
+  height: 2px;
+  background-color: red;
 }
 
 .datos-cliente span {
-/*  margin-left: 20px;*/
   font-size: 18px;
-  margin-bottom: 15px;
+  padding: 5px 10px 0px 10px;
 }
 
 #firma {
   float: left;
    width: 120%;
 }
-#firma > div {
+#firma div {
   float: left;
 }
 #firma div span  {
@@ -263,7 +190,6 @@
   margin-left: 300px;
 }
 
-
 #invoice-cliente {
   float: left;
    border-top: solid 1px;
@@ -272,6 +198,7 @@
 #invoice-cliente > div {
   float: left;
 }
+
 #invoice-cliente div span  {
   display: block;
   white-space: nowrap;
@@ -407,20 +334,6 @@ table tfoot tr td:first-child {
   border: none;
 }
 
-.advertencia h1 {
-  color:rgba(242, 38, 19, 1);
-  text-align: center;
-  font-size: 18px;
-   text-decoration: underline;
-}
-
-.advertencia p {
-  font-size: 15px;
-  
-/**
- * If the printed invoice is not looking as expected you may tune up
- * the print styles (you can use !important to override styles)
- */
 @media print {
   /* Here goes your print styles */
 }
