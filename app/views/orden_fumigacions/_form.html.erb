@@ -79,7 +79,7 @@
                               <script >
                                 // Multiselect dropdown orden_fumigacion.tratamiento -->
                                     $(document).ready(function() {
-                                    $("#orden_fumigacion_vector_<%=orden_fumigacion.id%>").multiselect({
+                                    $("#orden_fumigacion_vector_<%=orden_fumigacion.id*2%>").multiselect({
                                       allSelectedText: 'Showing All'
                                     });
                                   });
@@ -87,16 +87,16 @@
 
                                 //Cambia los valores de la cadena de proceso
                                   $(function () {
-                                    $("#orden_fumigacion_vector_<%=orden_fumigacion.id%>").change(function () {
+                                    $("#orden_fumigacion_vector_<%=orden_fumigacion.id*2%>").change(function () {
                                       var ValorSeleccionadoDropdown = $(this).val();
-                                      $(document).ready(function(){$("#<%=orden_fumigacion.id%>").val(ValorSeleccionadoDropdown)});
+                                      $(document).ready(function(){$("#<%=orden_fumigacion.id*2%>").val(ValorSeleccionadoDropdown)});
                                     });
                                   });
                                 //Fin de cambio los valores de la cadena de proceso
                               </script>
                               <div class="col-md-8">
                                 <label for="Vector">Vector</label>
-                                <select id= "orden_fumigacion_vector_<%=orden_fumigacion.id%>" multiple="multiple" class="form-control">
+                                <select id= "orden_fumigacion_vector_<%=orden_fumigacion.id*2%>" multiple="multiple" class="form-control">
                                   <% OrdenFumigacion::VECTOR.each do  |elemento_vector| %>
                                       <%if cadenatovector(orden_fumigacion.vector).include?  elemento_vector %>
                                         <option value = <%= elemento_vector %> selected ><%= elemento_vector %></option>
@@ -106,7 +106,7 @@
                                   <%end%>
                                 </select>
                               </div>
-                              <%= f.input :vector, :as => :hidden, :input_html => { :id => orden_fumigacion.id} %>
+                              <%= f.input :vector, :as => :hidden, :input_html => { :id => orden_fumigacion.id*2} %>
                           </div>                          
 
                           <div class="form-group">
@@ -119,7 +119,7 @@
                               <script >
                                 // Multiselect dropdown orden_fumigacion.tratamiento -->
                                     $(document).ready(function() {
-                                    $("#orden_fumigacion_veneno_<%=orden_fumigacion.id%>").multiselect({
+                                    $("#orden_fumigacion_veneno_<%=orden_fumigacion.id*3%>").multiselect({
                                       allSelectedText: 'Showing All'
                                     });
                                   });
@@ -127,16 +127,16 @@
 
                                 //Cambia los valores de la cadena de proceso
                                   $(function () {
-                                    $("#orden_fumigacion_veneno_<%=orden_fumigacion.id%>").change(function () {
+                                    $("#orden_fumigacion_veneno_<%=orden_fumigacion.id*3%>").change(function () {
                                       var ValorSeleccionadoDropdown = $(this).val();
-                                      $(document).ready(function(){$("#<%=orden_fumigacion.id%>").val(ValorSeleccionadoDropdown)});
+                                      $(document).ready(function(){$("#<%=orden_fumigacion.id*3%>").val(ValorSeleccionadoDropdown)});
                                     });
                                   });
                                 //Fin de cambio los valores de la cadena de proceso
                               </script>
                               <div class="col-md-8">
                                 <label for="veneno">Veneno</label>
-                                <select id= "orden_fumigacion_veneno_<%=orden_fumigacion.id%>" multiple="multiple" class="form-control">
+                                <select id= "orden_fumigacion_veneno_<%=orden_fumigacion.id*3%>" multiple="multiple" class="form-control">
                                   <% OrdenFumigacion::VENENO.each do  |elemento_veneno| %>
                                       <%if cadenatovector(orden_fumigacion.veneno).include?  elemento_veneno %>
                                         <option value = <%= elemento_veneno %> selected ><%= elemento_veneno %></option>
@@ -146,14 +146,14 @@
                                   <%end%>
                                 </select>
                               </div>
-                              <%= f.input :veneno, :as => :hidden, :input_html => { :id => orden_fumigacion.id} %>
+                              <%= f.input :veneno, :as => :hidden, :input_html => { :id => orden_fumigacion.id*3} %>
                           </div>
 
                           <div class="form-group">
                               <script >
                                 // Multiselect dropdown orden_fumigacion.tratamiento -->
                                     $(document).ready(function() {
-                                    $("#orden_fumigacion_droga_<%=orden_fumigacion.id%>").multiselect({
+                                    $("#orden_fumigacion_droga_<%=orden_fumigacion.id*4%>").multiselect({
                                       allSelectedText: 'Showing All'
                                     });
                                   });
@@ -161,16 +161,16 @@
 
                                 //Cambia los valores de la cadena de proceso
                                   $(function () {
-                                    $("#orden_fumigacion_droga_<%=orden_fumigacion.id%>").change(function () {
+                                    $("#orden_fumigacion_droga_<%=orden_fumigacion.id*4%>").change(function () {
                                       var ValorSeleccionadoDropdown = $(this).val();
-                                      $(document).ready(function(){$("#<%=orden_fumigacion.id%>").val(ValorSeleccionadoDropdown)});
+                                      $(document).ready(function(){$("#<%=orden_fumigacion.id*4%>").val(ValorSeleccionadoDropdown)});
                                     });
                                   });
                                 //Fin de cambio los valores de la cadena de proceso
                               </script>
                               <div class="col-md-8">
                                 <label for="droga">Droga</label>
-                                <select id= "orden_fumigacion_droga_<%=orden_fumigacion.id%>" multiple="multiple" class="form-control">
+                                <select id= "orden_fumigacion_droga_<%=orden_fumigacion.id*4%>" multiple="multiple" class="form-control">
                                   <% OrdenFumigacion::DROGA.each do  |elemento_droga| %>
                                       <%if cadenatovector(orden_fumigacion.droga).include?  elemento_droga %>
                                         <option value = <%= elemento_droga %> selected ><%= elemento_droga %></option>
@@ -180,7 +180,7 @@
                                   <%end%>
                                 </select>
                               </div>
-                              <%= f.input :droga, :as => :hidden, :input_html => { :id => orden_fumigacion.id} %>
+                              <%= f.input :droga, :as => :hidden, :input_html => { :id => orden_fumigacion.id*4} %>
                           </div>
 
                           <div class="form-group">

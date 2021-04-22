@@ -5,12 +5,12 @@ before_action :set_orden_fumigacion, only: [ :show, :edit, :update, :delete, :ad
     @orden_fumigacions = OrdenFumigacion.all.order(:nro_certificado)
     respond_to do |format|
       format.html
-      format.json
+      format.js
       format.pdf do
-        render pdf: "indexa",
-        orientation: "Landscape", # default Portrait
-        page_size: "A4", 
-        template: "orden_fumigacions/index.html.erb"
+          render pdf: "file_name", :template => 'orden_fumigacions/listado.pdf.erb', 
+          encoding: 'utf8',
+          orientation: 'Landscape', 
+          page_size: 'A4',:print_media_type => true
       end
     end
   end
@@ -26,8 +26,11 @@ before_action :set_orden_fumigacion, only: [ :show, :edit, :update, :delete, :ad
       format.html
       format.json
       format.pdf do
-        render pdf: 'orden_fumigacions/pdf', pdf: 'reporteordenfumigacion'
-      end  
+          render pdf: "file_name", :template => 'orden_fumigacions/certificado.pdf.erb', 
+          encoding: 'utf8',
+          orientation: 'Portrait', 
+          page_size: 'A4',:print_media_type => true
+      end
     end
   end
 
@@ -50,11 +53,20 @@ before_action :set_orden_fumigacion, only: [ :show, :edit, :update, :delete, :ad
   def edit
     @orden_fumigacion = OrdenFumigacion.find(params[:id])
   end
-
+  
   def update
         @orden_fumigacion = OrdenFumigacion.find(params[:id])
       if @orden_fumigacion.update(orden_fumigacion_params)
         redirect_to orden_fumigacions_path
+        puts "---------------------@orden_fumigacion.tratamiento: "
+        puts @orden_fumigacion.tratamiento
+        puts "---------------------@orden_fumigacion.vector: "
+        puts @orden_fumigacion.vector
+        puts "---------------------@orden_fumigacion.veneno: "
+        puts @orden_fumigacion.veneno
+        puts "---------------------@orden_fumigacion.droga: "
+        puts @orden_fumigacion.droga
+        
       else
         render :edit
       end
@@ -70,12 +82,12 @@ before_action :set_orden_fumigacion, only: [ :show, :edit, :update, :delete, :ad
     end
   end
 
-  def add_cliente 
-    
+  def add_cliente
+
     @cliente = Cliente.find(params[:cliente_id])
-  
+
     if @cliente.present?
-      
+
         result = { apellido: @cliente.try(:apellido)}
         puts "result: "
         puts result
@@ -92,11 +104,11 @@ before_action :set_orden_fumigacion, only: [ :show, :edit, :update, :delete, :ad
   end
 
   def add_tecnico
-    
+
     @tecnico = Tecnico.find(params[:tecnico_id])
 
     if @tecnico.present?
-      
+
         result = { apellido: @tecnico.try(:apellido) }
         puts "result: "
         puts result

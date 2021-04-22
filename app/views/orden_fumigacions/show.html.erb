@@ -69,9 +69,7 @@
 	    <table class="default">
 		  <tr>
 		    <td>
-		    	<button type="button" id="Imprimir Certificado" class="btn btn-info" >
-		          Imprimir Certificado
-		        </button>
+		    	<div class="col-sm ml-5"><h3><%= link_to 'Imprimir Certificado', orden_fumigacion_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %></h3></div>
 		    </td>
 		    <td>
 		    	<button type="button" id="Imprimir Certificado" class="btn btn-info" >

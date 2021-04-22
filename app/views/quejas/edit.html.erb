@@ -1,25 +1,8 @@
-<%= form_for(@queja) do |f| %>
-	<div>
-    	<%= f.label :orden_fumigacion_id %>
-    	<%= collection_select(:queja, :orden_fumigacion_id, OrdenFumigacion.all.order(:nro_certificado), :id, :nro_certificado, {:selected => @queja.orden_fumigacion_id} ) %>
-    </div>
-    <div>
-      	<%= f.label :nro_queja %>
-        <%= f.text_field :nro_queja %>
-    </div>
-    <div>
-    	<%= f.label :fecha_queja %>
-     	<%= f.text_field :fecha_queja%>
-    </div>
-    <div>
-      	<%= f.label :observaciones_queja %>
-        <%= f.text_field :observaciones_queja %>
-    </div>
-    <div>
-      	<%= f.label :estado %>
-        <%= f.text_field :estado %>
-    </div>
-    <div>
-    	<%= f.button :submit%>
-    </div>
-<% end %>
+<div class="container">
+  <h1 class="text-center card-header my-2">Editar Reclamo</h1>
+
+  <%= render 'form', queja: @queja %>
+
+  <%= link_to 'Atras',  queja_path(@queja), :class => "center-block btn btn-dark btn-lg btn-block w-75 mt-5"  %>
+</div>
+
