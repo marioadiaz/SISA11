@@ -1,0 +1,2 @@
+module FajasHelper
+end

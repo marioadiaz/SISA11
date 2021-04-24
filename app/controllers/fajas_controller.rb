@@ -1,4 +1,4 @@
-class OrdenFumigacionsController < ApplicationController
+class FajasController < ApplicationController
 before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, :delete, :add_cliente]
 
   def index
@@ -26,18 +26,11 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
       format.html
       format.json
       format.pdf do
-        render pdf: "file_name", :template => 'orden_fumigacions/certificado.pdf.erb', 
+        render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb', 
         encoding: 'utf8',
-        orientation: 'Portrait', 
+        orientation: 'Landscape', 
         page_size: 'A4',:print_media_type => true
       end
-
-      #  format.pdf do
-      #      render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb', 
-      #      encoding: 'utf8',
-      #      orientation: 'Landscape', 
-      #      page_size: 'A4',:print_media_type => true
-      #  end
     end
   end
 
@@ -168,3 +161,4 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
       params.require(:orden_fumigacion).permit(:cliente_id, :tecnico_id, :nro_ordfumigacion, :nro_certificado, :tipo_certificado, :fecha_aplicacion, :hora_aplicacion, :tratamiento, :vector, :superficie, :veneno, :droga, :observaciones_ordfumigacion, :fecha_vencimiento, :proximo_tratamiento, :importe, :estado, :baja)
     end
 end
+

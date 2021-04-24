@@ -38,8 +38,8 @@ $(document).ready(function(){
   <% @orden_fumigacions.each do |orden_fumigacion| %>
   	<%if orden_fumigacion.baja == true %>
 	  	<tr>
-	      <td><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
-	    	<td><%= link_to "#{orden_fumigacion.cliente.apellido}", orden_fumigacion_path(orden_fumigacion)%></td>
+	      <td><%= link_to "#{orden_fumigacion.nro_certificado}", faja_path(orden_fumigacion)%></td>
+	    	<td><%= link_to "#{orden_fumigacion.cliente.apellido}", faja_path(orden_fumigacion)%></td>
 	      <td><%= orden_fumigacion.tecnico.apellido %></td>
 	      <td><%= orden_fumigacion.tratamiento %></td>
 	      <td><%= orden_fumigacion.droga %></td>
