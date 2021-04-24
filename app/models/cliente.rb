@@ -24,6 +24,7 @@ before_update { |cliente| cliente.domicilio = cliente.domicilio.upcase }
 
     TIPO_CLIENTE = ['COMERCIAL', 'INDUSTRIAL', 'PARTICULAR', 'EDUCACIONAL', 'ESTATAL', 'OTROS']
 
+
     def self.buscador(termino)
       Cliente.where("apellido LIKE ?", "%#{termino}%")
     end

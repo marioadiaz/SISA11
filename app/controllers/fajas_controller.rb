@@ -22,40 +22,18 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
   def show
     # No lo usamos en este modelo
     @orden_fumigacion = OrdenFumigacion.find(params[:id])
+    
     respond_to do |format|
       format.html
       format.json
       format.pdf do
-        render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb', 
+        render pdf: "file_name", :template => 'fajas/faja.pdf.erb', 
         encoding: 'utf8',
         orientation: 'Landscape', 
-        page_size: 'A4',:print_media_type => true
+        page_size: 'A4', :print_media_type => true
+        puts "---------------------@orden_fumigacion.nro_certificado: "
+        puts @orden_fumigacion.nro_certificado
       end
-    end
-  end
-
-  def showfajas
-    # No lo usamos en este modelo
-    @orden_fumigacion = OrdenFumigacion.find(params[:nro_certificado])
-    puts "---------------------@orden_fumigacion.nro_certificado: "
-    puts @orden_fumigacion.nro_certificado
-    respond_to do |format|
-      format.html
-      format.json
-      format.pdf do
-        render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb', 
-        
-        encoding: 'utf8',
-        orientation: 'Portrait', 
-        page_size: 'A4',:print_media_type => true
-      end
-
-      #  format.pdf do
-      #      render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb', 
-      #      encoding: 'utf8',
-      #      orientation: 'Landscape', 
-      #      page_size: 'A4',:print_media_type => true
-      #  end
     end
   end
 
