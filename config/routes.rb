@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'fajas/new'
+  
+  get '/fajas', to: 'fajas#index'
+  get '/faja/:id', to: 'fajas#show', as: 'faja'
+  get 'fajas/create'
+  get 'fajas/edit'
+  get 'fajas/update'
+  get 'fajas/destroy'
+
 root 'pages#home'
 
 
@@ -36,7 +45,7 @@ end
   post '/orden_fumigacions', to: 'orden_fumigacions#create'
 
   get '/orden_fumigacion/:id', to: 'orden_fumigacions#show', as: 'orden_fumigacion'
-
+  
   get '/orden_fumigacions/:id/edit', to: 'orden_fumigacions#edit', as: 'edit_orden_fumigacion'
   patch '/orden_fumigacion/:id', to: 'orden_fumigacions#update'
   put '/orden_fumigacion/:id', to: 'orden_fumigacions#update'
