@@ -7,13 +7,22 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
       format.html
       format.js
       format.pdf do
-          render pdf: "file_name", :template => 'orden_fumigacions/listado.pdf.erb', 
+          render pdf: "file_name", :template => 'orden_fumigacions/listado.pdf.erb',
           encoding: 'utf8',
-          orientation: 'Landscape', 
+          orientation: 'Landscape',
           page_size: 'A4',:print_media_type => true
       end
     end
   end
+
+
+def proximas_fumigaciones
+    @date_method = (params[:search].present? ? params[:search][:date_method] : 'fecha_aplicacion').to_sym
+    @start = selected_date(:start_date)
+    @end = selected_date(:end_date)
+
+    @orden_fumigacions = params[:search].present? ? OrdenFumigacion.where(@date_method => @start..@end) : OrdenFumigacion.none
+end
 
   def new
     @orden_fumigacion = OrdenFumigacion.new
@@ -26,16 +35,16 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
       format.html
       format.json
       format.pdf do
-        render pdf: "file_name", :template => 'orden_fumigacions/certificado.pdf.erb', 
+        render pdf: "file_name", :template => 'orden_fumigacions/certificado.pdf.erb',
         encoding: 'utf8',
-        orientation: 'Portrait', 
+        orientation: 'Portrait',
         page_size: 'A4',:print_media_type => true
       end
 
       #  format.pdf do
-      #      render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb', 
+      #      render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb',
       #      encoding: 'utf8',
-      #      orientation: 'Landscape', 
+      #      orientation: 'Landscape',
       #      page_size: 'A4',:print_media_type => true
       #  end
     end
@@ -50,17 +59,17 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
       format.html
       format.json
       format.pdf do
-        render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb', 
-        
+        render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb',
+
         encoding: 'utf8',
-        orientation: 'Portrait', 
+        orientation: 'Portrait',
         page_size: 'A4',:print_media_type => true
       end
 
       #  format.pdf do
-      #      render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb', 
+      #      render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb',
       #      encoding: 'utf8',
-      #      orientation: 'Landscape', 
+      #      orientation: 'Landscape',
       #      page_size: 'A4',:print_media_type => true
       #  end
     end
@@ -85,7 +94,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
   def edit
     @orden_fumigacion = OrdenFumigacion.find(params[:id])
   end
-  
+
   def update
         @orden_fumigacion = OrdenFumigacion.find(params[:id])
       if @orden_fumigacion.update(orden_fumigacion_params)
@@ -98,7 +107,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
         puts @orden_fumigacion.veneno
         puts "---------------------@orden_fumigacion.droga: "
         puts @orden_fumigacion.droga
-        
+
       else
         render :edit
       end
@@ -160,11 +169,17 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
     # Use callbacks to share common setup or constraints between actions.
     def set_orden_fumigacion
       @orden_fumigacion = OrdenFumigacion.find(params[:id])
-      
+
     end
 
     # Only allow a list of trusted parameters through.
     def orden_fumigacion_params
       params.require(:orden_fumigacion).permit(:cliente_id, :tecnico_id, :nro_ordfumigacion, :nro_certificado, :tipo_certificado, :fecha_aplicacion, :hora_aplicacion, :tratamiento, :vector, :superficie, :veneno, :droga, :observaciones_ordfumigacion, :fecha_vencimiento, :proximo_tratamiento, :importe, :estado, :baja)
     end
+
+
+
+    def selected_date(symbol)
+    params[:search].present? && params[:search][symbol].present? ? params[:search][symbol].to_date : Time.now.to_date
+end
 end
