@@ -34,7 +34,7 @@
         <div>  <%= f.input :celular %> </div>
       </div>
       <div class="col-sm">
-        <%= f.input :tipo_cliente, as: :select, collection: Cliente::TIPO_CLIENTE,  label:'Tipo Cliente'%>
+        <%= f.input :tipo_cliente, as: :select, collection: Cliente::TIPO_CLIENTE,  label:'Tipo Cliente', prompt: "Seleccione tipo de Cliente" %>
       </div>
       <div>
     </div>

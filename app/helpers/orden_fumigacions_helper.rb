@@ -24,7 +24,6 @@ module OrdenFumigacionsHelper
         return hash_post
     end
 
-
     def options_for_select(container, selected = nil)
         return container if String === container
 

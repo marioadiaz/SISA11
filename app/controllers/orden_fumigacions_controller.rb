@@ -31,13 +31,6 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
         orientation: 'Portrait', 
         page_size: 'A4',:print_media_type => true
       end
-
-      #  format.pdf do
-      #      render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb', 
-      #      encoding: 'utf8',
-      #      orientation: 'Landscape', 
-      #      page_size: 'A4',:print_media_type => true
-      #  end
     end
   end
 
