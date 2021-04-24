@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_17_195004) do
+ActiveRecord::Schema.define(version: 2021_04_24_223805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_195004) do
     t.string "telefono"
     t.string "correo"
     t.string "observaciones_cliente"
-    t.integer "tipo_cliente"
+    t.string "tipo_cliente"
     t.integer "calificacion"
     t.boolean "baja"
     t.datetime "created_at", precision: 6, null: false

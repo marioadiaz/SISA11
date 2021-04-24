@@ -30,14 +30,13 @@ $(document).ready(function(){
   <% @quejas.each do |queja| %>
   	<%if queja.baja == true %>
 	  	<tr>
-        <td><%= link_to "#{queja.nro_queja}", queja_path(queja) %></td>
-          <td>  <%= link_to "#{queja.orden_fumigacion.nro_certificado}", queja_path(queja)  %>  </td>
-  	    	<td><%= link_to "#{queja.orden_fumigacion.cliente.apellido}", queja_path(queja) %></td>
-          <td>  <%= queja.orden_fumigacion.tecnico.apellido %>  </td>
-	        <td><%= queja.fecha_queja %></td>
-	        <td>
-	        	<%= link_to 'Eliminar', queja, method: :delete, data: { confirm: "¿Estás seguro/a?" }  %>
-	        </td>
+        <td><%= link_to "#{queja.id}", queja_path(queja) %></td>
+        <td><%= link_to "#{queja.orden_fumigacion.nro_certificado}", queja_path(queja)  %></td>
+  	    <td><%= link_to "#{queja.orden_fumigacion.cliente.apellido}", queja_path(queja) %></td>
+        <td><%= queja.orden_fumigacion.tecnico.apellido %></td>
+	      <td><%= queja.fecha_queja %></td>
+	      <td><%= link_to 'Eliminar', queja, method: :delete, data: { confirm: "¿Estás seguro/a?" }  %>
+	      </td>
 	  	</tr>
   <% end %>
   <% end %>

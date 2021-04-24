@@ -8,14 +8,12 @@
     <div class="row">
       <div class="col-sm">
         <div >
-      <%= f.label  'Nro Certificado' %>
-      <%= collection_select(:queja, :orden_fumigacion_id, OrdenFumigacion.all.order(:orden_fumigacions), :id, :nro_certificado, {:selected => @queja.orden_fumigacion_id} ) %>
-
-
+          <%= f.label  'Nro Certificado' %>
+          <%= collection_select :queja, :orden_fumigacion_id, OrdenFumigacion.where(baja: true).collect { |t| [ t.id, "#{t.nro_certificado} - #{t.cliente.apellido} - #{t.cliente.nombre} - #{t.cliente.cuit}" ] }, :first, :last, { prompt: "Seleccionar un Certificado" }, {class: "form-control"} %>
         </div>
       </div>
       <div class="col-sm">
-        <div><%= f.input :fecha_queja %></div>
+        <div><%= f.input :fecha_queja, :class => 'datepicker', as: :date, html5: true%></div>
       </div>
     </div>
     <div class="row">
@@ -23,7 +21,10 @@
         <div><%= f.input :observaciones_queja %> </div>
       </div>
       <div class="col-sm">
-        <div><%= f.input :estado %></div>
+        <div>
+          <%= f.label  'Estado' %>
+          <%= f.input :estado, as: :select, :collection => ["En proceso", "Finalizado"], label: false, :default=> "En proceso", :input_html => { :class => "form-control"}%>
+        </div>
       </div>
     </div>
   <!-- div form-inputs cliente-new-form -->

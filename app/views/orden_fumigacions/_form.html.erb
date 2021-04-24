@@ -25,7 +25,8 @@
 
                           <div class="form-group">
                               <div class="col-md-8">
-                                  <%= f.input :tipo_certificado, :label => false, :input_html => { :class => "form-control", :placeholder => "Tipo Certificado"}%>
+                                  <label for="tipo_certificado">Tipo Certificado</label>
+                                  <%= f.input :tipo_certificado, as: :select, :collection => ["F", "C"], label: false, :default=> "F", :input_html => { :class => "form-control"}%>                                 
                               </div>
                           </div>
 
