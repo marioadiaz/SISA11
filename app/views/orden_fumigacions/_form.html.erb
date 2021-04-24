@@ -25,8 +25,8 @@
 
                           <div class="form-group">
                               <div class="col-md-8">
-                                  <label for="tipo_certificado">Tipo Certificado</label>
-                                  <%= f.input :tipo_certificado, as: :select, :collection => ["F", "C"], label: false, :default=> "F", :input_html => { :class => "form-control"}%>                                 
+
+                                  <%= f.input :tipo_certificado, as: :select, :collection => ["F", "C"], label: "Tipo de certificado", :default=> "F", :input_html => { :class => "form-control"}%>
                               </div>
                           </div>
 
@@ -43,9 +43,9 @@
                           </div>
 
                           <%if orden_fumigacion.id.nil?   %>
-                              <%orden_fumigacion_id=1   %>          
+                              <%orden_fumigacion_id=1   %>
                           <%else%>
-                            <% orden_fumigacion_id=orden_fumigacion.id   %>          
+                            <% orden_fumigacion_id=orden_fumigacion.id   %>
                           <%end%>
 
                           <div class="form-group">
@@ -114,7 +114,7 @@
                                 </select>
                               </div>
                               <%= f.input :vector, :as => :hidden, :input_html => { :id => orden_fumigacion_id*2} %>
-                          </div>                          
+                          </div>
 
                           <div class="form-group">
                               <div class="col-md-8">
@@ -218,9 +218,9 @@
                               <div class="col-md-8">
                                   <%= f.input :observaciones_ordfumigacion, :label => false, :input_html => { :class => "form-control", :placeholder => "Observaciones"}%>
                               </div>
-                          </div>            
-  
-                          
+                          </div>
+
+
       </div>
   </div>
   <!-- div form-inputs cliente-new-form -->
@@ -228,6 +228,6 @@
     <div class="col-md-12">
       <div><%= f.button :submit,name="Confirmar",:class => "btn btn-success"  %> </div>
     </div>
-  </div>   
+  </div>
 
 <% end %>
