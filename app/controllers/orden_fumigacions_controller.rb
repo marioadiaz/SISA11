@@ -44,31 +44,6 @@ end
     end
   end
 
-  def showfajas
-    # No lo usamos en este modelo
-    @orden_fumigacion = OrdenFumigacion.find(params[:nro_certificado])
-    puts "---------------------@orden_fumigacion.nro_certificado: "
-    puts @orden_fumigacion.nro_certificado
-    respond_to do |format|
-      format.html
-      format.json
-      format.pdf do
-        render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb',
-
-        encoding: 'utf8',
-        orientation: 'Portrait',
-        page_size: 'A4',:print_media_type => true
-      end
-
-      #  format.pdf do
-      #      render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb',
-      #      encoding: 'utf8',
-      #      orientation: 'Landscape',
-      #      page_size: 'A4',:print_media_type => true
-      #  end
-    end
-  end
-
   def create
     @orden_fumigacion = OrdenFumigacion.new(orden_fumigacion_params)
 
