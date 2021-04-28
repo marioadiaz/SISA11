@@ -7,7 +7,10 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
       format.html
       format.json
       format.pdf do
-      render template: 'clientes/pdf', pdf: 'Reporte'
+          render pdf: "file_name", :template => 'clientes/listado_clientes.pdf.erb',
+          encoding: 'utf8',
+          orientation: 'Landscape',
+          page_size: 'A4',:print_media_type => true
       end
     end
   end

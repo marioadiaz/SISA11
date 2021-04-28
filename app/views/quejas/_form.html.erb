@@ -13,12 +13,18 @@
         </div>
       </div>
       <div class="col-sm">
-        <div><%= f.input :fecha_queja, :class => 'datepicker', as: :date, html5: true%></div>
+        <div>
+          <%= f.label  'Fecha Reclamo' %>
+          <%= f.input :fecha_queja, :class => 'datepicker', as: :date, html5: true, label: false, :input_html => { :class => "form-control"} %>
+        </div>
+
+    
       </div>
     </div>
     <div class="row">
       <div class="col-sm">
-        <div><%= f.input :observaciones_queja %> </div>
+        <%= f.label  'Observaciones' %>
+        <div><%= f.input :observaciones_queja, label: false %> </div>
       </div>
       <div class="col-sm">
         <div>

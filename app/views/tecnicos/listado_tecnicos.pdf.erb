@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Listado Tecnicos</title>
+    <%= wicked_pdf_stylesheet_link_tag "file.css" -%>
+  </head>
+  <body>
+    <header class="clearfix">
+      <div id="datos">
+        <h2><%=I18n.l(Date.today, format: '%A, %d de %B de %Y')%></h2>
+        <h1>Listado de Tecnicos</h1>
+      </div>
+      <div id="company">
+        <h1>SISA FUMIGACIONES</h1>
+        <h2>SISTEMA INTEGRAL DE SANEAMIENTO AMBIENTAL</h2>    
+      </div>
+    </header>
+    <div id="details" class="clearfix">
+    </div>
+    <div class="clearfix">
+      <table>
+        <tr>
+          <thead>
+            <th>DNI</th>
+            <th>Apellido</th>
+            <th>Nombre</th>
+            <th>Domicilio</th>
+            <th>Barrio</th>
+            <th>Celular</th>
+            <th>Telefono</th>
+            <th>Correo</th>
+          </thead>
+        </tr>
+          <tbody>
+            <% @tecnicos.each do |tecnico| %>
+              <%if tecnico.baja == true %>
+                <tr>
+                  <td><%= tecnico.dni %></td>
+                  <td><%= tecnico.apellido %></td>
+                  <td><%= tecnico.nombre %></td>
+                  <td><%= tecnico.domicilio %></td>
+                  <td><%= tecnico.barrio %></td>
+                  <td><%= tecnico.celular %></td>
+                  <td><%= tecnico.telefono %></td>
+                  <td><%= tecnico.correo %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+      </table>
+    </div>
+  </body>
+</html>
+
+<style type="text/css">
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#details {
+  margin-bottom: 10px;
+}
+
+body {
+  
+  position: relative;
+   
+  
+  color: #001028;
+
+  font-family: Arial;
+  font-size: 14px; 
+}
+
+
+#company {
+  padding-left: 6px;
+  border-left: 6px solid #0087C3;
+  float: left;
+  margin-bottom: 20px;
+}
+
+#company h1 {
+  font-size: 2.4em;
+  font-weight: bold;
+  margin: 0;
+  color: #ff0000;
+}
+
+#company h2 {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+  color: #000000;
+}
+
+#datos {
+  position: relative;
+  float: right;
+  text-align: right;
+  margin-bottom: 2px;
+}
+
+#datos h1 {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0;
+  color: #008000;
+}
+
+#datos h2 {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+  color: #000000; 
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 30px;
+}
+
+table th,
+table td {
+  text-align: center;
+}
+
+table th {
+  padding: 5px 0px 5px 0px;
+  background-color: lightblue;
+  border-bottom: 1px solid #C1CED9;
+  white-space: nowrap;        
+  font-weight: bold;
+}
+
+table .service,
+table .desc {
+  text-align: left;
+}
+
+table td {
+  padding: 10px;
+  text-align: right;
+}
+
+table td.service,
+table td.desc {
+  vertical-align: top;
+}
+
+table tr:nth-child(2n-1) td {
+  background: #EEEEEE;
+}
+
+table tr:last-child td {
+  background: #DDDDDD;
+}
+
+</style>
