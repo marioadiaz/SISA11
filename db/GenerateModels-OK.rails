@@ -93,3 +93,29 @@ function renderizar_modal() {
      <button type="button" OnClick="BuscarCliente()" id="BuscarCliente" class="btn btn-info" data-toggle="modal" data-target="#buscador_cliente">
           Buscar cliente
         </button>
+
+        
+                                  <% OrdenFumigacion::PERIODO.each do  |key_dias,valor_etiqueta| %>
+                                    <%if orden_fumigacion_proxtrat.to_i == key_dias.to_i %>
+                                        <option value = <%= sumarfechadias(orden_fumigacion_fechavenc,key_dias) %> selected ><%=valor_etiqueta%> - <%= sumarfechadias(orden_fumigacion_fechavenc,key_dias)%> </option>
+                                      <%else%>
+                                        <option value = <%= sumarfechadias(orden_fumigacion_fechavenc,key_dias) %> ><%=valor_etiqueta%> - <%= sumarfechadias(orden_fumigacion_fechavenc,key_dias)%>  </option>
+                                      <%end%>
+                                    
+                                  <%end%>
+
+                                   let proximo_tratamiento = new Date(<%= orden_fumigacion.proximo_tratamiento%>);
+                                  console.log("proximo_tratamiento: ", proximo_tratamiento);
+                                  var listaperiodos = {
+                                                        30: ["mensual"],
+                                                        60: ["bimestral"],
+                                                        90: ["trimestral"],
+                                                        120: ["cuatrimestral"],
+                                                      }
+                                  console.log("listaperiodos: ", listaperiodos);
+                                  console.log("listaperiodos[nro]: ", listaperiodos[30]);
+                                  var fech_venc = document.getElementById('orden_fumigacion_fecha_vencimiento').value;
+                                  console.log("fech_venc: ", fech_venc);
+                                  var prox_tratamiento = document.getElementById('orden_fumigacion_proximo_tratamiento_<%=orden_fumigacion_id*6%>');
+                                  console.log("valor: ", 'orden_fumigacion_proximo_tratamiento_<%=orden_fumigacion_id*6%>');
+                                  console.log("prox_tratamiento: ", prox_tratamiento);

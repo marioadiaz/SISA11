@@ -204,32 +204,23 @@
                           <%end%>
 
                           <div class="form-group">
-                              <script type="text/javascript">
-
-                                $("#orden_fumigacion_fecha_vencimiento").change(function () {
-                                  var orden_fumigacion_proxtrat = "<%= orden_fumigacion_proxtrat %>"
-                                  console.log("orden_fumigacion_proxtrat: ",orden_fumigacion_proxtrat)
-                                  var fecha_vencimiento = new Date(document.getElementById('orden_fumigacion_fecha_vencimiento').value)
-                                  console.log("fecha_vencimiento: ",fecha_vencimiento)
-                                  cargar_proximo_tratamiento(fecha_vencimiento,orden_fumigacion_proxtrat)
-                                });
-
+                              <script >
+                                  $("#orden_fumigacion_fecha_vencimiento").change(function () {
+                                    var orden_fumigacion_proxtrat = <%= orden_fumigacion_proxtrat %>;
+                                    var fecha_vencimiento = document.getElementById('orden_fumigacion_fecha_vencimiento').value
+                                    cargar_proximo_tratamiento(fecha_vencimiento,orden_fumigacion_proxtrat);
+                                  });  
                                 function cargar_proximo_tratamiento(fecha_vencimiento, orden_fumigacion_proxtrat) {
-                                                                  
+                                  
                                   var listaPeriodos = ["30","60","90","120"]
                                   var select_proximo_tratamiento = document.getElementById('orden_fumigacion_proximo_tratamiento_<%=orden_fumigacion_id*6%>')
 
                                   console.log('select_proximo_tratamiento: ', select_proximo_tratamiento)
 
-                                  if (select_proximo_tratamiento!= null){
-                                    select_proximo_tratamiento.innerHTML = '<option value="">Seleccione prox. tratamiento...</option>'
-                                  }
+                                  select_proximo_tratamiento.innerHTML = '<option value="">Seleccione prox. tratamiento...</option>'
 
                                   listaPeriodos.forEach(function(periodo){
                                     let opcion = document.createElement('option')
-                                    
-                                    console.log("fecha_vencimientooooo: ",fecha_vencimiento)
-
                                     let proximo_vencimiento = sumarfechas(fecha_vencimiento,periodo)
                                     opcion.value = proximo_vencimiento
                                     opcion.text = proximo_vencimiento + " - " + periodo
@@ -242,46 +233,35 @@
                                     select_proximo_tratamiento.add(opcion)
                                   });
                                    
-                                  console.log("select_proximo_tratamiento+++++: ",select_proximo_tratamiento)
-                                  $('#contenedor_proximo_tratamiento').append(select_proximo_tratamiento)
+                                  console.log("select_proximo_tratamiento: ",select_proximo_tratamiento)
+                                  $('#contenedor_proximo_tratamiento').append(select_proximo_tratamiento);
                                 }
 
                                 function sumarfechas(fecha,dias){
-                                  console.log("fecha---while: ", fecha, " dias: ",dias)
+                                  var dia = fecha.getDate()
                                   while (dias >= 30) {
-                                    
-                                    var dia = fecha.getDate()
-                                    var mes = fecha.getMonth()
-                                    var anio = fecha.getFullYear()
-
-                                    console.log("dia---while: ", dia, "mes---while: ",mes, "año---while: ", anio)
-                                    if (dia + 30 <= diasxmes(mes,anio)){
-                                      cadena = anio + "/" + mes + "/" + (dia + 30)
-                                      console.log("cadena1: ", cadena)
+                                    if (dia+30 <= diasxmes(fecha.getMonth(),fecha.getFullYear())){
+                                      cadena = (fecha.getDate() + 30).toString() + "/" + fecha.getMonth().toString() + "/" + fecha.getFullYear().toString()
                                       
                                     } else {
-                                      if (mes != 12) {
-                                        
-                                        cadena = anio + "/" + (mes+1) + "/" + (dia + 30 - diasxmes(mes-1,anio))
-                                        console.log("cadena2: ", cadena)
+                                      if (fecha.getMonth() != 12) {
+                                        cadena = (fecharesult.getDate() + 30 - diasxmes(fecha.getMonth(),fecha.getFullYear())).toString() + "/" + (fecha.getMonth()+1).toString() + "/" +fecha.getFullYear().toString()
                                         
                                       }else {
-                                        cadena = (anio+1) + "/" + "01" + "/" + (dia + 30 - diasxmes(mes,anio))
-                                        console.log("cadena3: ", cadena)
+                                        cadena = (fecharesult.getDate() + 30 - diasxmes(fecha.getMonth(),fecha.getFullYear())).toString() + "/" + "1" + "/" + (fecha.getFullYear()+1).toString()
                                       }
 
                                     }
                                   dias = dias - 30
                                   fecha = new Date(cadena)
-
                                   }
                                   return fecha
                                 }
 
                                 function diasxmes(mes,anio){
                                   let nmes = 31
-                                  
-                                  if ((mes==4) || (mes==6) || (mes==9)|| (mes==11)){
+                                  let meses30 = [4,6,9,11]
+                                  if (meses30.include(mes)){
                                     nmes=30;
                                   } else {
                                     if (mes == 2) {
@@ -316,7 +296,7 @@
                                   });
                                 //Fin de cambio los valores de la cadena de proceso                             
                               </script>
-                              <!--<div class="col-md-8">
+                              <div class="col-md-8">
                                 <div id="contenedor_proximo_tratamiento">
                                   <label for="proximo_tratamiento">Proximo tratamiento</label>
 
@@ -324,16 +304,10 @@
                                      <option value="">Seleccione prox. tratamiento...</option>
                                   </select>
                                 </div>
-                                <%= f.input :proximo_tratamiento, :as => :hidden, :input_html => { :id => orden_fumigacion_id*6} %>
-                              </div>-->
-                              
-
-                          </div>
-                          <div class="form-group">
-                              <div class="col-md-8">
-                                  <%= f.input :proximo_tratamiento, :class => 'datepicker', as: :date, html5: true, :input_html => {:class => "form-control"} %>
                               </div>
+                              <%= f.input :proximo_tratamiento, :as => :hidden, :input_html => { :id => orden_fumigacion_id*6} %>
                           </div>
+
                           <div class="form-group">
                               <div class="col-md-8">
                                   <%= f.input :importe, :label => false, :input_html => { :class => "form-control", :placeholder => "Importe"}%>
