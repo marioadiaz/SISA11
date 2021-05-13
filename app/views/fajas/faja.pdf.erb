@@ -12,14 +12,17 @@
   <div >
     <div style="position:absolute;left:95px;top:386px;" class="cls_002">
       <span class="cls_002"><%=I18n.l(@orden_fumigacion.fecha_aplicacion, locale: :es, format: :long)%></span>
+      <span style="left: 101.571px; top: 327.141px; font-size: 18.1536px; font-family: sans-serif; transform: scaleX(0.872185);" dir="ltr">&nbsp</span>
     </div>
     <div style="position:absolute;left:926px;top:386px;" class="cls_002">
       <span class="cls_002"><%=I18n.l(@orden_fumigacion.fecha_vencimiento, locale: :es, format: :long)%></span>
+      <span style="left: 101.571px; top: 327.141px; font-size: 18.1536px; font-family: sans-serif; transform: scaleX(0.872185);" dir="ltr">&nbsp</span>
+      
     </div>
-    <div style="position:absolute;left:265px;top:775px" class="cls_003">
+    <div style="position:absolute;left:265px;top:950px" class="cls_003">
       <span class="cls_003"><%= @orden_fumigacion.cliente.nombre%> <%= @orden_fumigacion.cliente.apellido%> - <%= @orden_fumigacion.cliente.rubro%></span>
     </div>
-    <div style="position:absolute;left:189px;top:832px" class="cls_003">
+    <div style="position:absolute;left:189px;top:950px" class="cls_003">
       <span class="cls_003"><%= @orden_fumigacion.cliente.domicilio%></span>
     </div>
   </div>
@@ -28,21 +31,20 @@
 <style type="text/css">
 
 span.cls_002{
-  font-family:Arial;
+  font-family:Arial,Arial;
   font-size:26px;
   color:#000000;
-  border: 3px solid #73AD21;
   font-weight:bold;
+
 }
 
 div.cls_002{
-  font-family:Arial;
+  font-family:Arial,Arial;
   font-size:26px;
   color:#000000;
-  border: 3px solid #73AD21;
   font-weight:bold;
-}
 
+}
 span.cls_003{
   font-family:Arial,Arial;
   font-size:24px;

@@ -59,7 +59,11 @@
           </tr>
           <tr>
             <td class="no">Hora aplicacion</td>
-            <td class="desc"><h3><%= @orden_fumigacion.hora_aplicacion.strftime("%H:%M") %></h3></td>
+            <%if @orden_fumigacion.hora_aplicacion != nil%>
+              <td class="desc"><h3><%= @orden_fumigacion.hora_aplicacion.strftime("%H:%M") %></h3></td>
+            <%else%>
+              <td class="desc"><h3> -:- </h3></td>
+            <%end%> 
             
           </tr>
           <tr>
