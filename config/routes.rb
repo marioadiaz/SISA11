@@ -1,16 +1,13 @@
 Rails.application.routes.draw do
 
-  get 'fajas/new'
-
-  get '/fajas', to: 'fajas#index'
-  get '/faja/:id', to: 'fajas#show', as: 'faja'
-  get 'fajas/create'
-  get 'fajas/edit'
-  get 'fajas/update'
-  get 'fajas/destroy'
-
+  get 'remitos/new'
+  get 'remitos/index'
+  get 'remitos/show'
+  get 'remitos/create'
+  get 'remitos/edit'
+  get 'remitos/update'
+  get 'remitos/destroy'
 root 'pages#home'
-
 
 devise_for :users
 devise_scope :user do
@@ -39,7 +36,7 @@ end
   delete '/tecnico/:id', to: 'tecnicos#delete'
 
   #ORDEN FUMIGACION
-   get '/orden_fumigacions/proximas_fumigaciones'
+  get '/orden_fumigacions/proximas_fumigaciones'
   get '/orden_fumigacions', to: 'orden_fumigacions#index'
 
   get 'orden_fumigacions/new', to: 'orden_fumigacions#new'
@@ -67,5 +64,23 @@ end
   patch '/queja/:id', to: 'quejas#update'
   put '/queja/:id', to: 'quejas#update'
   delete '/queja/:id', to: 'quejas#delete'
+  
+  #FAJAS
+  get '/fajas', to: 'fajas#index'
+  get '/faja/:id', to: 'fajas#show', as: 'faja'
+  get 'fajas/create'
+  get 'fajas/edit'
+  get 'fajas/update'
+  get 'fajas/destroy'
+
+  #REMITOS
+  get 'remitos/new'
+  get '/remitos', to: 'remitos#index'
+  get 'remitos/show'
+  get 'remitos/create'
+  get 'remitos/edit'
+  get 'remitos/update'
+  get 'remitos/destroy'
+  get 'fajas/new'
 
 end

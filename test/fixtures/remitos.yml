@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  orden_fumigacion: one
+  nro_remito: MyString
+  fecha_remito: 2021-05-15
+  concepto: MyString
+  importe: 1
+  baja: false
+
+two:
+  orden_fumigacion: two
+  nro_remito: MyString
+  fecha_remito: 2021-05-15
+  concepto: MyString
+  importe: 1
+  baja: false

@@ -1,0 +1,38 @@
+<%= simple_form_for(@remito) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="center-block form-inputs cliente-new-form">
+
+    <div class="row">
+      <div class="col-sm">
+        <div >
+          <%= f.label  'Nro Remito' %>
+          <%= collection_select :remito, :orden_fumigacion_id, OrdenFumigacion.where(baja: true).collect { |t| [ t.id, "#{t.nro_certificado} - #{t.cliente.apellido} - #{t.cliente.nombre} - #{t.cliente.cuit}" ] }, :first, :last, { prompt: "Seleccionar un Certificado" }, {class: "form-control"} %>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div>
+          <%= f.label  'Fecha Reclamo' %>
+          <%= f.input :fecha_remito, :class => 'datepicker', as: :date, html5: true, label: false, :input_html => { :class => "form-control"} %>
+        </div>
+
+    
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <%= f.label  'Observaciones' %>
+        <div><%= f.input :observaciones_remito, label: false %> </div>
+      </div>
+      <div class="col-sm">
+        <div>
+          <%= f.label  'Estado' %>
+          <%= f.input :estado, as: :select, :collection => ["En proceso", "Finalizado"], label: false, :default=> "En proceso", :input_html => { :class => "form-control"}%>
+        </div>
+      </div>
+    </div>
+  <!-- div form-inputs cliente-new-form -->
+   <div class= "d-flex my-3">
+     <div> <%= f.button :submit,name="Confirmar",:class => "btn btn-success"  %> </div>
+  </div>
+<% end %>

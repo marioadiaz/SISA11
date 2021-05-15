@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_24_223805) do
+ActiveRecord::Schema.define(version: 2021_05_15_185757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,18 @@ ActiveRecord::Schema.define(version: 2021_04_24_223805) do
     t.index ["orden_fumigacion_id"], name: "index_quejas_on_orden_fumigacion_id"
   end
 
+  create_table "remitos", force: :cascade do |t|
+    t.bigint "orden_fumigacion_id", null: false
+    t.string "nro_remito"
+    t.date "fecha_remito"
+    t.string "concepto"
+    t.integer "importe"
+    t.boolean "baja"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["orden_fumigacion_id"], name: "index_remitos_on_orden_fumigacion_id"
+  end
+
   create_table "tecnicos", force: :cascade do |t|
     t.string "dni"
     t.string "apellido"
@@ -100,4 +112,5 @@ ActiveRecord::Schema.define(version: 2021_04_24_223805) do
   add_foreign_key "orden_fumigacions", "clientes"
   add_foreign_key "orden_fumigacions", "tecnicos"
   add_foreign_key "quejas", "orden_fumigacions"
+  add_foreign_key "remitos", "orden_fumigacions"
 end

@@ -16,13 +16,13 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
   end
 
 
-def proximas_fumigaciones
-    @date_method = (params[:search].present? ? params[:search][:date_method] : 'fecha_aplicacion').to_sym
-    @start = selected_date(:start_date)
-    @end = selected_date(:end_date)
+  def proximas_fumigaciones
+      @date_method = (params[:search].present? ? params[:search][:date_method] : 'fecha_aplicacion').to_sym
+      @start = Date.today
+      @end = selected_date(:end_date)
 
-    @orden_fumigacions = params[:search].present? ? OrdenFumigacion.where(@date_method => @start..@end) : OrdenFumigacion.none
-end
+      @orden_fumigacions = params[:search].present? ? OrdenFumigacion.where(@date_method => @start..@end) : OrdenFumigacion.none
+  end
 
   def new
     @orden_fumigacion = OrdenFumigacion.new
@@ -150,5 +150,5 @@ end
 
     def selected_date(symbol)
     params[:search].present? && params[:search][symbol].present? ? params[:search][symbol].to_date : Time.now.to_date
-end
+    end
 end
