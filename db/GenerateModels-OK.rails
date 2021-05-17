@@ -135,3 +135,13 @@ if$('.pagination').length
       console.log("Ok :D");   
       $('.pagination').text('Buscando...')
       $.getScript(url)
+
+
+<div class="form-group">
+                              <div class="col-md-8">
+                                <label for="estado">Estado</label>
+                                <%= f.input :estado, as: :select, :collection => ["En proceso", "Finalizado"], label: false, :default=> "En proceso", :input_html => { :class => "form-control"}%>
+                              </div>
+                          </div>
+
+<input class="ml-3 w-25" id="myInput" type="text" placeholder="Buscar..">

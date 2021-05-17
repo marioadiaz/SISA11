@@ -1,4 +1,5 @@
 class Cliente < ApplicationRecord
+	
 	has_many :orden_fumigacions
 	has_many :remitos
 	has_many :tecnicos, through: :orden_fumigacions
@@ -18,7 +19,14 @@ class Cliente < ApplicationRecord
 
     TIPO_CLIENTE = ['COMERCIAL', 'INDUSTRIAL', 'PARTICULAR', 'EDUCACIONAL', 'ESTATAL', 'OTROS']
 
-    def self.buscador(termino)
-      Cliente.where("apellido LIKE ?", "%#{termino}%")
-    end
+    def self.search(cadena)
+    	if cadena 
+    		search = cadena.upcase
+	        where('cuit LIKE ? or nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ?', "%#{search}%","%#{search}%","%#{search}%","%#{search}%","%#{search}%","%#{search}%")
+	    else
+	    	
+	      where('id <> ?',0)
+
+	    end
+  	end
 end

@@ -3,7 +3,7 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
 
   def index
       #@clientes = Cliente.all.order(:apellido)
-      @clientes = Cliente.all.paginate(:page => params[:page], :per_page => 10 )
+      @clientes = Cliente.search(params[:search]).paginate(:page => params[:page], :per_page => 10 )
                          .order("updated_at DESC")
                          
       respond_to do |format|
