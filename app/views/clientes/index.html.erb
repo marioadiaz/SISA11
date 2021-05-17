@@ -7,6 +7,7 @@
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
+    console.log("value: ",value);
     $("#myTable tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
@@ -32,10 +33,11 @@ $(document).ready(function(){
   </tr>
 
   <tbody id="myTable" >
+  
   <% @clientes.each do |cliente| %>
   	<%if cliente.baja == true %>
 	  	<tr>
-        <td><%= cliente.cuit %></td>
+        <td><%= link_to "#{cliente.cuit}", cliente_path(cliente)%></td>
         <td><%= link_to "#{cliente.nombre}", cliente_path(cliente)%></td>
         <td><%= link_to "#{cliente.apellido}", cliente_path(cliente)%></td>
 	      <td><%= cliente.rubro%></td>
@@ -44,13 +46,15 @@ $(document).ready(function(){
 	      <td><%= cliente.telefono %></td>
 	      <td><%= cliente.tipo_cliente %></td>
 	      <td>
-	        	<%= link_to 'Eliminar', cliente, method: :delete, data: { confirm: "¿Estás seguro/a?" } %>
+	        	<%= link_to 'Eliminar', cliente_path(cliente), method: :delete, data: { confirm: "¿Estás seguro/a?" } %>
 	      </td>
 	  	</tr>
 	  <% end %>
   <% end %>
 </tbody>
+
 </table>
-
-
+  <div>
+    <%= will_paginate @clientes%>
+  </div>
 </div>

@@ -2,7 +2,7 @@ class OrdenFumigacionsController < ApplicationController
 before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, :delete, :add_cliente]
 
   def index
-    @orden_fumigacions = OrdenFumigacion.all.order(:nro_certificado)
+    @orden_fumigacions = OrdenFumigacion.all.order("updated_at DESC")
     respond_to do |format|
       format.html
       format.js
@@ -14,7 +14,6 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
       end
     end
   end
-
 
   def proximas_fumigaciones
       @date_method = (params[:search].present? ? params[:search][:date_method] : 'fecha_aplicacion').to_sym

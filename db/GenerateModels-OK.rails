@@ -124,3 +124,14 @@ function renderizar_modal() {
                                   var prox_tratamiento = document.getElementById('orden_fumigacion_proximo_tratamiento_<%=orden_fumigacion_id*6%>');
                                   console.log("valor: ", 'orden_fumigacion_proximo_tratamiento_<%=orden_fumigacion_id*6%>');
                                   console.log("prox_tratamiento: ", prox_tratamiento);
+
+
+paginacion
+
+if$('.pagination').length
+  $(winddow).scroll ->
+    url =('.pagination .next page').attr('href')
+    if url && $(winddow).scrollTop() > $(document).height - $(winddow).height - 50 
+      console.log("Ok :D");   
+      $('.pagination').text('Buscando...')
+      $.getScript(url)

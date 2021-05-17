@@ -21,7 +21,6 @@ ActiveStorage.start()
 
 $(document).on('turbolinks:load', function() {
 
-  
-});
 
+});
 

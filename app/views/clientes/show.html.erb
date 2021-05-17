@@ -2,6 +2,7 @@
     <div class="card-header d-flex justify-content-between">
       <div><h2 class="my-0 font-size:8vw">Detalle del cliente</h2></div>
       <div> <%= link_to 'Editar Cliente', edit_cliente_path(@cliente), class: "btn btn-primary mr-3" %></div>
+      <div> <%= link_to 'Eliminar', cliente_path(@cliente), method: :delete, data: { confirm: "¿Estás seguro/a?" } %></div>
     </div>
   <div class="card-body">
     <ul class="list-unstyled mt-3 mb-4 text-center">
@@ -67,5 +68,6 @@
     </ul>
 
     <a  class="btn btn-lg btn-block btn-dark" href="/clientes">Atrás</a>
+
   </div>
 </div>

@@ -2,7 +2,10 @@ class ClientesController < ApplicationController
 before_action :set_cliente, only: [:show, :edit, :update, :delete]
 
   def index
-      @clientes = Cliente.all.order(:apellido)
+      #@clientes = Cliente.all.order(:apellido)
+      @clientes = Cliente.all.paginate(:page => params[:page], :per_page => 10 )
+                         .order("updated_at DESC")
+                         
       respond_to do |format|
       format.html
       format.json
@@ -55,12 +58,21 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
   # Aparentemente el delete es mejor que destroy ya qye ejecuta una consulta sql directa
   def delete
     @cliente = Cliente.find(params[:id])
+
     @cliente.update baja: false
+        puts "---------------------@cliente.id: "
+        puts @cliente.id
+        puts "---------------------@cliente.cuit: "
+        puts @cliente.cuit
+        puts "---------------------@cliente.baja: "
+        puts @cliente.baja
+          
     respond_to do |format|
       format.html { redirect_to clientes_url, notice: 'El cliente fue eliminado.' }
       format.json { head :no_content }
     end
   end
+
 
   #DEFINO EL BUSCADOR PARA EL MODAL EN ORDEN_FUMIGACION
   def buscador
