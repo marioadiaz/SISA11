@@ -39,7 +39,7 @@ $(document).ready(function(){
   	<%if orden_fumigacion.baja == true %>
 	  	<tr>
 	      <td><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
-	    	<td><%= link_to "#{orden_fumigacion.cliente.apellido}", orden_fumigacion_path(orden_fumigacion)%></td>
+	    	<td><%= link_to "#{orden_fumigacion.cliente.apellido}", cliente_path(orden_fumigacion.cliente)%></td>
 	      <td><%= orden_fumigacion.tecnico.apellido %></td>
 	      <td><%= orden_fumigacion.tratamiento %></td>
 	      <td><%= orden_fumigacion.droga %></td>

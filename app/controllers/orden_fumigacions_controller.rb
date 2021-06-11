@@ -2,7 +2,7 @@ class OrdenFumigacionsController < ApplicationController
 before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, :delete, :add_cliente]
 
   def index
-    @orden_fumigacions = OrdenFumigacion.all.order("updated_at DESC")
+    @orden_fumigacions = OrdenFumigacion.all.order("updated_at DESC, nro_certificado DESC")
     respond_to do |format|
       format.html
       format.js

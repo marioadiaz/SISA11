@@ -2,7 +2,7 @@ class TecnicosController < ApplicationController
 before_action :set_tecnico, only: [:show, :edit, :update, :delete]
 
   def index
-      @tecnicos = Tecnico.all.order(:apellido)
+      @tecnicos = Tecnico.all.order("updated_at DESC, nombre DESC")
       respond_to do |format|
       format.html
       format.json

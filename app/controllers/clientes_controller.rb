@@ -4,7 +4,7 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
   def index
       #@clientes = Cliente.all.order(:apellido)
       @clientes = Cliente.search(params[:search]).paginate(:page => params[:page], :per_page => 10 )
-                         .order("updated_at DESC")
+                         .order("updated_at DESC, nombre DESC")
                          
       respond_to do |format|
       format.html
@@ -97,6 +97,6 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
 
     # Only allow a list of trusted parameters through.
     def cliente_params
-      params.require(:cliente).permit(:cuit, :rubro, :apellido, :nombre, :domicilio, :barrio, :celular, :telefono, :correo, :observaciones_cliente, :tipo_cliente, :calificacion, :baja)
+      params.require(:cliente).permit(:cuit, :rubro, :apellido, :nombre, :domicilio, :barrio, :localidad, :celular, :telefono, :correo, :observaciones_cliente, :tipo_cliente, :calificacion, :baja)
     end
 end
