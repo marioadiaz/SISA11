@@ -76,4 +76,6 @@ Rails.application.configure do
 
   # configuracion devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  config.hosts = ["192.168.1.250","sisa-md.duckdns.org"]
 end

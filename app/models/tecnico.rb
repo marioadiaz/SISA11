@@ -9,10 +9,10 @@ validates :nombre, presence: true
 validates :apellido, presence: true
 
 
-validates :dni, presence: true,  uniqueness: true
-validates :domicilio, presence: true
-validates :barrio, presence: true
-validates :celular, presence: true
+#validates :dni, presence: true,  uniqueness: true
+#validates :domicilio, presence: true
+#validates :barrio, presence: true
+#validates :celular, presence: true
 
 
 before_create { |tecnico| tecnico.apellido = tecnico.apellido.upcase }

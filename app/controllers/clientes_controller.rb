@@ -2,12 +2,18 @@ class ClientesController < ApplicationController
 before_action :set_cliente, only: [:show, :edit, :update, :delete]
 
   def index
-      @clientes = Cliente.all.order(:apellido)
+      #@clientes = Cliente.all.order(:apellido)
+      @clientes = Cliente.search(params[:search]).paginate(:page => params[:page], :per_page => 10 )
+                         .order("updated_at DESC, nombre DESC")
+                         
       respond_to do |format|
       format.html
       format.json
       format.pdf do
-      render template: 'clientes/pdf', pdf: 'Reporte'
+          render pdf: "file_name", :template => 'clientes/listado_clientes.pdf.erb',
+          encoding: 'utf8',
+          orientation: 'Landscape',
+          page_size: 'A4',:print_media_type => true
       end
     end
   end
@@ -52,12 +58,21 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
   # Aparentemente el delete es mejor que destroy ya qye ejecuta una consulta sql directa
   def delete
     @cliente = Cliente.find(params[:id])
+
     @cliente.update baja: false
+        puts "---------------------@cliente.id: "
+        puts @cliente.id
+        puts "---------------------@cliente.cuit: "
+        puts @cliente.cuit
+        puts "---------------------@cliente.baja: "
+        puts @cliente.baja
+          
     respond_to do |format|
       format.html { redirect_to clientes_url, notice: 'El cliente fue eliminado.' }
       format.json { head :no_content }
     end
   end
+
 
   #DEFINO EL BUSCADOR PARA EL MODAL EN ORDEN_FUMIGACION
   def buscador
@@ -82,6 +97,6 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
 
     # Only allow a list of trusted parameters through.
     def cliente_params
-      params.require(:cliente).permit(:cuit, :rubro, :apellido, :nombre, :domicilio, :barrio, :celular, :telefono, :correo, :observaciones_cliente, :tipo_cliente, :calificacion, :baja)
+      params.require(:cliente).permit(:cuit, :rubro, :apellido, :nombre, :domicilio, :barrio, :localidad, :celular, :telefono, :correo, :observaciones_cliente, :tipo_cliente, :calificacion, :baja)
     end
 end

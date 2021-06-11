@@ -2,12 +2,12 @@ class OrdenFumigacionsController < ApplicationController
 before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, :delete, :add_cliente]
 
   def index
-    @orden_fumigacions = OrdenFumigacion.all.order(:nro_certificado)
+    @orden_fumigacions = OrdenFumigacion.all.order("updated_at DESC")
     respond_to do |format|
       format.html
       format.js
       format.pdf do
-          render pdf: "file_name", :template => 'orden_fumigacions/listado.pdf.erb',
+          render pdf: "file_name", :template => 'orden_fumigacions/listado_fumigaciones.pdf.erb',
           encoding: 'utf8',
           orientation: 'Landscape',
           page_size: 'A4',:print_media_type => true
@@ -15,14 +15,13 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
     end
   end
 
+  def proximas_fumigaciones
+      @date_method = (params[:search].present? ? params[:search][:date_method] : 'fecha_aplicacion').to_sym
+      @start = Date.today
+      @end = selected_date(:end_date)
 
-def proximas_fumigaciones
-    @date_method = (params[:search].present? ? params[:search][:date_method] : 'fecha_aplicacion').to_sym
-    @start = selected_date(:start_date)
-    @end = selected_date(:end_date)
-
-    @orden_fumigacions = params[:search].present? ? OrdenFumigacion.where(@date_method => @start..@end) : OrdenFumigacion.none
-end
+      @orden_fumigacions = params[:search].present? ? OrdenFumigacion.where(@date_method => @start..@end) : OrdenFumigacion.none
+  end
 
   def new
     @orden_fumigacion = OrdenFumigacion.new
@@ -41,31 +40,6 @@ end
         page_size: 'A4',:print_media_type => true
       end
 
-    end
-  end
-
-  def showfajas
-    # No lo usamos en este modelo
-    @orden_fumigacion = OrdenFumigacion.find(params[:nro_certificado])
-    puts "---------------------@orden_fumigacion.nro_certificado: "
-    puts @orden_fumigacion.nro_certificado
-    respond_to do |format|
-      format.html
-      format.json
-      format.pdf do
-        render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb',
-
-        encoding: 'utf8',
-        orientation: 'Portrait',
-        page_size: 'A4',:print_media_type => true
-      end
-
-      #  format.pdf do
-      #      render pdf: "file_name", :template => 'orden_fumigacions/faja.pdf.erb',
-      #      encoding: 'utf8',
-      #      orientation: 'Landscape',
-      #      page_size: 'A4',:print_media_type => true
-      #  end
     end
   end
 
@@ -175,5 +149,5 @@ end
 
     def selected_date(symbol)
     params[:search].present? && params[:search][symbol].present? ? params[:search][symbol].to_date : Time.now.to_date
-end
+    end
 end

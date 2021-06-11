@@ -7,7 +7,10 @@ before_action :set_tecnico, only: [:show, :edit, :update, :delete]
       format.html
       format.json
       format.pdf do
-      render template: 'tecnicos/pdf', pdf: 'Reporte'
+          render pdf: "file_name", :template => 'tecnicos/listado_tecnicos.pdf.erb',
+          encoding: 'utf8',
+          orientation: 'Landscape',
+          page_size: 'A4',:print_media_type => true
       end
     end
   end

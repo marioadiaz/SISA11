@@ -7,7 +7,10 @@ before_action :set_queja, only: [:show, :edit, :update, :delete]
       format.html
       format.json
       format.pdf do
-      render template: 'quejas/pdf', pdf: 'Reporte'
+          render pdf: "file_name", :template => 'quejas/listado_reclamos.pdf.erb',
+          encoding: 'utf8',
+          orientation: 'Landscape',
+          page_size: 'A4',:print_media_type => true
       end
     end
   end

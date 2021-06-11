@@ -1,13 +1,13 @@
 class FajasController < ApplicationController
 before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, :delete, :add_cliente]
-
+#este controlador es el mismo que orden_fumigacions para permitir la impresion de la faja y solo estaria usando metodo index,show y los metodos del private
   def index
     @orden_fumigacions = OrdenFumigacion.all.order(:nro_certificado)
     respond_to do |format|
       format.html
       format.js
       format.pdf do
-          render pdf: "file_name", :template => 'orden_fumigacions/listado.pdf.erb', 
+          render pdf: "file_name", :template => 'orden_fumigacions/listado_fumigaciones.pdf.erb', 
           encoding: 'utf8',
           orientation: 'Landscape', 
           page_size: 'A4',:print_media_type => true
