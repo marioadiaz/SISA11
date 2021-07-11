@@ -77,7 +77,7 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
   #DEFINO EL BUSCADOR PARA EL MODAL EN ORDEN_FUMIGACION
   def buscador
 
-    @resultados = Cliente.buscador(params[:termino]).map do |cliente|
+    @resultados = Cliente.search(params[:termino]).map do |cliente|
       {
           id: cliente.id,
           apellido: cliente.apellido

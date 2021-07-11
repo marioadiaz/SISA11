@@ -1,7 +1,8 @@
 class Cliente < ApplicationRecord
 	
-	has_many :orden_fumigacions
 	has_many :remitos
+	
+	has_many :orden_fumigacions
 	has_many :tecnicos, through: :orden_fumigacions
 
 	#validates :nombre, presence: true

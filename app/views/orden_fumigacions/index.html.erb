@@ -4,7 +4,7 @@
 
 </div>
 <%= link_to 'Listado PDF', orden_fumigacions_path(format: 'pdf'), :class => 'btn btn-success my-3' %>
-<%= link_to "Crear Certificado", orden_fumigacions_new_path , :class => 'btn btn-warning my-3'%>
+
 
 
 <script>
@@ -43,8 +43,8 @@ $(document).ready(function(){
 	      <td><%= orden_fumigacion.tecnico.apellido %></td>
 	      <td><%= orden_fumigacion.tratamiento %></td>
 	      <td><%= orden_fumigacion.droga %></td>
-	      <td><%= orden_fumigacion.fecha_vencimiento %></td>
-	      <td><%= orden_fumigacion.proximo_tratamiento %></td>
+	      <td><%= I18n.l(orden_fumigacion.fecha_vencimiento, locale: :es, format: :default01) %></td>
+	      <td><%=orden_fumigacion.proximo_tratamiento %></td>
 	      <td>
             <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a?" } %>
         </td>

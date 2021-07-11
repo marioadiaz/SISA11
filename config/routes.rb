@@ -19,6 +19,8 @@ end
   get 'clientes/new', to: 'clientes#new'
   post '/clientes', to: 'clientes#create'
 
+  get 'buscador_clientes/:termino', to: 'clientes#buscador'
+
   get '/cliente/:id', to: 'clientes#show', as: 'cliente'
   get '/clientes/:id/edit', to: 'clientes#edit', as: 'edit_cliente'
   patch '/cliente/:id', to: 'clientes#update'
@@ -44,6 +46,7 @@ end
 
   get '/orden_fumigacion/:id', to: 'orden_fumigacions#show', as: 'orden_fumigacion'
 
+  get '/orden_fumigacions/:id/copy', to: 'orden_fumigacions#copy', as: 'copy_orden_fumigacion'
   get '/orden_fumigacions/:id/edit', to: 'orden_fumigacions#edit', as: 'edit_orden_fumigacion'
   patch '/orden_fumigacion/:id', to: 'orden_fumigacions#update'
   put '/orden_fumigacion/:id', to: 'orden_fumigacions#update'

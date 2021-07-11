@@ -16,13 +16,11 @@ before_create { |orden_fumigacion| orden_fumigacion.superficie = orden_fumigacio
 TIPO_CERTIFICADO = ["C,F"]
 TRATAMIENTO =  ["Aspersión","Humo","Niebla","Otros"]
 VECTOR =  ["Insectos","Roedores","Voladores","Bacterias","Otros"]
-VENENO = ["C", "B", "A"]
+VENENO = ["C"]
 DROGA = ["Piretroydes", "Bromadilone", "Otros"]
 ESTADO = ["En proceso", "Finalizado"]
 
 PERIODO = {30 => "Mensual", 60 => "Bimestral", 90 => "Trimestral", 120 => "Cuatrimestral"}
-
-#MESESXDIAS = {1 => 31,2 =>31,}
 
 MESES30 = [4,6,9,11]
 end
