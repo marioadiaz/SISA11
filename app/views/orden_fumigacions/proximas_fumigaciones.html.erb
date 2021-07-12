@@ -1,22 +1,43 @@
 <div class="container">
   <h3 class="text-center card-header my-2"><strong>Fechas aplicaciones o vencimiento fumigaciones</strong></h3>
-  <%= form_for :search, method: :get do |f| -%>
-    <%= f.select :date_method, options_for_select( [['fecha vencimiento','fecha_vencimiento'],['fecha aplicacion','fecha_aplicacion']], selected: @date_method ) -%>
-      <%= f.date_field :start_date, value: @start -%>
-      <%= f.date_field :end_date, value: @end -%>
-      <%= f.submit 'Buscar' -%>
-    <% end -%>
+  <div class="d-flex justify-content-between">
+    <%= form_for :search, method: :get do |f| %>  
+      <%= f.select :date_method, options_for_select( [['Seleccione las fechas','-'],['fecha aplicacion','fecha_aplicacion'],['fecha vencimiento','fecha_vencimiento'],['proximo tratamiento','proximo_tratamiento']]), id: "option_select" %>
+      Desde: 
+      <%= f.date_field :start_date, value: @start %>
+       hasta 
+      <%= f.date_field :end_date, value: @end %>
+      <%= f.submit 'Buscar', onclick: "miFunc()" %>
+    <% end %>  
+  </div>
+  
+  <script type="text/javascript">
+    function miFunc(){
+
+      var id_option_select = document.getElementById("search_date_method");
+      var valor = id_option_select.options[id_option_select.selectedIndex].value;
+      if (valor == "-") {
+          alert("Debe elegir una opcion");
+          document.getElementById("search_date_method").focus();
+          
+        }
+
+    }
+
+  </script>  
+
 
   <table class=" table-striped table table-responsive">
     <tr>
       <thead  class="thead-dark">
-        <th>Nro Certificado</th>
+        <th>#Cert.</th>
         <th>Cliente</th>
         <th>Tecnico</th>
         <th>Tratamiento</th>
         <th>Droga</th>
-        <th>Fecha Vencimiento</th>
-        <th>Proximo Tratamiento</th>
+        <th>F. Aplicacion</th>
+        <th>F. Vencimiento</th>
+        <th>Prox. Tratamiento</th>
         <th colspan="3"></th>
 
       </thead>
@@ -30,6 +51,7 @@
               <td><%= orden_fumigacion.tecnico.apellido %></td>
               <td><%= orden_fumigacion.tratamiento %></td>
               <td><%= orden_fumigacion.droga %></td>
+              <td><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
               <td><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
               <td><%= orden_fumigacion.proximo_tratamiento.strftime("%d-%m-%Y") %></td>
               <td>

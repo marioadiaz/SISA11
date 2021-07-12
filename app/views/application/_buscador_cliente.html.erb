@@ -1,36 +1,33 @@
-<div class="modal fade" id="buscador_cliente" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="buscador_cliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modal-items-title">FAJA</h5>
+        <h5 class="modal-title" id="buscador_cliente_label">Buscador de clientes</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body-items modal-body" id="modal-body-items">
-        <style type="text/css">
-<!--
-span.cls_002{font-family:Times,serif;font-size:18.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-div.cls_002{font-family:Times,serif;font-size:18.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-span.cls_003{font-family:Times,serif;font-size:16.0px;color:rgb(0,128,0);font-weight:normal;font-style:normal;text-decoration: none}
-div.cls_003{font-family:Times,serif;font-size:16.0px;color:rgb(0,128,0);font-weight:normal;font-style:normal;text-decoration: none}
--->
-</style>
-<script type="text/javascript" src="b32abf08-9d9d-11eb-8b25-0cc47a792c0a_id_b32abf08-9d9d-11eb-8b25-0cc47a792c0a_files/wz_jsgraphics.js"></script>
-</head>
-<body>
-<div style="position:absolute;left:50%;margin-left:-420px;top:0px;width:841px;height:595px;border-style:outset;overflow:hidden">
-<div style="position:absolute;left:0px;top:0px">
-<img src="b32abf08-9d9d-11eb-8b25-0cc47a792c0a_id_b32abf08-9d9d-11eb-8b25-0cc47a792c0a_files/background1.jpg" width=841 height=595></div>
-<div style="position:absolute;left:79.20px;top:272.92px" class="cls_002"><span class="cls_002">25 DE MARZO DE 2021</span></div>
-<div style="position:absolute;left:602.98px;top:272.92px" class="cls_002"><span class="cls_002">25 DE ABRIL DE 2021</span></div>
-<div style="position:absolute;left:193.32px;top:485.32px" class="cls_003"><span class="cls_003">AMX  ARGENTINA  S.A.</span></div>
-<div style="position:absolute;left:410.46px;top:485.32px" class="cls_003"><span class="cls_003">25/03/21 - TELEFONIA  CLARO</span></div>
-<div style="position:absolute;left:191.16px;top:514.12px" class="cls_003"><span class="cls_003">BARTOLOME  MITRE  N°143 - SALTA  -  CAPITAL</span></div>
-</div>
-
+        <div class="form-group">
+            <label for="buscador">Ingresa el nombre del cliente</label>
+            <input type="text" class="form-control" id="buscador_clientes" placeholder="Nombre cliente...">
+        </div>
+        <table class="table table-dark" id="tabla_buscador_clientes" >
+            <thead>
+            <tr>
+            <th >Nombre</th>
+            <th >Agregar</th>
+            </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
       </div>
-
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
     </div>
   </div>
 </div>

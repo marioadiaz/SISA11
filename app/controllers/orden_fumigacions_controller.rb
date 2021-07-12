@@ -1,8 +1,8 @@
 class OrdenFumigacionsController < ApplicationController
-before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, :delete, :add_cliente]
+before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, :delete, :copy]
 
   def index
-    @orden_fumigacions = OrdenFumigacion.all.order("updated_at DESC")
+    @orden_fumigacions = OrdenFumigacion.all.order("updated_at DESC, nro_certificado DESC")
     respond_to do |format|
       format.html
       format.js
@@ -15,16 +15,41 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
     end
   end
 
+  def copy
+    @orden_fumigacion_actual = OrdenFumigacion.find(params[:id])
+    @orden_fumigacion = @orden_fumigacion_actual.dup
+    @orden_fumigacion.nro_certificado = 0
+    render :new
+
+  end
+
   def proximas_fumigaciones
-      @date_method = (params[:search].present? ? params[:search][:date_method] : 'fecha_aplicacion').to_sym
-      @start = Date.today
+      @date_method = (params[:search].present? ? params[:search][:date_method]: '').to_sym
+
+      puts "-----search : "
+      puts params[:search]
+
+      puts "-----date_method : "
+      puts [:date_method]
+
+      puts "-----@date_method : "
+      puts @date_method
+
+      @start = selected_date(:start_date)
       @end = selected_date(:end_date)
 
-      @orden_fumigacions = params[:search].present? ? OrdenFumigacion.where(@date_method => @start..@end) : OrdenFumigacion.none
+      if (@date_method = "-")
+        @orden_fumigacions = OrdenFumigacion.none
+      else
+        @orden_fumigacions = params[:search].present? ? OrdenFumigacion.where(@date_method => @start..@end) : OrdenFumigacion.none
+      end  
   end
 
   def new
+    @cliente_id = params[:id]
     @orden_fumigacion = OrdenFumigacion.new
+    @orden_fumigacion.cliente_id = @cliente_id
+    
   end
 
   def show
@@ -44,7 +69,16 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
   end
 
   def create
+    
     @orden_fumigacion = OrdenFumigacion.new(orden_fumigacion_params)
+
+    
+    puts "---------------------@orden_fumigacion.cliente_id: "
+    puts @orden_fumigacion.cliente_id
+
+    if (@orden_fumigacion.proximo_tratamiento.nil?)
+      @orden_fumigacion.proximo_tratamiento = @orden_fumigacion.fecha_vencimiento + 30
+    end  
 
     @orden_fumigacion.update baja: true
 

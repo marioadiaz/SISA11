@@ -119,4 +119,7 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 config.serve_static_assets = true
 config.assets.digest = true
+
+config.hosts = ["192.168.1.250","sisa-md.duckdns.org"]
+
 end

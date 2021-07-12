@@ -1,8 +1,13 @@
 <div class="container">
 	<div class="card-header d-flex justify-content-between">
     	<div><h2 class="my-0 font-size:8vw">Detalle Fumigacion</h2></div>
-    	<div> <%= link_to 'Editar', edit_orden_fumigacion_path, class: "btn btn-primary mr-3" %></div>
-    </div>
+    	<div class="col-md-8">
+    		<%= link_to 'Editar', edit_orden_fumigacion_path, class: "btn btn-primary mr-3" %>
+    		<%= link_to 'Renovar', copy_orden_fumigacion_path, class: "btn btn-primary mr-3" %>
+    		<%= link_to 'Imprimir Certificado', orden_fumigacion_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
+			<%= link_to 'Imprimir Faja', faja_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
+    	</div>
+    </div>	
 	<div class="card-body">
 	    <ul class="list-unstyled mt-3 mb-4 text-center">
 			<h3>
@@ -23,11 +28,11 @@
 	      	</h3>
 	      	<h3>
 	        	<strong>Fecha Aplicacion:</strong>
-	        	<%= @orden_fumigacion.fecha_aplicacion%>
+	        	<%= @orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %>
 	      	</h3>
 	      	<h3>
 	        	<strong>Hora Aplicacion:</strong>
-	        	<%= @orden_fumigacion.hora_aplicacion%>
+	        	<%= @orden_fumigacion.hora_aplicacion.strftime("%H:%M") %>
 	      	</h3>
 	      	<h3>
 	        	<strong>Tratamiento:</strong>
@@ -51,11 +56,13 @@
 	      	</h3>
 	      	<h3>
 	        	<strong>Fecha Vencimiento:</strong>
-	        	<%= @orden_fumigacion.fecha_vencimiento%>
+	        	
+	        	<%= @orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %>
 	      	</h3>
 	      	<h3>
 	        	<strong>Proximo Tratamiento:</strong>
-	        	<%= @orden_fumigacion.proximo_tratamiento%>
+	        	
+	        	<%= @orden_fumigacion.proximo_tratamiento.strftime("%d-%m-%Y") %>
 	      	</h3>
 	      	<h3>
 	        	<strong>Importe:</strong>
@@ -70,16 +77,7 @@
 	        	<%= @orden_fumigacion.observaciones_ordfumigacion%>
 	      	</h3>
 	    </ul>
-	    <table class="default">
-		  <tr>
-		    <td>
-		    	<div class="col-sm ml-5"><h3><%= link_to 'Imprimir Certificado', orden_fumigacion_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %></h3></div>
-		    </td>
-		    <td>
-		    	<div class="col-sm ml-5"><h3><%= link_to 'Imprimir Faja', faja_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %></h3></div>
-		    </td>
-		  </tr>
-  		</table>
+	    	    
   		<a class="btn btn-lg btn-block btn-dark" href="/orden_fumigacions">Atrás</a>
 	</div>
 </div>
