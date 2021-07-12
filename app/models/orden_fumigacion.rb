@@ -4,12 +4,10 @@ class OrdenFumigacion < ApplicationRecord
   has_many :quejas
 
 validates :nro_certificado, presence: true, uniqueness: true, :numericality => { :greater_than_or_equal_to => 0 }
-validates :tipo_certificado, presence: true
+validates :hora_aplicacion, presence: true
 validates :fecha_aplicacion, presence: true
-validates :tratamiento, presence: true
-validates :vector, presence: true
-validates :droga, presence: true
 validates :fecha_vencimiento, presence: true
+
 
 before_create { |orden_fumigacion| orden_fumigacion.superficie = orden_fumigacion.superficie.upcase }
 

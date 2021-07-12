@@ -28,11 +28,11 @@
 	      	</h3>
 	      	<h3>
 	        	<strong>Fecha Aplicacion:</strong>
-	        	<%= @orden_fumigacion.fecha_aplicacion%>
+	        	<%= @orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %>
 	      	</h3>
 	      	<h3>
 	        	<strong>Hora Aplicacion:</strong>
-	        	<%= @orden_fumigacion.hora_aplicacion%>
+	        	<%= @orden_fumigacion.hora_aplicacion.strftime("%H:%M") %>
 	      	</h3>
 	      	<h3>
 	        	<strong>Tratamiento:</strong>
@@ -57,12 +57,12 @@
 	      	<h3>
 	        	<strong>Fecha Vencimiento:</strong>
 	        	
-	        	<%= I18n.l(@orden_fumigacion.fecha_vencimiento, locale: :es, format: :default01) %>
+	        	<%= @orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %>
 	      	</h3>
 	      	<h3>
 	        	<strong>Proximo Tratamiento:</strong>
 	        	
-	        	<%= @orden_fumigacion.proximo_tratamiento %>
+	        	<%= @orden_fumigacion.proximo_tratamiento.strftime("%d-%m-%Y") %>
 	      	</h3>
 	      	<h3>
 	        	<strong>Importe:</strong>
