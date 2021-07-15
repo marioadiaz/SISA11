@@ -4,7 +4,7 @@
       <div class="col-md-8">
         <%= link_to 'Editar Cliente', edit_cliente_path(@cliente), class: "btn btn-primary mr-3" %>
         <%= link_to "Crear Certificado", orden_fumigacions_new_path(:id => @cliente.id) , :class => 'btn btn-warning my-3'%>
-        <%= link_to 'Eliminar', cliente_path(@cliente), method: :delete, data: { confirm: "¿Estás seguro/a?" } %>
+        <%= link_to 'Eliminar', cliente_path(@cliente), method: :delete, :class => 'btn btn-danger', :target => 'blank', data: { confirm: "¿Estás seguro/a de eliminar el Cliente?" } %>
       </div>
 
     </div>

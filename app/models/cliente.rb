@@ -27,7 +27,49 @@ class Cliente < ApplicationRecord
     def self.search(cadena)
     	if cadena 
     		search = cadena.upcase
-	        where('cuit LIKE ? or nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ?', "%#{search}%","%#{search}%","%#{search}%","%#{search}%","%#{search}%","%#{search}%")
+    		vectorsearch = search.split(" ")
+    		puts "vectorsearch[5]: "
+        	puts vectorsearch.length()
+
+        	case vectorsearch.length()
+        	when 1
+
+	        	where('cuit LIKE ? or nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ?', 
+		        	"#{search}%",
+		        	"#{search}%",
+		        	"#{search}%",
+		        	"#{search}%",
+		        	"#{search}%",
+		        	"#{search}%")
+	        when 2
+
+	        	where('nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ?', 
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%",
+		        	"#{search}%",
+		        	"#{search}%",
+		        	"#{search}%")
+	        when 3
+
+	        	where('nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ?', 
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%")
+	        when 4
+
+	        	where('domicilio LIKE ?', 
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +"#{vectorsearch[3]}%")
+	        when 5
+
+	        	where('domicilio LIKE ?', 
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +"#{vectorsearch[3]}%" +"#{vectorsearch[4]}%")
+	        when 6
+
+	        	where('domicilio LIKE ?', 
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +"#{vectorsearch[3]}%" +"#{vectorsearch[4]}%" +"#{vectorsearch[5]}%")
+	        end
 	    else
 	    	
 	      where('id <> ?',0)

@@ -6,6 +6,7 @@
     		<%= link_to 'Renovar', copy_orden_fumigacion_path, class: "btn btn-primary mr-3" %>
     		<%= link_to 'Imprimir Certificado', orden_fumigacion_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
 			<%= link_to 'Imprimir Faja', faja_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
+			<%= link_to 'Eliminar', orden_fumigacion_path, method: :delete, :class => 'btn btn-danger', :target => 'blank', data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
     	</div>
     </div>	
 	<div class="card-body">

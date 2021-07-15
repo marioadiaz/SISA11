@@ -26,6 +26,10 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
   def proximas_fumigaciones
       @date_method = (params[:search].present? ? params[:search][:date_method]: '').to_sym
 
+      puts "-----current_user : "
+      puts current_user.id
+      puts current_user.email
+      
       puts "-----search : "
       puts params[:search]
 
@@ -38,8 +42,13 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
       @start = selected_date(:start_date)
       @end = selected_date(:end_date)
 
-      if (@date_method = "-")
+      vectordate_method=@date_method.to_s().split('-')
+
+
+      if (vectordate_method.length()>2)
         @orden_fumigacions = OrdenFumigacion.none
+        puts "en el if -----@date_method : "
+        puts @date_method
       else
         @orden_fumigacions = params[:search].present? ? OrdenFumigacion.where(@date_method => @start..@end) : OrdenFumigacion.none
       end  
@@ -71,13 +80,13 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
   def create
     
     @orden_fumigacion = OrdenFumigacion.new(orden_fumigacion_params)
-
-    
     puts "---------------------@orden_fumigacion.cliente_id: "
     puts @orden_fumigacion.cliente_id
 
     if (@orden_fumigacion.proximo_tratamiento.nil?)
       @orden_fumigacion.proximo_tratamiento = @orden_fumigacion.fecha_vencimiento + 30
+      puts "------------@orden_fumigacion.proximo_tratamiento: "
+      puts @orden_fumigacion.proximo_tratamiento
     end  
 
     @orden_fumigacion.update baja: true

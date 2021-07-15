@@ -2,7 +2,8 @@
   <h3 class="text-center card-header my-2"><strong>Fechas aplicaciones o vencimiento fumigaciones</strong></h3>
   <div class="d-flex justify-content-between">
     <%= form_for :search, method: :get do |f| %>  
-      <%= f.select :date_method, options_for_select( [['Seleccione las fechas','-'],['fecha aplicacion','fecha_aplicacion'],['fecha vencimiento','fecha_vencimiento'],['proximo tratamiento','proximo_tratamiento']]), id: "option_select" %>
+      <%= f.select :date_method, options_for_select( [['Seleccione las fechas','Seleccione-las-fechas' ],['fecha aplicacion','fecha_aplicacion'],['fecha vencimiento','fecha_vencimiento'],['proximo tratamiento','proximo_tratamiento']]) %>
+
       Desde: 
       <%= f.date_field :start_date, value: @start %>
        hasta 
@@ -16,7 +17,7 @@
 
       var id_option_select = document.getElementById("search_date_method");
       var valor = id_option_select.options[id_option_select.selectedIndex].value;
-      if (valor == "-") {
+      if (valor == 'Seleccione-las-fechas') {
           alert("Debe elegir una opcion");
           document.getElementById("search_date_method").focus();
         }
