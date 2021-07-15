@@ -60,6 +60,9 @@ ALTA DE QUEJAS
 ALTA DE REMITOS 
     rails generate model Remito orden_fumigacion:references nro_remito:string fecha_remito:date concepto:string importe:integer baja:boolean
 
+ALTA DE SEGUIMIENTO USUARIO
+    rails generate model Seguimiento usuario:string controlador:string registro_procesado:string accion:string baja:boolean
+
 CREACION Y MIGRACION DEL MODELO DE DATOS A LA BD
 
   rails db:create
@@ -76,6 +79,8 @@ AGREGAR CONTROLADORES
   rails generate controller OrdenFumigacions new index show create edit update destroy
 
   rails generate controller Remitos new index show create edit update destroy
+
+  rails generate controller Seguimientos new index show create edit update destroy
 
 
 git init

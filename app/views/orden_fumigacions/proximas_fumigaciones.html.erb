@@ -54,7 +54,7 @@
               <td><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
               <td><%= orden_fumigacion.proximo_tratamiento.strftime("%d-%m-%Y") %></td>
               <td>
-                  <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a?" } %>
+                  <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
               </td>
             </tr>
           <% end %>

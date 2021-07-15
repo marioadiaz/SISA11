@@ -32,6 +32,14 @@ before_action :set_queja, only: [:show, :edit, :update, :delete]
       if @queja.save
         format.html { redirect_to quejas_path, notice: 'La queja fue exitosamente creada.' }
         format.json { render :show, status: :created, location: @queja }
+        
+        @seguimiento = Seguimiento.new
+        @seguimiento.usuario = current_user.email
+        @seguimiento.controlador = "create"
+        @seguimiento.registro_procesado = "Queja : " + queja_params.to_s
+        @seguimiento.accion = Time.now.to_s + " "
+        @seguimiento.save
+
       else
         format.html { render :new }
         format.json { render json: @queja.errors, status: :unprocessable_entity }
@@ -47,6 +55,14 @@ before_action :set_queja, only: [:show, :edit, :update, :delete]
         @queja = Queja.find(params[:id])
       if @queja.update(queja_params)
         redirect_to quejas_path
+
+        @seguimiento = Seguimiento.new
+        @seguimiento.usuario = current_user.email
+        @seguimiento.controlador = "update"
+        @seguimiento.registro_procesado = "Queja : " + queja_params.to_s
+        @seguimiento.accion = Time.now.to_s + " "
+        @seguimiento.save  
+
       else
         render :edit
       end
@@ -56,6 +72,14 @@ before_action :set_queja, only: [:show, :edit, :update, :delete]
   def delete
     @queja = Queja.find(params[:id])
     @queja.update baja: false
+
+    @seguimiento = Seguimiento.new
+    @seguimiento.usuario = current_user.email
+    @seguimiento.controlador = "delete"
+    @seguimiento.registro_procesado = "Queja : " + @queja.id.to_s
+    @seguimiento.accion = Time.now.to_s + " "
+    @seguimiento.save
+
     respond_to do |format|
       format.html { redirect_to quejas_url, notice: 'La queja fue eliminada.' }
       format.json { head :no_content }

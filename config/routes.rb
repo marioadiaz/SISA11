@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'seguimientos/new'
+  get 'seguimientos/index'
+  get 'seguimientos/show'
+  get 'seguimientos/create'
+  get 'seguimientos/edit'
+  get 'seguimientos/update'
+  get 'seguimientos/destroy'
   get 'remitos/new'
   get 'remitos/index'
   get 'remitos/show'

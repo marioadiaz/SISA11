@@ -2,11 +2,11 @@ class ClientesController < ApplicationController
 before_action :set_cliente, only: [:show, :edit, :update, :delete]
 
   def index
-      #@clientes = Cliente.all.order(:apellido)
-      @clientes = Cliente.search(params[:search]).paginate(:page => params[:page], :per_page => 10 )
+    #@clientes = Cliente.all.order(:apellido)
+    @clientes = Cliente.search(params[:search]).paginate(:page => params[:page], :per_page => 10 )
                          .order("updated_at DESC, nombre DESC")
-                         
-      respond_to do |format|
+
+    respond_to do |format|
       format.html
       format.json
       format.pdf do
@@ -16,6 +16,7 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
           page_size: 'A4',:print_media_type => true
       end
     end
+
   end
 
   def new
@@ -23,7 +24,8 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
   end
 
   def show
-    # No lo usamos en este modelo
+    cliente_id = params[:id]
+    @cliente = Cliente.find(cliente_id)
   end
 
   def create
@@ -35,21 +37,42 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
       if @cliente.save
         format.html { redirect_to clientes_path, notice: 'El cliente fue exitosamente creado.' }
         format.json { render :show, status: :created, location: @cliente }
+
+        @seguimiento = Seguimiento.new
+        @seguimiento.usuario = current_user.email
+        @seguimiento.controlador = "create"
+        @seguimiento.registro_procesado = "Cliente : " + cliente_params.to_s
+        @seguimiento.accion = Time.now.to_s + " Cliente.new(cliente_params)"
+        @seguimiento.save
+
       else
         format.html { render :new }
         format.json { render json: @cliente.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   def edit
     @cliente = Cliente.find(params[:id])
+    
   end
 
   def update
-        @cliente = Cliente.find(params[:id])
+      
+      @cliente = Cliente.find(params[:id])
+
       if @cliente.update(cliente_params)
+        
         redirect_to clientes_path
+
+        @seguimiento = Seguimiento.new
+        @seguimiento.usuario = current_user.email
+        @seguimiento.controlador = "update"
+        @seguimiento.registro_procesado = "Cliente : " + cliente_params.to_s
+        @seguimiento.accion = Time.now.to_s + " Cliente.find(params[:id])"
+        @seguimiento.save
+
       else
         render :edit
       end
@@ -66,6 +89,13 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
         puts @cliente.cuit
         puts "---------------------@cliente.baja: "
         puts @cliente.baja
+
+    @seguimiento = Seguimiento.new
+    @seguimiento.usuario = current_user.email
+    @seguimiento.controlador = "delete"
+    @seguimiento.registro_procesado = "Cliente : " + @cliente.id
+    @seguimiento.accion = Time.now.to_s + " Cliente.find(params[:id])"
+    @seguimiento.save
           
     respond_to do |format|
       format.html { redirect_to clientes_url, notice: 'El cliente fue eliminado.' }

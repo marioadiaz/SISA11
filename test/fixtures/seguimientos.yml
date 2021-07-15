@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  usuario: MyString
+  controlador: MyString
+  registro_procesado: MyString
+  accion: MyString
+  baja: false
+
+two:
+  usuario: MyString
+  controlador: MyString
+  registro_procesado: MyString
+  accion: MyString
+  baja: false

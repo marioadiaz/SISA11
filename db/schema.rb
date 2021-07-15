@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_18_160330) do
+ActiveRecord::Schema.define(version: 2021_07_15_020318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,18 @@ ActiveRecord::Schema.define(version: 2021_05_18_160330) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "localidad"
+  end
+
+  create_table "contactos", id: false, force: :cascade do |t|
+    t.bigint "id_cliente"
+    t.string "apellido"
+    t.string "nombre"
+    t.string "domicilio"
+    t.string "telefono"
+    t.string "celular"
+    t.string "barrio"
+    t.string "rubro"
+    t.string "estado"
   end
 
   create_table "orden_fumigacions", force: :cascade do |t|
@@ -81,6 +93,16 @@ ActiveRecord::Schema.define(version: 2021_05_18_160330) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["orden_fumigacion_id"], name: "index_remitos_on_orden_fumigacion_id"
+  end
+
+  create_table "seguimientos", force: :cascade do |t|
+    t.string "usuario"
+    t.string "controlador"
+    t.string "registro_procesado"
+    t.string "accion"
+    t.boolean "baja"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tecnicos", force: :cascade do |t|
