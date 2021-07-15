@@ -1,12 +1,16 @@
 <div class="container">
     <div class="card-header d-flex justify-content-between">
-      <div><h2 class="my-0 font-size:8vw">Detalle cliente</h2></div>
-      <div class="col-md-8">
-        <%= link_to 'Editar Cliente', edit_cliente_path(@cliente), class: "btn btn-primary mr-3" %>
-        <%= link_to "Crear Certificado", orden_fumigacions_new_path(:id => @cliente.id) , :class => 'btn btn-warning my-3'%>
-        <%= link_to 'Eliminar', cliente_path(@cliente), method: :delete, :class => 'btn btn-danger', :target => 'blank', data: { confirm: "¿Estás seguro/a de eliminar el Cliente?" } %>
-      </div>
+      <%if @cliente.baja%>
+        <div><h2 class="my-0 font-size:8vw">Detalle cliente</h2></div>
+        <div class="col-md-8">
+          <%= link_to 'Editar Cliente', edit_cliente_path(@cliente), class: "btn btn-primary mr-3" %>
+          <%= link_to "Crear Certificado", orden_fumigacions_new_path(:id => @cliente.id) , :class => 'btn btn-warning my-3'%>
+          <%= link_to 'Eliminar', cliente_path(@cliente), method: :delete, :class => 'btn btn-danger', :target => 'blank', data: { confirm: "¿Estás seguro/a de eliminar el Cliente?" } %>
+        </div>
+      <%else%>
+        <div><h2 class="my-0 font-size:8vw">Detalle cliente: <strong><span style="color:red">Cliente dado de baja en el sistema<span></strong></h2></div>     
 
+      <%end%>   
     </div>
   <div class="card-body">
     <ul class="list-unstyled mt-3 mb-4 text-center">
