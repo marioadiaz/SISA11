@@ -4,7 +4,7 @@
       <th>CUIT</th>
       <th>Nombre</th>
       <th>Apellido</th>
-      <th>Rubro</th>
+      <th>Razon Social</th>
       <th>Domicilio</th>
       <th>Celular</th>
       <th>Telefono</th>
@@ -18,7 +18,7 @@
   <% @clientes.each do |cliente| %>
     <%if cliente.baja == true %>
       <tr>
-        <td><%= link_to "#{cliente.cuit}", cliente_path(cliente)%></td>
+        <td><%= link_to "#{cliente.cuit}", cliente_path(:id => cliente.id)%></td>
         <td><%= link_to "#{cliente.nombre}", cliente_path(cliente)%></td>
         <td><%= link_to "#{cliente.apellido}", cliente_path(cliente)%></td>
         <td><%= cliente.rubro%></td>
@@ -27,7 +27,7 @@
         <td><%= cliente.telefono %></td>
         <td><%= cliente.tipo_cliente %></td>
         <td>
-            <%= link_to 'Eliminar', cliente_path(cliente), method: :delete, data: { confirm: "¿Estás seguro/a?" } %>
+            <%= link_to 'Eliminar', cliente_path(cliente), method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Cliente?" }%>
         </td>
       </tr>
     <% end %>
@@ -35,5 +35,5 @@
 </tbody>
 
 </table>
-<%= will_paginate @clientes%>
+<%= will_paginate @clientes%> 
   

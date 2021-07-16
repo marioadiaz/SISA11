@@ -1,11 +1,9 @@
 <div class="container">
   <div class="d-flex justify-content-between">
-<h1>Listado Fumigaciones</h1>
+    <h1>Listado Fumigaciones</h1>
 
-</div>
+  </div>
 <%= link_to 'Listado PDF', orden_fumigacions_path(format: 'pdf'), :class => 'btn btn-success my-3' %>
-
-
 
 <script>
 $(document).ready(function(){
@@ -20,16 +18,18 @@ $(document).ready(function(){
 
 
 <input class="ml-3 w-25" id="myInput" type="text" placeholder="Buscar certificado..">
+
 <table class=" table-striped table table-responsive">
   <tr>
     <thead  class="thead-dark">
-      <th>Nro Certificado</th>
+      <th>#Cert.</th>
       <th>Cliente</th>
       <th>Tecnico</th>
       <th>Tratamiento</th>
       <th>Droga</th>
-      <th>Fecha Vencimiento</th>
-      <th>Proximo Tratamiento</th>
+      <th>F. Aplicacion</th>
+      <th>F. Vencimiento</th>
+      <th>Prox. Tratamiento</th>
       <th colspan="3"></th>
 
     </thead>
@@ -43,10 +43,11 @@ $(document).ready(function(){
         <td><%= orden_fumigacion.tecnico.apellido %></td>
         <td><%= orden_fumigacion.tratamiento %></td>
         <td><%= orden_fumigacion.droga %></td>
-        <td><%= I18n.l(orden_fumigacion.fecha_vencimiento, locale: :es, format: :default01) %></td>
-        <td><%=orden_fumigacion.proximo_tratamiento %></td>
+        <td><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
+        <td><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
+        <td><%= orden_fumigacion.proximo_tratamiento.strftime("%d-%m-%Y") %></td>
         <td>
-            <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a?" } %>
+            <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
         </td>
       </tr>
     <% end %>

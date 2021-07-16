@@ -3,9 +3,50 @@
 
       <%= link_to 'Listado PDF', clientes_path(format: 'pdf'), :class => 'btn btn-success my-3' %>
       <%= link_to "Crear Cliente", clientes_new_path, :class => 'btn btn-warning my-3'%>
+      
       <%= form_tag clientes_path, :method => 'get', :id => "clientes_search" do %>
         <%= text_field_tag :search, params[:search] %>
         <%= submit_tag "Buscar", :name => nil, :class => 'btn btn-success my-3' %>
+        
+      
       <% end %>
-      <div id="clientes"><%= render 'clientes' %></div>
+
+<table class=" table-striped table table-responsive">
+  <tr>
+    <thead  class="thead-dark">
+      <th>CUIT</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Razon Social</th>
+      <th>Domicilio</th>
+      <th>Celular</th>
+      <th>Telefono</th>
+      <th>Tipo Cliente</th>
+      <th colspan="3"></th>
+    </thead>
+  </tr>
+
+  <tbody id="myTable" >
+  
+  <% @clientes.each do |cliente| %>
+    <%if cliente.baja == true %>
+      <tr>
+        <td><%= link_to "#{cliente.cuit}", cliente_path(:id => cliente.id)%></td>
+        <td><%= link_to "#{cliente.nombre}", cliente_path(cliente)%></td>
+        <td><%= link_to "#{cliente.apellido}", cliente_path(cliente)%></td>
+        <td><%= cliente.rubro%></td>
+        <td><%= cliente.domicilio %></td>
+        <td><%= cliente.celular %></td>
+        <td><%= cliente.telefono %></td>
+        <td><%= cliente.tipo_cliente %></td>
+        <td>
+            <%= link_to 'Eliminar', cliente_path(cliente), method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Cliente?" }%>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</tbody>
+
+</table>
+<%= will_paginate @clientes%> 
 </div>
