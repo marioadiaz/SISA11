@@ -28,8 +28,10 @@ class Cliente < ApplicationRecord
     	if cadena 
     		search = cadena.upcase
     		vectorsearch = search.split(" ")
-    		puts "vectorsearch[5]: "
+    		puts "---------------vectorsearch.length(): "
         	puts vectorsearch.length()
+        	puts "---------------vectorsearch: "
+        	puts vectorsearch
 
         	case vectorsearch.length()
         	when 1
@@ -43,33 +45,84 @@ class Cliente < ApplicationRecord
 		        	"#{search}%")
 	        when 2
 
-	        	where('nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ?', 
+	        	where('nombre LIKE ? or apellido LIKE ? or nombre LIKE ? or apellido LIKE ? or nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ?', 
+		        	
+		        	"#{vectorsearch[0]}%",
+		        	"#{vectorsearch[1]}%",
+		        	"#{vectorsearch[1]}%",
+		        	"#{vectorsearch[0]}%",
 		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%",
 		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%",
-		        	"#{search}%",
-		        	"#{search}%",
-		        	"#{search}%")
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%")
 	        when 3
 
-	        	where('nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ?', 
-		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%",
-		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%",
-		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%",
-		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%",
-		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%")
+	        	where('(nombre LIKE ? and apellido LIKE ?) or nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ?', 
+		        	"#{vectorsearch[0]}" +" %" +"#{vectorsearch[1]}%",
+		        	"#{vectorsearch[2]}%",
+		        	"#{vectorsearch[0]}" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%",
+		        	"#{vectorsearch[0]}" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%",
+		        	"#{vectorsearch[0]}" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%",
+		        	"#{vectorsearch[0]}" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%",
+		        	"#{vectorsearch[0]}" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%")
 	        when 4
 
-	        	where('domicilio LIKE ?', 
-		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +"#{vectorsearch[3]}%")
+	        	where('apellido LIKE ? or rubro LIKE ? or domicilio LIKE ?', 
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%")
 	        when 5
 
-	        	where('domicilio LIKE ?', 
-		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +"#{vectorsearch[3]}%" +"#{vectorsearch[4]}%")
+	        	where('rubro LIKE ? or domicilio LIKE ?', 
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%")
 	        when 6
 
-	        	where('domicilio LIKE ?', 
-		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +"#{vectorsearch[3]}%" +"#{vectorsearch[4]}%" +"#{vectorsearch[5]}%")
-	        end
+	        	where('rubro LIKE ? or domicilio LIKE ?', 
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%" +" %" +"#{vectorsearch[5]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%" +" %" +"#{vectorsearch[5]}%")
+	       	when 7
+
+	        	where('rubro LIKE ? or domicilio LIKE ?', 
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%" +" %" +"#{vectorsearch[5]}%"+" %" +"#{vectorsearch[6]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%" +" %" +"#{vectorsearch[5]}%"+" %" +"#{vectorsearch[6]}%")
+	       	when 8
+
+	        	where('rubro LIKE ? or domicilio LIKE ?', 
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%" +" %" +"#{vectorsearch[5]}%"+" %" +"#{vectorsearch[6]}%"+" %" +"#{vectorsearch[7]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%" +" %" +"#{vectorsearch[5]}%"+" %" +"#{vectorsearch[6]}%"+" %" +"#{vectorsearch[7]}%")
+	        when 9
+
+	        	where('rubro LIKE ? or domicilio LIKE ?', 
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%" +" %" +"#{vectorsearch[5]}%"+" %" +"#{vectorsearch[6]}%"+" %" +"#{vectorsearch[7]}%"+" %" +"#{vectorsearch[8]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%" +" %" +"#{vectorsearch[5]}%"+" %" +"#{vectorsearch[6]}%"+" %" +"#{vectorsearch[7]}%"+" %" +"#{vectorsearch[8]}%")
+	        when 10
+
+	        	where('rubro LIKE ? or domicilio LIKE ?', 
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%" +" %" +"#{vectorsearch[5]}%"+" %" +"#{vectorsearch[6]}%"+" %" +"#{vectorsearch[7]}%"+" %" +"#{vectorsearch[8]}%"+" %" +"#{vectorsearch[9]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%" +" %" +"#{vectorsearch[5]}%"+" %" +"#{vectorsearch[6]}%"+" %" +"#{vectorsearch[7]}%"+" %" +"#{vectorsearch[8]}%"+" %" +"#{vectorsearch[9]}%")
+		    
+		    when 11
+
+	        	where('rubro LIKE ? or domicilio LIKE ?', 
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%" +" %" +"#{vectorsearch[5]}%"+" %" +"#{vectorsearch[6]}%"+" %" +"#{vectorsearch[7]}%"+" %" +"#{vectorsearch[8]}%"+" %" +"#{vectorsearch[9]}%"+" %" +"#{vectorsearch[10]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%" +" %" +"#{vectorsearch[5]}%"+" %" +"#{vectorsearch[6]}%"+" %" +"#{vectorsearch[7]}%"+" %" +"#{vectorsearch[8]}%"+" %" +"#{vectorsearch[9]}%"+" %" +"#{vectorsearch[10]}%")
+
+		    when 12
+
+	        	where('rubro LIKE ? or domicilio LIKE ?', 
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%" +" %" +"#{vectorsearch[5]}%"+" %" +"#{vectorsearch[6]}%"+" %" +"#{vectorsearch[7]}%"+" %" +"#{vectorsearch[8]}%"+" %" +"#{vectorsearch[9]}%"+" %" +"#{vectorsearch[10]}%"+" %" +"#{vectorsearch[11]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%" +" %" +"#{vectorsearch[5]}%"+" %" +"#{vectorsearch[6]}%"+" %" +"#{vectorsearch[7]}%"+" %" +"#{vectorsearch[8]}%"+" %" +"#{vectorsearch[9]}%"+" %" +"#{vectorsearch[10]}%"+" %" +"#{vectorsearch[11]}%")    	    		
+	        
+	        else
+
+	        	puts "---------------else: "
+        		
+	        	where('(nombre + " " + apellido LIKE ?) or (apellido + " " + nombre LIKE ?)', 
+		        	"#{vectorsearch[0]} #{vectorsearch[1]}%",
+		        	"#{vectorsearch[1]} #{vectorsearch[0]}%")
+	    	end
 	    else
 	    	
 	      where('id <> ?',0)

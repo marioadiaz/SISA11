@@ -93,7 +93,7 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
     @seguimiento = Seguimiento.new
     @seguimiento.usuario = current_user.email
     @seguimiento.controlador = "delete"
-    @seguimiento.registro_procesado = "Cliente : " + @cliente.id
+    @seguimiento.registro_procesado = "Cliente : " + @cliente.id.to_s
     @seguimiento.accion = Time.now.to_s + " Cliente.find(params[:id])"
     @seguimiento.save
           

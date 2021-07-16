@@ -124,7 +124,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
     @seguimiento = Seguimiento.new
     @seguimiento.usuario = current_user.email
     @seguimiento.controlador = "create"
-    @seguimiento.registro_procesado = "OrdenFumigacion : " + @orden_fumigacion.id
+    @seguimiento.registro_procesado = "OrdenFumigacion : " + @orden_fumigacion.id.to_s
     @seguimiento.accion = Time.now.to_s + " "
     @seguimiento.save
 
