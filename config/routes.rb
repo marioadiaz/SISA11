@@ -46,6 +46,8 @@ end
 
   #ORDEN FUMIGACION
   get '/orden_fumigacions/proximas_fumigaciones'
+  get '/orden_fumigacions/fumigaciones_por_cliente', to: 'orden_fumigacions#fumigaciones_por_cliente' 
+
   get '/orden_fumigacions', to: 'orden_fumigacions#index'
 
   get 'orden_fumigacions/new', to: 'orden_fumigacions#new'
@@ -58,12 +60,6 @@ end
   patch '/orden_fumigacion/:id', to: 'orden_fumigacions#update'
   put '/orden_fumigacion/:id', to: 'orden_fumigacions#update'
   delete '/orden_fumigacion/:id', to: 'orden_fumigacions#delete'
-
-
-  get 'buscador_clientes/:termino', to: 'clientes#buscador'
-  post '/add_cliente_orden_fumigacion/', to: 'orden_fumigacions#add_cliente'
-  get 'buscador_tecnicos/:termino', to: 'tecnicos#buscador'
-  post '/add_tecnico_orden_fumigacion/', to: 'orden_fumigacions#add_tecnico'
 
   #QUEJAS
   get '/quejas', to: 'quejas#index'

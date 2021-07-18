@@ -1,0 +1,43 @@
+49	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 00:43:51 -0300 	\N	2021-07-15 03:43:51.472479	2021-07-15 03:43:51.472479
+50	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 00:55:28 -0300 	\N	2021-07-15 03:55:28.438151	2021-07-15 03:55:28.438151
+51	sisa@sisa.com	update	Cliente : {"cuit"=>"2637", "rubro"=>"DESPENSA                    C.800", "apellido"=>"CAMPERO   ", "nombre"=>"VICTOR                       03/04/21", "domicilio"=>"MANZANA  Nº  404  \\"C\\"  -  LOTE  Nº  5  - 3ª  ETAPA  ", "barrio"=>"SOLIDARIDAD ", "localidad"=>"", "celular"=>"", "telefono"=>"154630007  -  4716990", "correo"=>"", "observaciones_cliente"=>" ", "tipo_cliente"=>"", "calificacion"=>"2"}	2021-07-15 00:56:25 -0300 Cliente.find(params[:id])	\N	2021-07-15 03:56:25.133987	2021-07-15 03:56:25.133987
+52	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 01:10:02 -0300 	\N	2021-07-15 04:10:02.706718	2021-07-15 04:10:02.706718
+53	sisa@sisa.com	create	OrdenFumigacion : {"cliente_id"=>"2", "tecnico_id"=>"3", "nro_certificado"=>"224", "tipo_certificado"=>"F", "fecha_aplicacion"=>"2021-07-12", "hora_aplicacion"=>"05:35:00.000", "tratamiento"=>"", "vector"=>"", "superficie"=>"", "veneno"=>"C", "droga"=>"", "observaciones_ordfumigacion"=>"", "fecha_vencimiento"=>"2021-07-15", "proximo_tratamiento"=>"2021-08-11", "importe"=>""}	2021-07-15 01:10:17 -0300 	\N	2021-07-15 04:10:17.097935	2021-07-15 04:10:17.097935
+54	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 01:10:18 -0300 	\N	2021-07-15 04:10:18.724484	2021-07-15 04:10:18.724484
+55	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 01:15:10 -0300 	\N	2021-07-15 04:15:10.666424	2021-07-15 04:15:10.666424
+56	sisa@sisa.com	create	OrdenFumigacion : {"cliente_id"=>"2", "tecnico_id"=>"3", "nro_certificado"=>"4343473", "tipo_certificado"=>"F", "fecha_aplicacion"=>"2021-04-11", "hora_aplicacion"=>"23:02:00.000", "tratamiento"=>"Humo", "vector"=>"Voladores", "superficie"=>"", "veneno"=>"C", "droga"=>"Bromadilone", "observaciones_ordfumigacion"=>"VA UN EQUIPO DE TECNICOS <<<<", "fecha_vencimiento"=>"2021-07-15", "proximo_tratamiento"=>"2021-04-11", "importe"=>"44545"}	2021-07-15 01:15:38 -0300 	\N	2021-07-15 04:15:38.653148	2021-07-15 04:15:38.653148
+57	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 01:15:41 -0300 	\N	2021-07-15 04:15:41.660026	2021-07-15 04:15:41.660026
+58	sisa@sisa.com	update	Cliente : {"cuit"=>"1770", "rubro"=>"DESPENSA           C.700", "apellido"=>"RODRIGUEZ   ", "nombre"=>"ZULEMA              26/02/21", "domicilio"=>"MANZANA  \\"C\\"  -  LOTE  Nº  140", "barrio"=>"NUESTRA  SEÑORA  DEL  CARMEN  ", "localidad"=>"", "celular"=>"MAURO", "telefono"=>"4331327", "correo"=>"", "observaciones_cliente"=>" ", "tipo_cliente"=>"", "calificacion"=>""}	2021-07-15 01:26:38 -0300 Cliente.find(params[:id])	\N	2021-07-15 04:26:38.641161	2021-07-15 04:26:38.641161
+59	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 02:07:02 -0300 	\N	2021-07-15 05:07:02.044549	2021-07-15 05:07:02.044549
+60	sisa@sisa.com	update	Cliente : {"cuit"=>"40-00202002-4", "rubro"=>"COMERCIO", "apellido"=>"ENZO", "nombre"=>"CRIVELLI", "domicilio"=>"CASEROS", "barrio"=>"CENTRO", "localidad"=>"SALTA", "celular"=>"3876150991", "telefono"=>"344444423423", "correo"=>"ecrivelli@gmail.com", "observaciones_cliente"=>"NUEVO CLIENTE informatica", "tipo_cliente"=>"INDUSTRIAL", "calificacion"=>"2"}	2021-07-15 02:26:12 -0300 Cliente.find(params[:id])	\N	2021-07-15 05:26:12.157474	2021-07-15 05:26:12.157474
+61	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 03:29:27 -0300 	\N	2021-07-15 06:29:27.779485	2021-07-15 06:29:27.779485
+62	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 03:41:12 -0300 	\N	2021-07-15 06:41:12.88694	2021-07-15 06:41:12.88694
+63	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 03:41:22 -0300 	\N	2021-07-15 06:41:22.777641	2021-07-15 06:41:22.777641
+64	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 04:03:22 -0300 	\N	2021-07-15 07:03:22.883247	2021-07-15 07:03:22.883247
+65	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 11:32:09 -0300 	\N	2021-07-15 14:32:09.082327	2021-07-15 14:32:09.082327
+66	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:14:58 -0300 	\N	2021-07-15 15:14:58.707697	2021-07-15 15:14:58.707697
+67	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:15:00 -0300 	\N	2021-07-15 15:15:00.411104	2021-07-15 15:15:00.411104
+68	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:15:04 -0300 	\N	2021-07-15 15:15:04.625415	2021-07-15 15:15:04.625415
+69	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:15:06 -0300 	\N	2021-07-15 15:15:06.297202	2021-07-15 15:15:06.297202
+70	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:15:08 -0300 	\N	2021-07-15 15:15:08.999635	2021-07-15 15:15:08.999635
+71	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:16:16 -0300 	\N	2021-07-15 15:16:16.013509	2021-07-15 15:16:16.013509
+72	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:48:34 -0300 	\N	2021-07-15 15:48:34.719849	2021-07-15 15:48:34.719849
+73	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:48:36 -0300 	\N	2021-07-15 15:48:36.285242	2021-07-15 15:48:36.285242
+74	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:48:38 -0300 	\N	2021-07-15 15:48:38.30529	2021-07-15 15:48:38.30529
+75	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:48:40 -0300 	\N	2021-07-15 15:48:40.032082	2021-07-15 15:48:40.032082
+76	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:48:41 -0300 	\N	2021-07-15 15:48:41.637585	2021-07-15 15:48:41.637585
+77	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:48:43 -0300 	\N	2021-07-15 15:48:43.308946	2021-07-15 15:48:43.308946
+78	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:48:45 -0300 	\N	2021-07-15 15:48:45.009373	2021-07-15 15:48:45.009373
+79	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:49:37 -0300 	\N	2021-07-15 15:49:37.583668	2021-07-15 15:49:37.583668
+80	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:51:12 -0300 	\N	2021-07-15 15:51:12.376083	2021-07-15 15:51:12.376083
+81	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:51:13 -0300 	\N	2021-07-15 15:51:13.969724	2021-07-15 15:51:13.969724
+82	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:51:15 -0300 	\N	2021-07-15 15:51:15.775422	2021-07-15 15:51:15.775422
+83	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:51:17 -0300 	\N	2021-07-15 15:51:17.118044	2021-07-15 15:51:17.118044
+84	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 12:51:18 -0300 	\N	2021-07-15 15:51:18.276626	2021-07-15 15:51:18.276626
+85	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 19:42:54 -0300 	\N	2021-07-15 22:42:54.498393	2021-07-15 22:42:54.498393
+86	sisa@sisa.com	home	OrdenFumigacion : all	2021-07-15 20:04:48 -0300 	\N	2021-07-15 23:04:48.812704	2021-07-15 23:04:48.812704
+87	sisa@sisa.com	update	Cliente : {"cuit"=>"2060", "rubro"=>"", "apellido"=>"xxx", "nombre"=>"", "domicilio"=>"", "barrio"=>"", "localidad"=>"", "celular"=>"", "telefono"=>"", "correo"=>"", "observaciones_cliente"=>" ", "tipo_cliente"=>"", "calificacion"=>""}	2021-07-15 23:57:50 -0300 Cliente.find(params[:id])	\N	2021-07-16 02:57:50.06656	2021-07-16 02:57:50.06656
+88	sisa@sisa.com	delete	Cliente : 16002	2021-07-16 12:56:30 -0300 Cliente.find(params[:id])	\N	2021-07-16 15:56:30.741485	2021-07-16 15:56:30.741485
+\.
+
+

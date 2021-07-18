@@ -63,6 +63,12 @@ ALTA DE REMITOS
 ALTA DE SEGUIMIENTO USUARIO
     rails generate model Seguimiento usuario:string controlador:string registro_procesado:string accion:string baja:boolean
 
+AGREGAR CAMPO CODIFICACION A TECNICOS
+    rails generate migration AddCodificacionToTecnicos
+AGREGAR CAMPO CODIFICACION A TECNICOS
+    rails generate migration AddFechaFinalizacionToQueja
+    rails generate migration AddObservacionFinalToQueja
+
 CREACION Y MIGRACION DEL MODELO DE DATOS A LA BD
 
   rails db:create

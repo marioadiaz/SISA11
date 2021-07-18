@@ -3,22 +3,19 @@ class OrdenFumigacion < ApplicationRecord
   belongs_to :tecnico
   has_many :quejas
 
-validates :nro_certificado, presence: true, uniqueness: true, :numericality => { :greater_than_or_equal_to => 0 }
-validates :hora_aplicacion, presence: true
-validates :fecha_aplicacion, presence: true
-validates :fecha_vencimiento, presence: true
+  validates :nro_certificado, presence: true, uniqueness: true, :numericality => { :greater_than_or_equal_to => 0 }
+  validates :hora_aplicacion, presence: true
+  validates :fecha_aplicacion, presence: true
+  validates :fecha_vencimiento, presence: true
+  validates :proximo_tratamiento, presence: true
 
+  before_create { |orden_fumigacion| orden_fumigacion.superficie = orden_fumigacion.superficie.upcase }
 
-before_create { |orden_fumigacion| orden_fumigacion.superficie = orden_fumigacion.superficie.upcase }
+  TIPO_CERTIFICADO = ["C,F"]
+  TRATAMIENTO =  ["Aspersión","Humo","Niebla","Otros"]
+  VECTOR =  ["Insectos","Roedores","Voladores","Bacterias","Otros"]
+  VENENO = ["C"]
+  DROGA = ["Piretroydes", "Bromadilone", "Otros"]
+  ESTADO = ["En proceso", "Finalizado"]
 
-TIPO_CERTIFICADO = ["C,F"]
-TRATAMIENTO =  ["Aspersión","Humo","Niebla","Otros"]
-VECTOR =  ["Insectos","Roedores","Voladores","Bacterias","Otros"]
-VENENO = ["C"]
-DROGA = ["Piretroydes", "Bromadilone", "Otros"]
-ESTADO = ["En proceso", "Finalizado"]
-
-PERIODO = {30 => "Mensual", 60 => "Bimestral", 90 => "Trimestral", 120 => "Cuatrimestral"}
-
-MESES30 = [4,6,9,11]
 end

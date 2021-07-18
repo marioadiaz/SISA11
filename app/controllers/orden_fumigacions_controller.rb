@@ -25,7 +25,16 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
 
   end
 
+  def fumigaciones_por_cliente
+      @cliente_id = params[:id]
+      @cliente = Cliente.find(@cliente_id)
+
+      @orden_fumigacions = OrdenFumigacion.where(cliente_id:@cliente_id).order("updated_at DESC, nro_certificado DESC").all
+
+  end
+
   def proximas_fumigaciones
+      
       @date_method = (params[:search].present? ? params[:search][:date_method]: '').to_sym
 
       @start = selected_date(:start_date)
@@ -40,14 +49,13 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
       else
         @orden_fumigacions = params[:search].present? ? OrdenFumigacion.where(@date_method => @start..@end) : OrdenFumigacion.none
       end  
+      
   end
 
   def new
     @cliente_id = params[:id]
     @orden_fumigacion = OrdenFumigacion.new
     @orden_fumigacion.cliente_id = @cliente_id
-
-    
   end
 
   def show
@@ -62,7 +70,6 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
         orientation: 'Portrait',
         page_size: 'A4',:print_media_type => true
       end
-
     end
   end
 
@@ -71,27 +78,36 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
     @orden_fumigacion = OrdenFumigacion.new(orden_fumigacion_params)
 
     if (@orden_fumigacion.proximo_tratamiento.nil?)
-      @orden_fumigacion.proximo_tratamiento = @orden_fumigacion.fecha_vencimiento + 30
+      if (@orden_fumigacion.fecha_vencimiento.present?)
+        @orden_fumigacion.proximo_tratamiento = @orden_fumigacion.fecha_vencimiento + 30
+      end
     end  
 
     @orden_fumigacion.update baja: true
 
     respond_to do |format|
-      if @orden_fumigacion.save!
-        format.html { redirect_to orden_fumigacions_path, notice: 'La orden_fumigacion fue exitosamente creada.' }
-        format.json { render :show, status: :created, location: @orden_fumigacion }
+      if @orden_fumigacion.valid?
+        puts "-----------------validacion ok: "
+        puts @orden_fumigacion.valid?
 
-        @seguimiento = Seguimiento.new
-        @seguimiento.usuario = current_user.email
-        @seguimiento.controlador = "create"
-        @seguimiento.registro_procesado = "OrdenFumigacion : " + orden_fumigacion_params.to_s
-        @seguimiento.accion = Time.now.to_s + " "
-        @seguimiento.save  
+        if @orden_fumigacion.save!
+          format.html { redirect_to orden_fumigacions_path, notice: 'La orden_fumigacion fue exitosamente creada.' }
+          format.json { render :show, status: :created, location: @orden_fumigacion }
 
-      else
+          @seguimiento = Seguimiento.new
+          @seguimiento.usuario = current_user.email
+          @seguimiento.controlador = "create"
+          @seguimiento.registro_procesado = "OrdenFumigacion : " + orden_fumigacion_params.to_s
+          @seguimiento.accion = Time.now.to_s + " "
+          @seguimiento.save  
+        end  
+
+      else 
+        puts "-----------------validacion fail: "
+        puts @orden_fumigacion.valid?
         format.html { render :new }
         format.json { render json: @orden_fumigacion.errors, status: :unprocessable_entity }
-      end
+      end  
     end
   end
 
@@ -116,7 +132,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
       end
   end
 
-  # Aparentemente el delete es mejor que destroy ya qye ejecuta una consulta sql directa
+  # Aparentemente el delete es mejor que destroy ya que ejecuta una consulta sql directa
   def delete
     @orden_fumigacion = OrdenFumigacion.find(params[:id])
     @orden_fumigacion.update baja: false
@@ -134,48 +150,6 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
     end
   end
 
-  def add_cliente
-
-    @cliente = Cliente.find(params[:cliente_id])
-
-    if @cliente.present?
-
-        result = { apellido: @cliente.try(:apellido)}
-        puts "result: "
-        puts result
-        respond_to do |format|
-        if @cliente.valid?
-            format.json { render json: result }
-          else
-            format.json { render json: @cliente.errors.full_messages, status: :unprocessable_entity }
-          end
-        end
-    else
-      render json: { message: "El cliente no se encontró" }, status: :not_found
-    end
-  end
-
-  def add_tecnico
-
-    @tecnico = Tecnico.find(params[:tecnico_id])
-
-    if @tecnico.present?
-
-        result = { apellido: @tecnico.try(:apellido) }
-        puts "result: "
-        puts result
-        respond_to do |format|
-        if @tecnico.valid?
-            format.json { render json: result }
-          else
-            format.json { render json: @tecnico.errors.full_messages, status: :unprocessable_entity }
-          end
-        end
-    else
-      render json: { message: "El tecnico no se encontró" }, status: :not_found
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_orden_fumigacion
@@ -187,8 +161,6 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
     def orden_fumigacion_params
       params.require(:orden_fumigacion).permit(:cliente_id, :tecnico_id, :nro_ordfumigacion, :nro_certificado, :tipo_certificado, :fecha_aplicacion, :hora_aplicacion, :tratamiento, :vector, :superficie, :veneno, :droga, :observaciones_ordfumigacion, :fecha_vencimiento, :proximo_tratamiento, :importe, :estado, :baja)
     end
-
-
 
     def selected_date(symbol)
     params[:search].present? && params[:search][symbol].present? ? params[:search][symbol].to_date : Time.now.to_date

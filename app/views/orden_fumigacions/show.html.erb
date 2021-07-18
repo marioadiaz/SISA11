@@ -15,6 +15,14 @@
 	        	<strong>Cliente:</strong>
 	        	<%= @orden_fumigacion.cliente.apellido %>
 	      	</h3>
+	      	<h3>
+	        	<strong>Tipo Cliente:</strong>
+	        	<%= @orden_fumigacion.cliente.tipo_cliente %>
+	      	</h3>
+	      	<h3>
+	        	<strong>Rubro o Razon Social:</strong>
+	        	<%= @orden_fumigacion.cliente.rubro %>
+	      	</h3>
 	    	<h3>
 	        	<strong>Tecnico:</strong>
 	        	<%= @orden_fumigacion.tecnico.apellido %>
@@ -30,8 +38,6 @@
 	      	<h3>
 	        	<strong>Fecha Aplicacion:</strong>
 	        	<%= @orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %>
-	      	</h3>
-	      	<h3>
 	        	<strong>Hora Aplicacion:</strong>
 	        	<%= @orden_fumigacion.hora_aplicacion.strftime("%H:%M") %>
 	      	</h3>
@@ -57,12 +63,10 @@
 	      	</h3>
 	      	<h3>
 	        	<strong>Fecha Vencimiento:</strong>
-	        	
 	        	<%= @orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %>
 	      	</h3>
 	      	<h3>
 	        	<strong>Proximo Tratamiento:</strong>
-	        	
 	        	<%= @orden_fumigacion.proximo_tratamiento.strftime("%d-%m-%Y") %>
 	      	</h3>
 	      	<h3>

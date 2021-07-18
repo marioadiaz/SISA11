@@ -36,7 +36,8 @@ class Cliente < ApplicationRecord
         	case vectorsearch.length()
         	when 1
 
-	        	where('cuit LIKE ? or nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ?', 
+	        	where('cuit LIKE ? or nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ? or localidad LIKE ?', 
+		        	"#{search}%",
 		        	"#{search}%",
 		        	"#{search}%",
 		        	"#{search}%",
@@ -45,7 +46,7 @@ class Cliente < ApplicationRecord
 		        	"#{search}%")
 	        when 2
 
-	        	where('nombre LIKE ? or apellido LIKE ? or nombre LIKE ? or apellido LIKE ? or nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ?', 
+	        	where('nombre LIKE ? or apellido LIKE ? or nombre LIKE ? or apellido LIKE ? or nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ? or localidad LIKE ?',  
 		        	
 		        	"#{vectorsearch[0]}%",
 		        	"#{vectorsearch[1]}%",
@@ -55,12 +56,14 @@ class Cliente < ApplicationRecord
 		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%",
 		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%",
 		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%",
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%",
 		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%")
 	        when 3
 
-	        	where('(nombre LIKE ? and apellido LIKE ?) or nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ?', 
+	        	where('(nombre LIKE ? and apellido LIKE ?) or nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ? or localidad LIKE ?',  
 		        	"#{vectorsearch[0]}" +" %" +"#{vectorsearch[1]}%",
 		        	"#{vectorsearch[2]}%",
+		        	"#{vectorsearch[0]}" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%",
 		        	"#{vectorsearch[0]}" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%",
 		        	"#{vectorsearch[0]}" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%",
 		        	"#{vectorsearch[0]}" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%",
@@ -68,13 +71,15 @@ class Cliente < ApplicationRecord
 		        	"#{vectorsearch[0]}" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%")
 	        when 4
 
-	        	where('apellido LIKE ? or rubro LIKE ? or domicilio LIKE ?', 
+	        	where('apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or localidad LIKE ?',  
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%",
 		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%",
 		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%",
 		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%")
 	        when 5
 
-	        	where('rubro LIKE ? or domicilio LIKE ?', 
+	        	where('rubro LIKE ? or domicilio LIKE ? or localidad LIKE ?', 
+		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%",
 		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%",
 		        	"#{vectorsearch[0]}%" +" %" +"#{vectorsearch[1]}%" +" %" +"#{vectorsearch[2]}%" +" %" +"#{vectorsearch[3]}%" +" %" +"#{vectorsearch[4]}%")
 	        when 6

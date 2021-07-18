@@ -82,6 +82,6 @@ before_action :set_tecnico, only: [:show, :edit, :update, :delete]
 
     # Only allow a list of trusted parameters through.
     def tecnico_params
-      params.require(:tecnico).permit(:dni, :apellido, :nombre, :domicilio, :barrio, :celular, :telefono, :correo, :observaciones_tecnico, :baja)
+      params.require(:tecnico).permit(:dni, :codificacion, :apellido, :nombre, :domicilio, :barrio, :celular, :telefono, :correo, :observaciones_tecnico, :baja)
     end
 end

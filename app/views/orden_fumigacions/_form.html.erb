@@ -1,7 +1,6 @@
 <%= simple_form_for(@orden_fumigacion) do |f| %>
   <%= f.error_notification %>
- 
-
+  
   <div class="center-block form-inputs cliente-new-form">
       <div class="row">
           <div class="col-md-12">                          
@@ -286,8 +285,9 @@
 
                           <div class="form-group">
                               <div class="col-md-8">
-                                  <%= f.input :observaciones_ordfumigacion, :label => false, :input_html => { :class => "form-control", :placeholder => "Observaciones"}%>
+                                  <%= f.input :observaciones_ordfumigacion, :label => "Observaciones Certificado (No figura en el impreso)", :as => :text, :input_html => { :class => "form-control", :rows => 10, :placeholder => "Observaciones"}%>
                               </div>
+                                  
                           </div>
 
 
