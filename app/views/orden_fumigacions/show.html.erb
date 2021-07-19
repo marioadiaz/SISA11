@@ -1,19 +1,30 @@
-<script>
-  $('#anular_id').on('click', function() {
-    alert("Esta es una prueba");
-  });
-</script>
 <div class="container">
 	<div class="card-header d-flex justify-content-between">
-    	<div class="col-md-4"><h2 class="my-0 font-size:8vw">Detalle Fumigacion</h2></div>
-    	<div class="col-md-8">
-    		<%= link_to 'Anular', orden_fumigacion_path, method: :anular, class: "btn btn-secondary" %>
-    		<%= link_to 'Editar', edit_orden_fumigacion_path, class: "btn btn-primary" %>
-    		<%= link_to 'Renovar', copy_orden_fumigacion_path, class: "btn btn-primary" %>
-    		<%= link_to 'Imprimir Cert.', orden_fumigacion_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
-			<%= link_to 'Imprimir Faja', faja_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
-			<%= link_to 'Eliminar', orden_fumigacion_path, method: :delete, :class => 'btn btn-danger', :target => 'blank', data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
-    	</div>
+			<%if @orden_fumigacion.anulado==true%>
+				<div class="col-md-4">
+					<h3 class="my-0 font-size:8vw">Detalle Fumigacion <strong  style="color:green"></strong></h2>
+				</div>
+				<div class="col-md-8">
+		    		<%= link_to 'Anular', orden_fumigacion_path, method: :anular, class: "btn btn-secondary" %>
+		    		<%= link_to 'Editar', edit_orden_fumigacion_path, class: "btn btn-primary" %>
+		    		<%= link_to 'Renovar', copy_orden_fumigacion_path, class: "btn btn-primary" %>
+		    		<%= link_to 'Imprimir Cert.', orden_fumigacion_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
+					<%= link_to 'Imprimir Faja', faja_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
+					<%= link_to 'Eliminar', orden_fumigacion_path, method: :delete, :class => 'btn btn-danger', :target => 'blank', data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
+		    	</div>
+			<% else %>
+				<div class="col-md-4">
+					<h3 class="my-0 font-size:8vw">Detalle Fumigacion: <strong  style="color:red">Anulado!</strong></h2>
+				</div>
+				<div class="col-md-8">
+		    		<%= link_to 'Editar', edit_orden_fumigacion_path, class: "btn btn-primary" %>
+		    		<%= link_to 'Renovar', copy_orden_fumigacion_path, class: "btn btn-primary" %>
+		    		<%= link_to 'Imprimir Cert.', orden_fumigacion_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
+					<%= link_to 'Imprimir Faja', faja_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
+					<%= link_to 'Eliminar', orden_fumigacion_path, method: :delete, :class => 'btn btn-danger', :target => 'blank', data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
+		    	</div>
+			<% end %>
+    	
     </div>	
 	<div class="card-body">
 	    <ul class="list-unstyled mt-3 mb-4 text-center">
@@ -29,18 +40,31 @@
 	        	<strong>Rubro o Razon Social:</strong>
 	        	<%= @orden_fumigacion.cliente.rubro %>
 	      	</h3>
-	    	<h3>
+	    		<h3>
 	        	<strong>Tecnico:</strong>
 	        	<%= @orden_fumigacion.tecnico.apellido %>
 	      	</h3>
-	      	<h3>
-	        	<strong>NroCertificado:</strong>
-	        	<%= @orden_fumigacion.nro_certificado%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Tipo Certificado:</strong>
-	        	<%= @orden_fumigacion.tipo_certificado%>
-	      	</h3>
+	      	
+	      	<%if @orden_fumigacion.anulado==true%>
+		      	<h3 style="color:green">
+		        	<strong  style="color:green">NroCertificado:</strong>
+		        	<%= @orden_fumigacion.nro_certificado%>
+		      	</h3>
+		      	<h3 style="color:green">
+		        	<strong>Tipo Certificado:</strong>
+		        	<%= @orden_fumigacion.tipo_certificado%>
+		      	</h3>
+	      	<% else %>
+	      		<h3 style="color:red">
+		        	<strong>Nro. Certificado:</strong>
+		        	<%= @orden_fumigacion.nro_certificado%>
+		      	</h3>
+		      	<h3 style="color:red">
+		        	<strong>Tipo Certificado:</strong>
+		        	<%= @orden_fumigacion.tipo_certificado%>
+		      	</h3>
+	      	<% end %>
+
 	      	<h3>
 	        	<strong>Fecha Aplicacion:</strong>
 	        	<%= @orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %>

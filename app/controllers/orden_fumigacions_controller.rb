@@ -123,7 +123,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
         
         @seguimiento = Seguimiento.new
         @seguimiento.usuario = current_user.email
-        @seguimiento.controlador = "create"
+        @seguimiento.controlador = "update"
         @seguimiento.registro_procesado = "OrdenFumigacion : " + orden_fumigacion_params.to_s
         @seguimiento.accion = Time.now.to_s + " "
         @seguimiento.save
@@ -139,7 +139,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
 
     @seguimiento = Seguimiento.new
     @seguimiento.usuario = current_user.email
-    @seguimiento.controlador = "create"
+    @seguimiento.controlador = "anular"
     @seguimiento.registro_procesado = "OrdenFumigacion : " + @orden_fumigacion.id.to_s
     @seguimiento.accion = Time.now.to_s + " "
     @seguimiento.save
@@ -157,7 +157,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
 
     @seguimiento = Seguimiento.new
     @seguimiento.usuario = current_user.email
-    @seguimiento.controlador = "create"
+    @seguimiento.controlador = "delete"
     @seguimiento.registro_procesado = "OrdenFumigacion : " + @orden_fumigacion.id.to_s
     @seguimiento.accion = Time.now.to_s + " "
     @seguimiento.save
