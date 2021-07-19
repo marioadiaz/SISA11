@@ -65,9 +65,11 @@ ALTA DE SEGUIMIENTO USUARIO
 
 AGREGAR CAMPO CODIFICACION A TECNICOS
     rails generate migration AddCodificacionToTecnicos
-AGREGAR CAMPO CODIFICACION A TECNICOS
+AGREGAR CAMPOS CODIFICACION A QUEJAS
     rails generate migration AddFechaFinalizacionToQueja
     rails generate migration AddObservacionFinalToQueja
+AGREGAR CAMPO ANULAR A ORDENFUMIGACIONS
+    rails generate migration AddAnuladoToOrdenFumigacions
 
 CREACION Y MIGRACION DEL MODELO DE DATOS A LA BD
 

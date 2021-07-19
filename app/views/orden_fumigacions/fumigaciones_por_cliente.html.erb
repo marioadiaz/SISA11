@@ -4,7 +4,7 @@
       <h3 class="my-0 font-size:8vw"><strong>Fumigaciones por cliente</strong></h3>
     </div>
     <div class="col-md-6">
-      <%= link_to 'Atras', cliente_path(@cliente), class: "btn btn-primary custom", style: "width: 50%;" %>
+      <%= link_to 'Detalle Cliente', cliente_path(@cliente), class: "btn btn-primary custom", style: "width: 50%;" %>
     
     </div>
   </div>
@@ -95,19 +95,35 @@
      <tbody id="myTable" >
     <% @orden_fumigacions.each do |orden_fumigacion| %>
       <%if orden_fumigacion.baja == true %>
-        <tr>
-          <td><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
-          <td><%= orden_fumigacion.cliente.apellido%></td>
-          <td><%= orden_fumigacion.tecnico.apellido %></td>
-          <td><%= orden_fumigacion.tratamiento %></td>
-          <td><%= orden_fumigacion.droga %></td>
-          <td><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
-          <td><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
-          <td><%= orden_fumigacion.proximo_tratamiento.strftime("%d-%m-%Y") %></td>
-          <td>
-              <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
-          </td>
-        </tr>
+        <%if orden_fumigacion.anulado == true %>
+          <tr>
+            <td><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
+            <td><%= orden_fumigacion.cliente.apellido%></td>
+            <td><%= orden_fumigacion.tecnico.apellido %></td>
+            <td><%= orden_fumigacion.tratamiento %></td>
+            <td><%= orden_fumigacion.droga %></td>
+            <td><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
+            <td><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
+            <td><%= orden_fumigacion.proximo_tratamiento.strftime("%d-%m-%Y") %></td>
+            <td>
+                <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
+            </td>
+          </tr>
+        <% else %>
+          <tr >
+            <td ><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.cliente.apellido%></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.tecnico.apellido %></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.tratamiento %></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.droga %></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.proximo_tratamiento.strftime("%d-%m-%Y") %></td>
+            <td>
+                <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     <% end %>
   </tbody>

@@ -34,6 +34,7 @@ class Cliente < ApplicationRecord
         	puts vectorsearch
 
         	case vectorsearch.length()
+
         	when 1
 
 	        	where('cuit LIKE ? or nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ? or localidad LIKE ?', 
@@ -124,7 +125,7 @@ class Cliente < ApplicationRecord
 
 	        	puts "---------------else: "
         		
-	        	where('(nombre + " " + apellido LIKE ?) or (apellido + " " + nombre LIKE ?)', 
+	        	where('(nombre LIKE ?) or (apellido LIKE ?)', 
 		        	"#{vectorsearch[0]} #{vectorsearch[1]}%",
 		        	"#{vectorsearch[1]} #{vectorsearch[0]}%")
 	    	end

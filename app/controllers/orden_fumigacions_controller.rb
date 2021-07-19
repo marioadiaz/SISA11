@@ -1,5 +1,5 @@
 class OrdenFumigacionsController < ApplicationController
-before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, :delete, :copy]
+before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, :anular, :delete, :copy]
 
   def index
     @orden_fumigacions = OrdenFumigacion.all.order("updated_at DESC, nro_certificado DESC")
@@ -84,6 +84,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
     end  
 
     @orden_fumigacion.update baja: true
+    @orden_fumigacion.update anulado: true
 
     respond_to do |format|
       if @orden_fumigacion.valid?
@@ -132,6 +133,23 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
       end
   end
 
+  def anular
+    @orden_fumigacion = OrdenFumigacion.find(params[:id])
+    @orden_fumigacion.update anulado: false
+
+    @seguimiento = Seguimiento.new
+    @seguimiento.usuario = current_user.email
+    @seguimiento.controlador = "create"
+    @seguimiento.registro_procesado = "OrdenFumigacion : " + @orden_fumigacion.id.to_s
+    @seguimiento.accion = Time.now.to_s + " "
+    @seguimiento.save
+
+    respond_to do |format|
+      format.html { redirect_to orden_fumigacions_fumigaciones_por_cliente_url(:id => @orden_fumigacion.cliente.id), notice: 'La orden_fumigacion fue anulada.' }
+      format.json { head :no_content }
+    end
+  end
+
   # Aparentemente el delete es mejor que destroy ya que ejecuta una consulta sql directa
   def delete
     @orden_fumigacion = OrdenFumigacion.find(params[:id])
@@ -159,7 +177,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
 
     # Only allow a list of trusted parameters through.
     def orden_fumigacion_params
-      params.require(:orden_fumigacion).permit(:cliente_id, :tecnico_id, :nro_ordfumigacion, :nro_certificado, :tipo_certificado, :fecha_aplicacion, :hora_aplicacion, :tratamiento, :vector, :superficie, :veneno, :droga, :observaciones_ordfumigacion, :fecha_vencimiento, :proximo_tratamiento, :importe, :estado, :baja)
+      params.require(:orden_fumigacion).permit(:cliente_id, :tecnico_id, :nro_ordfumigacion, :nro_certificado, :tipo_certificado, :fecha_aplicacion, :hora_aplicacion, :tratamiento, :vector, :superficie, :veneno, :droga, :observaciones_ordfumigacion, :fecha_vencimiento, :proximo_tratamiento, :importe, :estado, :anulado, :baja)
     end
 
     def selected_date(symbol)

@@ -1,10 +1,16 @@
+<script>
+  $('#anular_id').on('click', function() {
+    alert("Esta es una prueba");
+  });
+</script>
 <div class="container">
 	<div class="card-header d-flex justify-content-between">
-    	<div><h2 class="my-0 font-size:8vw">Detalle Fumigacion</h2></div>
+    	<div class="col-md-4"><h2 class="my-0 font-size:8vw">Detalle Fumigacion</h2></div>
     	<div class="col-md-8">
-    		<%= link_to 'Editar', edit_orden_fumigacion_path, class: "btn btn-primary mr-3" %>
-    		<%= link_to 'Renovar', copy_orden_fumigacion_path, class: "btn btn-primary mr-3" %>
-    		<%= link_to 'Imprimir Certificado', orden_fumigacion_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
+    		<%= link_to 'Anular', orden_fumigacion_path, method: :anular, class: "btn btn-secondary" %>
+    		<%= link_to 'Editar', edit_orden_fumigacion_path, class: "btn btn-primary" %>
+    		<%= link_to 'Renovar', copy_orden_fumigacion_path, class: "btn btn-primary" %>
+    		<%= link_to 'Imprimir Cert.', orden_fumigacion_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
 			<%= link_to 'Imprimir Faja', faja_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
 			<%= link_to 'Eliminar', orden_fumigacion_path, method: :delete, :class => 'btn btn-danger', :target => 'blank', data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
     	</div>
@@ -80,6 +86,14 @@
 	      	</h3>
 	    </ul>
 	    	    
-  		<a class="btn btn-lg btn-block btn-dark" href="/orden_fumigacions">Atrás</a>
+  		
+  		<div class="card-header d-flex justify-content-between">
+	  		<div class="col-md-4">
+	  			<a class="btn btn-lg btn-block btn-dark" href="/orden_fumigacions">Atrás</a>
+	  		</div>
+	  		<div class="col-md-8">
+		  		<%= link_to 'Más Certificados de este Cliente', orden_fumigacions_fumigaciones_por_cliente_path(:id => @orden_fumigacion.cliente.id) , :class=>"btn btn-lg btn-block btn-dark"%>
+	  		</div>
+  		</div>
 	</div>
 </div>

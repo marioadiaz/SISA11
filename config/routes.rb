@@ -59,6 +59,10 @@ end
   get '/orden_fumigacions/:id/edit', to: 'orden_fumigacions#edit', as: 'edit_orden_fumigacion'
   patch '/orden_fumigacion/:id', to: 'orden_fumigacions#update'
   put '/orden_fumigacion/:id', to: 'orden_fumigacions#update'
+  
+  patch '/orden_fumigacion/:id', to: 'orden_fumigacions#anular'
+  post '/orden_fumigacion/:id', to: 'orden_fumigacions#anular'
+  
   delete '/orden_fumigacion/:id', to: 'orden_fumigacions#delete'
 
   #QUEJAS
