@@ -9,7 +9,7 @@
     <header class="clearfix">
       <div id="datos">
         <h2><%=I18n.l(Date.today, format: '%A, %d de %B de %Y')%></h2>
-        <h1>Listado de Reclamos</h1>
+        <h1>Listado de Tecnicos</h1>
       </div>
       <div id="company">
         <h1>SISA FUMIGACIONES</h1>
@@ -22,24 +22,30 @@
       <table>
         <tr>
           <thead>
-            <th>Nro Reclamo</th>
-            <th>Nro Certificado</th>
-            <th>Cliente</th>
-            <th>Tecnico</th>
-            <th>Fecha</th>
-            <th>Observaciones</th>
+            <th>DNI</th>
+            <th>Cod.</th>
+            <th>Apellido</th>
+            <th>Nombre</th>
+            <th>Domicilio</th>
+            <th>Barrio</th>
+            <th>Celular</th>
+            <th>Telefono</th>
+            <th>Correo</th>
           </thead>
         </tr>
           <tbody>
-            <% @quejas.each do |queja| %>
-              <%if queja.baja == true %>
+            <% @tecnicos.each do |tecnico| %>
+              <%if tecnico.baja == true %>
                 <tr>
-                  <td><%= queja.id %></td>
-                  <td><%= queja.orden_fumigacion.nro_certificado  %></td>
-                  <td><%= queja.orden_fumigacion.cliente.apellido %></td>
-                  <td><%= queja.orden_fumigacion.tecnico.apellido %></td>
-                  <td><%= queja.fecha_queja %></td>
-                  <td><%= queja.observaciones_queja %></td>
+                  <td><%= tecnico.dni %></td>
+                  <td><%= tecnico.codificacion %></td>
+                  <td><%= tecnico.apellido %></td>
+                  <td><%= tecnico.nombre %></td>
+                  <td><%= tecnico.domicilio %></td>
+                  <td><%= tecnico.barrio %></td>
+                  <td><%= tecnico.celular %></td>
+                  <td><%= tecnico.telefono %></td>
+                  <td><%= tecnico.correo %></td>
                 </tr>
               <% end %>
             <% end %>

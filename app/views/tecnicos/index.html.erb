@@ -14,11 +14,12 @@ $(document).ready(function(){
 </script>
 
 
-<input class="ml-3 w-25" id="myInput" type="text" placeholder="Buscar..">
+<input class="ml-4 w-25" id="myInput" type="text" placeholder="Buscar..">
 <table class=" table-striped table table-responsive">
   <tr>
     <thead  class="thead-dark">
         <th>DNI</th>
+        <th>Cod.</th>
         <th>Apellido</th>
         <th>Nombre</th>
         <th>Domicilio</th>
@@ -34,6 +35,7 @@ $(document).ready(function(){
     <%if tecnico.baja == true %>
       <tr>
           <td><%= tecnico.dni %></td>
+          <td><%= tecnico.codificacion %></td>
           <td><%= link_to "#{tecnico.apellido}", tecnico_path(tecnico) %></td>
           <td><%= link_to "#{tecnico.nombre}", tecnico_path(tecnico) %></td>
           <td><%= tecnico.domicilio %></td>

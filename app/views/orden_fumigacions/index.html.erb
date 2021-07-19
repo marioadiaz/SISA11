@@ -36,7 +36,7 @@ $(document).ready(function(){
   </tr>
    <tbody id="myTable" >
   <% @orden_fumigacions.each do |orden_fumigacion| %>
-    <%if orden_fumigacion.baja == true %>
+    <%if (orden_fumigacion.baja == true)  && (orden_fumigacion.anulado==true)%>
       <tr>
         <td><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
         <td><%= link_to "#{orden_fumigacion.cliente.apellido}", cliente_path(orden_fumigacion.cliente)%></td>

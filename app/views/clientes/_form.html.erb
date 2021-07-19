@@ -37,9 +37,7 @@
       <div class="col-sm">
         <div>  <%= f.input :celular %> </div>
       </div>
-      <div class="col-sm">
-        <%= f.input :tipo_cliente, as: :select, collection: Cliente::TIPO_CLIENTE,  label:'Tipo Cliente', prompt: "Seleccione tipo de Cliente" %>
-      </div>
+      
       <div>
     </div>
       </div>
@@ -47,13 +45,21 @@
       <div class="col-sm">
         <%= f.input :calificacion %>
       </div>
-        <div class="col-sm">
-        <%= f.input :observaciones_cliente %>
+
+      <div class="col-sm">
+        <%= f.input :tipo_cliente, as: :select, collection: Cliente::TIPO_CLIENTE,  label:'Tipo Cliente', prompt: "Seleccione tipo de Cliente" %>
       </div>
-    <div class="col-sm">
-      <%= f.input :rubro  ,label: "Razon Social"%>
+      
+      <div class="col-sm">
+        <%= f.input :rubro  ,label: "Razon Social"%>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-sm">
+        
+        <%= f.input :observaciones_cliente, :label => "Observaciones Cliente (Informacion de relevancia o para tener el perfil de cliente)", :as => :text, :input_html => { :class => "form-control", :rows => 10, :placeholder => "Observaciones"}%>
       </div>
+    </div>
 
   <!-- div form-inputs cliente-new-form -->
    <div class= "d-flex my-3">

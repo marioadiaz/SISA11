@@ -1,7 +1,86 @@
 <div class="container">
   <h1 class="text-center card-header my-2">Editar Reclamo</h1>
 
-  <%= render 'form', queja: @queja %>
+  <%= simple_form_for(@queja) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="center-block form-inputs cliente-new-form">
+
+    <div class="row">
+      <div class="col-sm">
+          <h3 >
+          <div >
+            <label>#Cert:</label>
+            <strong> <%= @queja.orden_fumigacion.nro_certificado%> </strong>
+          </div>
+          <div >
+                <label>Cliente:</label>
+                <strong> <%= @queja.orden_fumigacion.cliente.cuit%> - <%= @queja.orden_fumigacion.cliente.nombre%> - <%= @queja.orden_fumigacion.cliente.apellido%> - <%= @queja.orden_fumigacion.cliente.rubro%></strong>
+          </div>
+          <div >
+            <label>Tecnico:</label>
+            <strong> <%= @queja.orden_fumigacion.tecnico.nombre%> <%= @queja.orden_fumigacion.tecnico.apellido%> </strong>
+          </div>
+        </h3 >
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <div>
+          <%= f.label  'Fecha Reclamo' %>
+          <%= f.input :fecha_queja, :class => 'datepicker', as: :date, html5: true, label: false, :input_html => { :class => "form-control"} %>
+        </div>
+        
+      </div>
+    </div>    
+    <div class="row"> 
+      <div class="col-sm">
+        <div>
+          <%= f.input :observaciones_queja, :label => "Observaciones Reclamo", :as => :text, :input_html => { :class => "form-control", :rows => 7, :placeholder => "Observaciones"}%>
+        </div>
+        <div>
+          <script >
+            //Cambia los valores de la cadena de proceso
+            $(function () {
+              $("#queja_estado").change(function () {
+                
+                var ValorSeleccionadoDropdown = $(this).val();
+                
+                if (ValorSeleccionadoDropdown == "En proceso"){
+                    document.getElementById('queja_observacion_final').style.display = "none";
+                    console.log("ValorSeleccionadoDropdown-en proceso-: ",ValorSeleccionadoDropdown);
+                  } else
+                    document.getElementById('queja_observacion_final').style.display = "block";
+                    console.log("ValorSeleccionadoDropdown-finalizado-: ",ValorSeleccionadoDropdown);
+                  {
+
+                }
+                });
+              });
+            //Fin de cambio los valores de la cadena de proceso
+          </script>
+          <%= f.label  'Estado' %>
+          <%= f.input :estado, as: :select, :collection => ["En proceso", "Finalizado"], label: false, :default=> "En proceso", :input_html => { :class => "form-control"}%>
+        </div>
+        <div>
+          <%if (@queja.estado == "En proceso") or (@queja.estado.nil?)%>
+            <%= f.input :observacion_final, :label => false, :as => :text, :input_html => { :class => "form-control", :rows => 3, :placeholder => "Observacion final para cerrar el reclamo", :style=> "display: none"}%>
+          <%else%>  
+            <%= f.input :observacion_final, :label => false, :as => :text, :input_html => { :class => "form-control", :rows => 3, :placeholder => "Observacion final para cerrar el reclamo", :style=> "display: block"}%>
+
+            
+          <%end%>
+        </div>
+      </div>
+    </div>
+      
+  <!-- div form-inputs cliente-new-form -->
+   <div class= "d-flex my-3">
+     <div> <%= f.button :submit,name="Confirmar",:class => "btn btn-success"  %> </div>
+  </div>
+<% end %>
+
 
   <%= link_to 'Atras',  queja_path(@queja), :class => "center-block btn btn-dark btn-lg btn-block w-75 mt-5"  %>
 </div>

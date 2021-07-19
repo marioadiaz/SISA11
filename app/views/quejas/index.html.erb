@@ -18,11 +18,15 @@ $(document).ready(function(){
 <table class=" table-striped table table-responsive">
   <tr>
     <thead  class="thead-dark">
-      <th>Nro Reclamo</th>
-      <th>Nro Certificado</th>
-      <th>Cliente</th>
+      <th>#Rec.</th>
+      <th>#Cert.</th>
+      <th>#CUIT</th>
+      <th>Nombre Cliente</th>
+      <th>Razon Social</th>
       <th>Tecnico</th>
-      <th>Fecha</th>
+      <th>F. Inicio</th>
+      <th>Estado</th>
+      <th>F. Final.</th>
       
       <th colspan="3"></th>
     </thead>
@@ -33,11 +37,20 @@ $(document).ready(function(){
     <%if queja.baja == true %>
       <tr>
         <td><%= link_to "#{queja.id}", queja_path(queja) %></td>
-        <td><%= link_to "#{queja.orden_fumigacion.nro_certificado}", queja_path(queja)  %></td>
-        <td><%= link_to "#{queja.orden_fumigacion.cliente.apellido}", queja_path(queja) %></td>
+        <td><%= queja.orden_fumigacion.nro_certificado  %></td>
+        <td><%= queja.orden_fumigacion.cliente.cuit %></td>
+        <td><%= link_to "#{queja.orden_fumigacion.cliente.nombre}", queja_path(queja) %></td>
+        <td><%= link_to "#{queja.orden_fumigacion.cliente.rubro}", queja_path(queja) %></td>
+        
         <td><%= queja.orden_fumigacion.tecnico.apellido %></td>
-        <td><%= queja.fecha_queja %></td>
-      
+        <td><%= queja.fecha_queja.strftime("%d-%m-%Y") %></td>
+        <%if queja.estado == "En proceso"%>
+          <td><strong  style="color:red;"><%= queja.estado%></strong></td>
+          <td></td>
+        <%else%>
+          <td><strong  style="color:green;"><%= queja.estado%></strong></td>
+          <td><strong  style="color:green;"><%= queja.fecha_finalizacion.strftime("%d-%m-%Y") %></strong></td>
+        <%end%>
         <td><%= link_to 'Eliminar', queja, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Reclamo?" }  %>
         </td>
       </tr>

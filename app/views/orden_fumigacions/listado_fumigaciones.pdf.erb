@@ -40,7 +40,7 @@
         </tr>
           <tbody>
             <% @orden_fumigacions.each do |orden_fumigacion| %>
-              <%if orden_fumigacion.baja == true %>
+              <%if (orden_fumigacion.baja == true) && (orden_fumigacion.anulado==true)%>
                 <tr>
                   <td><%= orden_fumigacion.nro_certificado%></td>
                   <td><%= orden_fumigacion.tipo_certificado%></td>

@@ -2,7 +2,7 @@ class QuejasController < ApplicationController
 before_action :set_queja, only: [:show, :edit, :update, :delete]
 
   def index
-      @quejas = Queja.all.order(:nro_queja)
+      @quejas = Queja.all.order("updated_at DESC")
       respond_to do |format|
       format.html
       format.json
@@ -53,6 +53,11 @@ before_action :set_queja, only: [:show, :edit, :update, :delete]
 
   def update
         @queja = Queja.find(params[:id])
+        @queja.fecha_finalizacion = Date.today
+
+        puts "---------queja_params : "
+        puts queja_params
+
       if @queja.update(queja_params)
         redirect_to quejas_path
 
@@ -94,6 +99,6 @@ before_action :set_queja, only: [:show, :edit, :update, :delete]
 
     # Only allow a list of trusted parameters through.
     def queja_params
-      params.require(:queja).permit(:orden_fumigacion_id, :nro_queja, :fecha_queja, :observaciones_queja, :estado, :baja)
+      params.require(:queja).permit(:orden_fumigacion_id, :nro_queja, :fecha_queja, :fecha_finalizacion, :observaciones_queja, :observacion_final, :estado, :baja)
     end
 end
