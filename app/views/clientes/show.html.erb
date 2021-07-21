@@ -9,7 +9,7 @@
       <%= link_to 'Eliminar', cliente_path(@cliente), method: :delete, :class => 'btn btn-danger', :target => 'blank', data: { confirm: "¿Estás seguro/a de eliminar el Cliente?" } %>
       </div>
     <%else%>
-      <div class="col-md-4"><h2 class="my-0 font-size:8vw">Detalle cliente: <strong><span style="color:red">Cliente dado de baja en el sistema<span></strong></h2></div>     
+      <div class="col-md-4"><h2 class="my-0 font-size:8vw">Detalle cliente: <strong><span style="color:red">Cliente anulado en el sistema!<span></strong></h2></div>     
       <div class="col-md-8">
         <%= link_to 'Certificados generados', orden_fumigacions_fumigaciones_por_cliente_path(:id => @cliente.id) , :class => 'btn btn-info'%>
       </div>

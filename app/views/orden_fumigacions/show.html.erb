@@ -5,7 +5,7 @@
           <h3 class="my-0 font-size:8vw">Detalle Fumigacion <strong  style="color:green"></strong></h2>
         </div>
         <div class="col-md-8">
-            <%= link_to 'Anular', orden_fumigacion_path, method: :anular, class: "btn btn-secondary" %>
+            <%= link_to 'Baja', orden_fumigacion_path, method: :anular, class: "btn btn-secondary" %>
             <%= link_to 'Editar', edit_orden_fumigacion_path, class: "btn btn-primary" %>
             <%= link_to 'Renovar', copy_orden_fumigacion_path, class: "btn btn-primary" %>
             <%= link_to 'Imprimir Cert.', orden_fumigacion_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
@@ -14,7 +14,7 @@
           </div>
       <% else %>
         <div class="col-md-4">
-          <h3 class="my-0 font-size:8vw">Detalle Fumigacion: <strong  style="color:red">Anulado!</strong></h2>
+          <h3 class="my-0 font-size:8vw">Detalle Fumigacion: <strong  style="color:red">Dado de baja!</strong></h2>
         </div>
         <div class="col-md-8">
             <%= link_to 'Editar', edit_orden_fumigacion_path, class: "btn btn-primary" %>
