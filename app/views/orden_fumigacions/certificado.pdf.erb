@@ -19,7 +19,7 @@
           <h2>SISTEMA INTEGRAL DE SANEAMIENTO AMBIENTAL</h2>    
       </div>
       <div id="company">
-        <h3>PADRON N° 68.023/03 - CUIT: 20-22583332-0 ADMINISTRACION & VENTAS: MANZANA N° 748  LOTE N°8 BARRIO SANTA ANA II  -  CP 4400 -SALTA CAPITAL TELEFONOS: (0387)4291082 - (0387) 4248560</h3>
+        <h3>PADRON N° 68.023/03 - CAM-SLA 68575 CUIT: 20-22583332-0 ADMINISTRACION & VENTAS: MANZANA N° 748  LOTE N°8 BARRIO SANTA ANA II  -  CP 4400 -SALTA CAPITAL TELEFONOS: (0387)4291082 - (0387) 4248560</h3>
       </div>
       
     </header>
@@ -27,23 +27,30 @@
       <div id="separador">
         <h1>DATOS CLIENTE</h1>
       </div>
-      <div id="detalle" class="clearfix">
-        <div id="client">
-          <h1><%= @orden_fumigacion.cliente.apellido%> <%= @orden_fumigacion.cliente.nombre%></h1>
-          <h2><%= @orden_fumigacion.cliente.domicilio%></h2>
-          <h2><%= @orden_fumigacion.cliente.barrio%> <%= @orden_fumigacion.cliente.localidad%></h2>
-          
-        </div>
-        <div id="datos">
+      <div id="encabezadoclient">
+        <h1><%= @orden_fumigacion.cliente.apellido%> <%= @orden_fumigacion.cliente.nombre%></h1>
+      </div>
+
+      <div class="clearfix">
+        <div id="datosright" class="col-md-3">
           <h2>Telefono: <%= @orden_fumigacion.cliente.telefono%></h2>
           <h2>Celular: <%= @orden_fumigacion.cliente.celular%></h2>
           <h2><a href="mailto:<%= @orden_fumigacion.cliente.correo%>"><%= @orden_fumigacion.cliente.correo%></a></h2>
-          
         </div>
+        <div id="datosleft" class="col-md-9">
+          <h2><strong>CUIT: </strong><strong style="color:red"><%= @orden_fumigacion.cliente.cuit%></strong></h2>
+          <h2><%= @orden_fumigacion.cliente.domicilio%> <%= @orden_fumigacion.cliente.barrio%></h2>
+          <h2><%= @orden_fumigacion.cliente.localidad%></h2>
+        </div>   
       </div>
+         
+
+    </main>
+
       <div id="separador" class="clearfix">
         <h1>DETALLE</h1>
-      </div>     
+      </div>
+
       <table  border="0" cellspacing="0" cellpadding="0">
         <thead>
           <tr>
@@ -120,7 +127,7 @@
         <div class="notice">LA FIRMA BRINDA GARANTIA DE SATIFACCION, VALIDEZ 30 DIAS CORRIDOS POSTERIORES AL SERVICIO, SIN EXCEPCION</div>
       </div>
       <div class="clearfix">
-        <div id="garantia">GARANTIA SUJETA A INSPECCIONES TECNICAS, A LAS CONDICIONES DE HIGENE, EDILICIAS, CLIMATICAS, AL GRADO DE INFESTACION Y AL TIPO DE PLAGA -  LA EFICTIVIDAD DEL SERVICIO NO DEPENDE DE LAS FECHAS DE APLICACION Y VENCIMIENTO DE ESTE CERTIFICADO, SOLO DEL PLAN DE TRABAJO ACORDADO. COMERCIOS DONDE SE EXPENDA, ELABORE,FRACCIONE Y ALMACENE ALIMENTOS, LA CERTIFICACION DE SERVICIOS NO SERA SUPERIOR A LOS 60 DIAS, SEGÚN ORDENANZA N° 12.157/04 - DECRETO N°917/98 DE LA MUNICIPALIDAD DE LA CIUDAD DE SALTA.
+        <div id="garantia">GARANTIA SUJETA A INSPECCIONES TECNICAS, A LAS CONDICIONES DE HIGIENE, EDILICIAS, CLIMATICAS, AL GRADO DE INFESTACION Y AL TIPO DE PLAGA -  LA EFICTIVIDAD DEL SERVICIO NO DEPENDE DE LAS FECHAS DE APLICACION Y VENCIMIENTO DE ESTE CERTIFICADO, SOLO DEL PLAN DE TRABAJO ACORDADO. COMERCIOS DONDE SE EXPENDA, ELABORE,FRACCIONE Y ALMACENE ALIMENTOS, LA CERTIFICACION DE SERVICIOS NO SERA SUPERIOR A LOS 60 DIAS, SEGÚN ORDENANZA N° 12.157/04 - DECRETO N°917/98 DE LA MUNICIPALIDAD DE LA CIUDAD DE SALTA.
         </div>
       </div>
       <div  class="clearfix">
@@ -131,10 +138,10 @@
         <div id="detalle" class="clearfix">
           <div id="dataleft">
             <h1><%= I18n.l(@orden_fumigacion.fecha_vencimiento, locale: :es, format: :long) %></h1>
-            <h1>Fecha de Vencimiento</h1>        
+            <h1>Fecha de Aplicacion</h1>        
           </div>
           <div id="dataright">
-            <h1><%= I18n.l(@orden_fumigacion.proximo_tratamiento, locale: :es, format: :long) %></h1>
+            <h1><%= I18n.l(@orden_fumigacion.fecha_vencimiento, locale: :es, format: :long) %></h1>
             <h1>Proximo Vencimiento </h1>
           </div>
         </div>
@@ -148,7 +155,7 @@
           </div>
         </div>
       </div>  
-    </main>
+    
   
 </body>
 </html>
@@ -158,6 +165,12 @@
   content: "";
   display: table;
   clear: both;
+}
+
+.clearfix1:after {
+  content: "";
+  display: table;
+  
 }
 
 body {
@@ -175,7 +188,8 @@ body {
 
 header {
   padding: 10px 0;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  background: #ABD891;
 }
 
 footer {
@@ -232,9 +246,38 @@ a {
   color: #000000;
 }
 
+#datosleft {
+  padding-left: 5px;
+  border-left: 5px solid #57B223;
+  float: left;
+  padding-left: 6px;
+  
+}
+
+#datosleft h2 {
+  font-size: 1.2em;
+  font-weight: normal;
+  margin: 0;
+  color: #000000;
+}
+
+#datosright {
+  float: right;
+  padding-right: 6px;
+}
+
+#datosright h2 {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+  color: #000000;
+
+}
+
 #datos {
   float: right;
   text-align: right;
+  padding: 0px 5px 0px 0px;
   margin-bottom: 2px;
 }
 
@@ -250,22 +293,24 @@ a {
   font-size: 1.2em;
   font-weight: bold;
   margin: 0;
-  color: #000000; 
+  color: #000000;
+
 }
 
 #detalle {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 #firmas {
-  padding: 100px 0px 0px 0px;
+  padding: 70px 0px 0px 0px;
 }
 
 #company {
-  padding-left: 6px;
-  border-left: 6px solid #0087C3;
+  padding: 0px 5px 0px 5px;
+  padding-left: 5px;
   float: left;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+
 }
 
 #company h1 {
@@ -292,14 +337,24 @@ a {
 }
 
 #client {
-  padding-left: 6px;
-  border-left: 6px solid #57B223;
+  padding-left: 5px;
+  border-left: 5px solid #57B223;
   float: left;
+  text-align: left;
+  width: 70%;
 }
 
 #client h1 {
     color: #0087C3;
     font-size: 1.8em;
+    line-height: 1em;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+}
+
+#encabezadoclient h1 {
+    color: #0087C3;
+    font-size: 1.7em;
     line-height: 1em;
     font-weight: bold;
     margin: 0 0 5px 0;
@@ -326,8 +381,8 @@ a {
   font-weight: bold;
   background: #EEEEEE;
   color: #000000;
-  margin-bottom: 15px;
-  padding: 10px 20px 20px 20px;
+  margin-bottom: 10px;
+  padding: 10px 20px 15px 20px;
 }
 
 #antidoto{
@@ -392,7 +447,7 @@ table td h3{
 table .no {
   color: #002b3c;
   font-size: 1.4em;
-  background: #57B223;
+  background: #B4B4B4;
 }
 
 table .desc {
@@ -437,6 +492,14 @@ table td:first-child {
 table td:last-child {
   width: 350px;
     
+}
+
+table .datosclientesno {
+
+}
+
+table .datosclientesdesc {
+
 }
 
 </style>

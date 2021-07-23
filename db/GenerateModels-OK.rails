@@ -90,6 +90,10 @@ AGREGAR CONTROLADORES
 
   rails generate controller Seguimientos new index show create edit update destroy
 
+  rails generate controller Fajas new index show create edit update destroy
+
+  rails generate controller Diario index
+
 
 git init
 git add README.md

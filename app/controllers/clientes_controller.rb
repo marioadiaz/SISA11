@@ -5,7 +5,6 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
     #@clientes = Cliente.all.order(:apellido)
     @clientes = Cliente.search(params[:search]).paginate(:page => params[:page], :per_page => 10 )
                          .order("updated_at DESC, nombre DESC")
-
     respond_to do |format|
       format.html
       format.json
@@ -100,22 +99,6 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
     respond_to do |format|
       format.html { redirect_to clientes_url, notice: 'El cliente fue eliminado.' }
       format.json { head :no_content }
-    end
-  end
-
-
-  #DEFINO EL BUSCADOR PARA EL MODAL EN ORDEN_FUMIGACION
-  def buscador
-
-    @resultados = Cliente.search(params[:termino]).map do |cliente|
-      {
-          id: cliente.id,
-          apellido: cliente.apellido
-      }
-    end
-
-    respond_to do |format|
-      format.json { render :json => @resultados }
     end
   end
 

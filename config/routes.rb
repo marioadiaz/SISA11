@@ -1,32 +1,18 @@
 Rails.application.routes.draw do
 
-  get 'seguimientos/new'
-  get 'seguimientos/index'
-  get 'seguimientos/show'
-  get 'seguimientos/create'
-  get 'seguimientos/edit'
-  get 'seguimientos/update'
-  get 'seguimientos/destroy'
-  get 'remitos/new'
-  get 'remitos/index'
-  get 'remitos/show'
-  get 'remitos/create'
-  get 'remitos/edit'
-  get 'remitos/update'
-  get 'remitos/destroy'
 root 'pages#home'
 
 devise_for :users
 devise_scope :user do
   get '/users/sign_out' => 'devise/sessions#destroy'
 end
- get '/pages/home', to: 'pages#home'
+   
+  get '/pages/home', to: 'pages#home'
+  
   #CLIENTES
   get '/clientes', to: 'clientes#index'
   get 'clientes/new', to: 'clientes#new'
   post '/clientes', to: 'clientes#create'
-
-  get 'buscador_clientes/:termino', to: 'clientes#buscador'
 
   get '/cliente/:id', to: 'clientes#show', as: 'cliente'
   get '/clientes/:id/edit', to: 'clientes#edit', as: 'edit_cliente'
@@ -78,10 +64,9 @@ end
   #FAJAS
   get '/fajas', to: 'fajas#index'
   get '/faja/:id', to: 'fajas#show', as: 'faja'
-  get 'fajas/create'
-  get 'fajas/edit'
-  get 'fajas/update'
-  get 'fajas/destroy'
+  
+  #DIARIO
+  get '/diario', to: 'diario#index'
 
   #REMITOS
   get 'remitos/new'

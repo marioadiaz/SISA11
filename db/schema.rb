@@ -34,18 +34,6 @@ ActiveRecord::Schema.define(version: 2021_07_19_003533) do
     t.string "localidad"
   end
 
-  create_table "contactos", id: false, force: :cascade do |t|
-    t.bigint "id_cliente"
-    t.string "apellido"
-    t.string "nombre"
-    t.string "domicilio"
-    t.string "telefono"
-    t.string "celular"
-    t.string "barrio"
-    t.string "rubro"
-    t.string "estado"
-  end
-
   create_table "orden_fumigacions", force: :cascade do |t|
     t.bigint "cliente_id", null: false
     t.bigint "tecnico_id", null: false

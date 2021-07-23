@@ -24,13 +24,6 @@ ActiveStorage.start()
 
 $(document).on('turbolinks:load', function() {
 
-  $("#clientes_search input").keyup(function() {
-    $.get($("#clientes_search").attr("action"), $("#clientes_search").serialize(), null, "script");
-    console.log("get",$.get($("#clientes_search").attr("action"), $("#clientes_search").serialize(), null, "script"));
-    console.log("this(val): ", $(this).val());
-    
-    return false;
-  });
 
     $("#buscador_clientes").keyup(function(event){
     let termino = $(this).val();

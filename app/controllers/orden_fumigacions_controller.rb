@@ -2,12 +2,12 @@ class OrdenFumigacionsController < ApplicationController
 before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, :anular, :delete, :copy]
 
   def index
-    @orden_fumigacions = OrdenFumigacion.all.order("updated_at DESC, nro_certificado DESC")
+    @orden_fumigacions = OrdenFumigacion.all.order("nro_certificado DESC")
     respond_to do |format|
       format.html
       format.js
       format.pdf do
-          render pdf: "file_name", :template => 'orden_fumigacions/listado_fumigaciones.pdf.erb',
+          render pdf: "listado_fumigaciones", :template => 'orden_fumigacions/listado_fumigaciones.pdf.erb',
           encoding: 'utf8',
           orientation: 'Landscape',
           page_size: 'A4',:print_media_type => true
@@ -47,8 +47,10 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
         puts "en el if -----@date_method : "
         puts @date_method
       else
-        @orden_fumigacions = params[:search].present? ? OrdenFumigacion.where(@date_method => @start..@end) : OrdenFumigacion.none
-      end  
+        @orden_fumigacions = params[:search].present? ? OrdenFumigacion.where(@date_method => @start..@end) : OrdenFumigacion.none        
+      end
+
+ 
       
   end
 
@@ -65,7 +67,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
       format.html
       format.json
       format.pdf do
-        render pdf: "file_name", :template => 'orden_fumigacions/certificado.pdf.erb',
+        render pdf: "certificado-"+@orden_fumigacion.nro_certificado.to_s, :template => 'orden_fumigacions/certificado.pdf.erb',
         encoding: 'utf8',
         orientation: 'Portrait',
         page_size: 'A4',:print_media_type => true

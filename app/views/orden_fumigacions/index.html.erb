@@ -1,8 +1,9 @@
 <div class="container">
   <div class="d-flex justify-content-between">
 		<h1>Listado Fumigaciones</h1>
-
 	</div>
+<%= link_to 'Listado Hoy', diario_path(format: 'pdf'), class: "btn btn-secondary",:target => 'blank'%>
+
 <%= link_to 'Listado PDF', orden_fumigacions_path(format: 'pdf'), :class => 'btn btn-success my-3' %>
 
 <script>

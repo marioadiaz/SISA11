@@ -7,7 +7,7 @@
       <div class="col-sm">
         <div >
           <%= f.label  'Nro Certificado' %>
-          <%= collection_select :queja, :orden_fumigacion_id, OrdenFumigacion.where(baja: true).collect { |t| [ t.id, "#{t.nro_certificado} - #{t.cliente.apellido} - #{t.cliente.nombre} - #{t.cliente.cuit}" ] }, :first, :last, { prompt: "Seleccionar un Certificado" }, {class: "form-control"} %>
+          <%= collection_select :queja, :orden_fumigacion_id, OrdenFumigacion.where(baja: true).collect { |t| [ t.id, "#:#{t.nro_certificado}  -Fecha Aplicacion: #{t.fecha_aplicacion} - #{t.cliente.apellido} - #{t.cliente.nombre}" ] }, :first, :last, { prompt: "Seleccionar un Certificado" }, {class: "form-control"} %>
         </div>
       </div>
     </div>
