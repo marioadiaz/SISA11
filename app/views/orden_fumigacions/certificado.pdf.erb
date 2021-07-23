@@ -27,24 +27,23 @@
       <div id="separador">
         <h1>DATOS CLIENTE</h1>
       </div>
-
       <div id="encabezadoclient">
         <h1><%= @orden_fumigacion.cliente.apellido%> <%= @orden_fumigacion.cliente.nombre%></h1>
       </div>
 
-      <div id="detalle" class="clearfix">
-        <div id="client">
-          <h2><strong>CUIT: </strong><strong style="color:red"><%= @orden_fumigacion.cliente.cuit%></strong></h2>
-          <h2><%= @orden_fumigacion.cliente.domicilio%> <%= @orden_fumigacion.cliente.barrio%></h2>
-          <h2><%= @orden_fumigacion.cliente.localidad%></h2>
-        </div>
-
-        <div id="datos">
+      <div class="clearfix">
+        <div id="datosright" class="col-md-3">
           <h2>Telefono: <%= @orden_fumigacion.cliente.telefono%></h2>
           <h2>Celular: <%= @orden_fumigacion.cliente.celular%></h2>
           <h2><a href="mailto:<%= @orden_fumigacion.cliente.correo%>"><%= @orden_fumigacion.cliente.correo%></a></h2>
         </div>
+        <div id="datosleft" class="col-md-9">
+          <h2><strong>CUIT: </strong><strong style="color:red"><%= @orden_fumigacion.cliente.cuit%></strong></h2>
+          <h2><%= @orden_fumigacion.cliente.domicilio%> <%= @orden_fumigacion.cliente.barrio%></h2>
+          <h2><%= @orden_fumigacion.cliente.localidad%></h2>
+        </div>   
       </div>
+         
 
     </main>
 
@@ -111,7 +110,7 @@
             
           </tr>
           <tr>
-            <td class="no">Importe</td>
+          <td class="no">Codigo</td>
             <td class="desc"><h3><%= @orden_fumigacion.importe%></h3></td>
             
           </tr>
@@ -168,6 +167,12 @@
   clear: both;
 }
 
+.clearfix1:after {
+  content: "";
+  display: table;
+  
+}
+
 body {
   position: relative;
   width: 21cm;  
@@ -184,6 +189,7 @@ body {
 header {
   padding: 10px 0;
   margin-bottom: 8px;
+  background: #ABD891;
 }
 
 footer {
@@ -240,9 +246,38 @@ a {
   color: #000000;
 }
 
+#datosleft {
+  padding-left: 5px;
+  border-left: 5px solid #57B223;
+  float: left;
+  padding-left: 6px;
+  
+}
+
+#datosleft h2 {
+  font-size: 1.2em;
+  font-weight: normal;
+  margin: 0;
+  color: #000000;
+}
+
+#datosright {
+  float: right;
+  padding-right: 6px;
+}
+
+#datosright h2 {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+  color: #000000;
+
+}
+
 #datos {
   float: right;
   text-align: right;
+  padding: 0px 5px 0px 0px;
   margin-bottom: 2px;
 }
 
@@ -258,7 +293,8 @@ a {
   font-size: 1.2em;
   font-weight: bold;
   margin: 0;
-  color: #000000; 
+  color: #000000;
+
 }
 
 #detalle {
@@ -266,14 +302,15 @@ a {
 }
 
 #firmas {
-  padding: 90px 0px 0px 0px;
+  padding: 70px 0px 0px 0px;
 }
 
 #company {
-  padding-left: 6px;
-  border-left: 6px solid #0087C3;
+  padding: 0px 5px 0px 5px;
+  padding-left: 5px;
   float: left;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
+
 }
 
 #company h1 {
@@ -300,9 +337,10 @@ a {
 }
 
 #client {
-  padding-left: 6px;
-  border-left: 6px solid #57B223;
+  padding-left: 5px;
+  border-left: 5px solid #57B223;
   float: left;
+  text-align: left;
   width: 70%;
 }
 
@@ -409,7 +447,7 @@ table td h3{
 table .no {
   color: #002b3c;
   font-size: 1.4em;
-  background: #57B223;
+  background: #B4B4B4;
 }
 
 table .desc {

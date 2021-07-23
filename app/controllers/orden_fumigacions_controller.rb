@@ -7,7 +7,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
       format.html
       format.js
       format.pdf do
-          render pdf: "file_name", :template => 'orden_fumigacions/listado_fumigaciones.pdf.erb',
+          render pdf: "listado_fumigaciones", :template => 'orden_fumigacions/listado_fumigaciones.pdf.erb',
           encoding: 'utf8',
           orientation: 'Landscape',
           page_size: 'A4',:print_media_type => true
@@ -65,7 +65,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
       format.html
       format.json
       format.pdf do
-        render pdf: "file_name", :template => 'orden_fumigacions/certificado.pdf.erb',
+        render pdf: "certificado-"+@orden_fumigacion.nro_certificado.to_s, :template => 'orden_fumigacions/certificado.pdf.erb',
         encoding: 'utf8',
         orientation: 'Portrait',
         page_size: 'A4',:print_media_type => true

@@ -1,19 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'seguimientos/new'
-  get 'seguimientos/index'
-  get 'seguimientos/show'
-  get 'seguimientos/create'
-  get 'seguimientos/edit'
-  get 'seguimientos/update'
-  get 'seguimientos/destroy'
-  get 'remitos/new'
-  get 'remitos/index'
-  get 'remitos/show'
-  get 'remitos/create'
-  get 'remitos/edit'
-  get 'remitos/update'
-  get 'remitos/destroy'
 root 'pages#home'
 
 devise_for :users
@@ -83,6 +69,9 @@ end
   get 'fajas/update'
   get 'fajas/destroy'
 
+  #DIARIO
+  get '/diario', to: 'diario#index'
+  
   #REMITOS
   get 'remitos/new'
   get '/remitos', to: 'remitos#index'

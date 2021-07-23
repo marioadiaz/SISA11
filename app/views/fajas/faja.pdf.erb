@@ -10,20 +10,20 @@
   </head>
 <body>
   <div >
-    <div style="position:absolute;left:95px;top:386px;" class="cls_002">
-      <span class="cls_002"><%=I18n.l(@orden_fumigacion.fecha_aplicacion, locale: :es, format: :long)%></span>
-      <span style="left: 101.571px; top: 327.141px; font-size: 18.1536px; font-family: sans-serif; transform: scaleX(0.872185);" dir="ltr">&nbsp</span>
-    </div>
-    <div style="position:absolute;left:926px;top:386px;" class="cls_002">
-      <span class="cls_002"><%=I18n.l(@orden_fumigacion.fecha_vencimiento, locale: :es, format: :long)%></span>
+    <div style="position:absolute;left:95px;top:395px;" class="cls_002">
+      <span class="cls_002"><%=(I18n.l(@orden_fumigacion.fecha_aplicacion, locale: :es, format: :long)).upcase!%></span>
       <span style="left: 101.571px; top: 327.141px; font-size: 18.1536px; font-family: sans-serif; transform: scaleX(0.872185);" dir="ltr">&nbsp</span>
       
     </div>
-    <div style="position:absolute;left:265px;top:775px" class="cls_003">
+    <div style="position:absolute;left:926px;top:395px;" class="cls_002">
+      <span class="cls_002"><%=(I18n.l(@orden_fumigacion.fecha_vencimiento, locale: :es, format: :long)).upcase!%></span>
+      <span style="left: 101.571px; top: 327.141px; font-size: 18.1536px; font-family: sans-serif; transform: scaleX(0.872185);" dir="ltr">&nbsp</span>
+    </div>
+    <div style="position:absolute;left:265px;top:790px" class="cls_003">
       <span class="cls_003"><%= @orden_fumigacion.cliente.nombre%> <%= @orden_fumigacion.cliente.apellido%> - <%= @orden_fumigacion.cliente.rubro%></span>
     </div>
-    <div style="position:absolute;left:189px;top:832px" class="cls_003">
-      <span class="cls_003"><%= @orden_fumigacion.cliente.domicilio%></span>
+    <div style="position:absolute;left:230px;top:847px" class="cls_003">
+      <span class="cls_003"><%= @orden_fumigacion.cliente.domicilio%> - <%= @orden_fumigacion.cliente.barrio%> - <%= @orden_fumigacion.cliente.localidad%></span>
     </div>
   </div>
 </body>
@@ -31,36 +31,42 @@
 <style type="text/css">
 
 span.cls_002{
-  font-family:Arial;
+  font-family:Arial,Arial;
   font-size:26px;
   color:#000000;
-  
   font-weight:bold;
+  font-style:normal;
+  text-decoration: none
 }
 
 div.cls_002{
-  font-family:Arial;
+  font-family:Arial,Arial;
   font-size:26px;
   color:#000000;
-  
   font-weight:bold;
+  font-style:normal;
+  text-decoration: none
+  text-align:justify;
+  text-justify:inter-word;
 }
 
 span.cls_003{
   font-family:Arial,Arial;
-  font-size:24px;
-  color:#008000;
+  font-size:25px;
+  color:#000000;
   font-weight:bold;
   font-style:normal;
   text-decoration: none
 }
 div.cls_003{
   font-family:Arial,Arial;
-  font-size:24px;
-  color:#008000;
+  font-size:25px;
+  color:#000000;
   font-weight:bold;
   font-style:normal;
   text-decoration: none
+  text-align:justify;
+  text-justify:inter-word;
 }
 
 </style>

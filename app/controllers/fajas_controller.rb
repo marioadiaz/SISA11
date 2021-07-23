@@ -15,10 +15,6 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
     end
   end
 
-  def new
-    @orden_fumigacion = OrdenFumigacion.new
-  end
-
   def show
     # No lo usamos en este modelo
     @orden_fumigacion = OrdenFumigacion.find(params[:id])
@@ -27,7 +23,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
       format.html
       format.json
       format.pdf do
-        render pdf: "file_name", :template => 'fajas/faja.pdf.erb', 
+        render pdf: "faja-"+@orden_fumigacion.nro_certificado.to_s, :template => 'fajas/faja.pdf.erb', 
         encoding: 'utf8',
         orientation: 'Landscape', 
         page_size: 'A4', :print_media_type => true
@@ -37,95 +33,6 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
     end
   end
 
-  def create
-    @orden_fumigacion = OrdenFumigacion.new(orden_fumigacion_params)
-
-    @orden_fumigacion.update baja: true
-
-    respond_to do |format|
-      if @orden_fumigacion.save!
-        format.html { redirect_to orden_fumigacions_path, notice: 'La orden_fumigacion fue exitosamente creada.' }
-        format.json { render :show, status: :created, location: @orden_fumigacion }
-      else
-        format.html { render :new }
-        format.json { render json: @orden_fumigacion.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def edit
-    @orden_fumigacion = OrdenFumigacion.find(params[:id])
-  end
-  
-  def update
-        @orden_fumigacion = OrdenFumigacion.find(params[:id])
-      if @orden_fumigacion.update(orden_fumigacion_params)
-        redirect_to orden_fumigacions_path
-        puts "---------------------@orden_fumigacion.tratamiento: "
-        puts @orden_fumigacion.tratamiento
-        puts "---------------------@orden_fumigacion.vector: "
-        puts @orden_fumigacion.vector
-        puts "---------------------@orden_fumigacion.veneno: "
-        puts @orden_fumigacion.veneno
-        puts "---------------------@orden_fumigacion.droga: "
-        puts @orden_fumigacion.droga
-        
-      else
-        render :edit
-      end
-  end
-
-  # Aparentemente el delete es mejor que destroy ya qye ejecuta una consulta sql directa
-  def delete
-    @orden_fumigacion = OrdenFumigacion.find(params[:id])
-    @orden_fumigacion.update baja: false
-    respond_to do |format|
-      format.html { redirect_to orden_fumigacions_url, notice: 'La orden_fumigacion fue eliminada.' }
-      format.json { head :no_content }
-    end
-  end
-
-  def add_cliente
-
-    @cliente = Cliente.find(params[:cliente_id])
-
-    if @cliente.present?
-
-        result = { apellido: @cliente.try(:apellido)}
-        puts "result: "
-        puts result
-        respond_to do |format|
-        if @cliente.valid?
-            format.json { render json: result }
-          else
-            format.json { render json: @cliente.errors.full_messages, status: :unprocessable_entity }
-          end
-        end
-    else
-      render json: { message: "El cliente no se encontró" }, status: :not_found
-    end
-  end
-
-  def add_tecnico
-
-    @tecnico = Tecnico.find(params[:tecnico_id])
-
-    if @tecnico.present?
-
-        result = { apellido: @tecnico.try(:apellido) }
-        puts "result: "
-        puts result
-        respond_to do |format|
-        if @tecnico.valid?
-            format.json { render json: result }
-          else
-            format.json { render json: @tecnico.errors.full_messages, status: :unprocessable_entity }
-          end
-        end
-    else
-      render json: { message: "El tecnico no se encontró" }, status: :not_found
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
