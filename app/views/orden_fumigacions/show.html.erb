@@ -37,7 +37,7 @@
             <%= @orden_fumigacion.cliente.tipo_cliente %>
           </h3>
           <h3>
-            <strong>Rubro o Razon Social:</strong>
+            <strong>Rubro:</strong>
             <%= @orden_fumigacion.cliente.rubro %>
           </h3>
           <h3>
@@ -95,10 +95,7 @@
             <strong>Fecha Vencimiento:</strong>
             <%= @orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %>
           </h3>
-          <h3>
-            <strong>Proximo Tratamiento:</strong>
-            <%= @orden_fumigacion.proximo_tratamiento.strftime("%d-%m-%Y") %>
-          </h3>
+          
           <h3>
             <strong>Importe:</strong>
             <%= @orden_fumigacion.importe%>

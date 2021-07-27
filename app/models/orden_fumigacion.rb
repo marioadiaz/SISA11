@@ -7,7 +7,7 @@ class OrdenFumigacion < ApplicationRecord
   validates :hora_aplicacion, presence: true
   validates :fecha_aplicacion, presence: true
   validates :fecha_vencimiento, presence: true
-  validates :proximo_tratamiento, presence: true
+  
 
   before_create { |orden_fumigacion| orden_fumigacion.superficie = orden_fumigacion.superficie.upcase }
 
