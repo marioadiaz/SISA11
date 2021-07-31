@@ -26,8 +26,8 @@ import "../stylesheets/application"
 /*****ESTO ES DE TEST***/
 document.addEventListener("turbolinks:load", function() {
 
-	$('[data-toggle="tooltip"]').tooltip()
-	$('[data-toggle="popover"]').popover()
+    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="popover"]').popover()
 
 });
 
@@ -57,6 +57,22 @@ ALTA DE ORDEN_FUMICAGION (CERTIFICADOS)
 ALTA DE QUEJAS
     rails generate model Queja orden_fumigacion:references nro_queja:integer fecha_queja:date observaciones_queja:string estado:string baja:boolean
 
+ALTA DE REMITOS 
+    rails generate model Remito orden_fumigacion:references nro_remito:string fecha_remito:date concepto:string importe:integer baja:boolean
+
+ALTA DE SEGUIMIENTO USUARIO
+    rails generate model Seguimiento usuario:string controlador:string registro_procesado:string accion:string baja:boolean
+
+AGREGAR CAMPO CODIFICACION A TECNICOS
+    rails generate migration AddCodificacionToTecnicos
+AGREGAR CAMPOS CODIFICACION A QUEJAS
+    rails generate migration AddFechaFinalizacionToQueja
+    rails generate migration AddObservacionFinalToQueja
+AGREGAR CAMPO ANULAR A ORDENFUMIGACIONS
+    rails generate migration AddAnuladoToOrdenFumigacions
+AGREGAR CAMPO CODIFICACION A QUEJAS
+    rails generate migration AddCodificacionToQueja
+
 CREACION Y MIGRACION DEL MODELO DE DATOS A LA BD
 
   rails db:create
@@ -71,6 +87,14 @@ AGREGAR CONTROLADORES
   rails generate controller Quejas new index show create edit update destroy
 
   rails generate controller OrdenFumigacions new index show create edit update destroy
+
+  rails generate controller Remitos new index show create edit update destroy
+
+  rails generate controller Seguimientos new index show create edit update destroy
+
+  rails generate controller Fajas new index show create edit update destroy
+
+  rails generate controller Diario index
 
 
 git init
@@ -93,3 +117,61 @@ function renderizar_modal() {
      <button type="button" OnClick="BuscarCliente()" id="BuscarCliente" class="btn btn-info" data-toggle="modal" data-target="#buscador_cliente">
           Buscar cliente
         </button>
+
+        
+                                  <% OrdenFumigacion::PERIODO.each do  |key_dias,valor_etiqueta| %>
+                                    <%if orden_fumigacion_proxtrat.to_i == key_dias.to_i %>
+                                        <option value = <%= sumarfechadias(orden_fumigacion_fechavenc,key_dias) %> selected ><%=valor_etiqueta%> - <%= sumarfechadias(orden_fumigacion_fechavenc,key_dias)%> </option>
+                                      <%else%>
+                                        <option value = <%= sumarfechadias(orden_fumigacion_fechavenc,key_dias) %> ><%=valor_etiqueta%> - <%= sumarfechadias(orden_fumigacion_fechavenc,key_dias)%>  </option>
+                                      <%end%>
+                                    
+                                  <%end%>
+
+                                   let proximo_tratamiento = new Date(<%= orden_fumigacion.proximo_tratamiento%>);
+                                  console.log("proximo_tratamiento: ", proximo_tratamiento);
+                                  var listaperiodos = {
+                                                        30: ["mensual"],
+                                                        60: ["bimestral"],
+                                                        90: ["trimestral"],
+                                                        120: ["cuatrimestral"],
+                                                      }
+                                  console.log("listaperiodos: ", listaperiodos);
+                                  console.log("listaperiodos[nro]: ", listaperiodos[30]);
+                                  var fech_venc = document.getElementById('orden_fumigacion_fecha_vencimiento').value;
+                                  console.log("fech_venc: ", fech_venc);
+                                  var prox_tratamiento = document.getElementById('orden_fumigacion_proximo_tratamiento_<%=orden_fumigacion_id*6%>');
+                                  console.log("valor: ", 'orden_fumigacion_proximo_tratamiento_<%=orden_fumigacion_id*6%>');
+                                  console.log("prox_tratamiento: ", prox_tratamiento);
+
+
+paginacion
+
+if$('.pagination').length
+  $(winddow).scroll ->
+    url =('.pagination .next page').attr('href')
+    if url && $(winddow).scrollTop() > $(document).height - $(winddow).height - 50 
+      console.log("Ok :D");   
+      $('.pagination').text('Buscando...')
+      $.getScript(url)
+
+
+<div class="form-group">
+                              <div class="col-md-8">
+                                <label for="estado">Estado</label>
+                                <%= f.input :estado, as: :select, :collection => ["En proceso", "Finalizado"], label: false, :default=> "En proceso", :input_html => { :class => "form-control"}%>
+                              </div>
+                          </div>
+
+<input class="ml-3 w-25" id="myInput" type="text" placeholder="Buscar..">
+
+
+            PID User    Application Client  Backend start   State   Wait event  Blocking PIDs
+4529    postgres    pgAdmin 4 - DB:SISA11_development   127.0.0.1   2021-07-30 15:00:35 -03 active      
+
+/usr/bin/pg_dump --file "/mnt/DATA-01/MDIAZ/10-PROYECTOS/SISA11/db/SISA11-TEST.sql" --host "localhost" --port "5432" --username "postgres" --no-password --verbose --format=t --blobs "SISA11_development"
+
+
+/usr/bin/pg_restore --host "localhost" --port "5432" --username "postgres" --no-password --role "postgres" --dbname "SISA11" --verbose "/mnt/DATA-01/MDIAZ/10-PROYECTOS/SISA11/db/SISA11-TEST.sql"
+
+pg_dump -i -h localhost -p 5432 -U postgres -t clientes -F p -b -v -f "/home/damian/backups/mitabla.sql" mibase
