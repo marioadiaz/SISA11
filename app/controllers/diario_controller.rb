@@ -21,7 +21,7 @@ class DiarioController < ApplicationController
       @orden_fumigacion = OrdenFumigacion.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    #Only allow a list of trusted parameters through.
     def orden_fumigacion_params
       params.require(:orden_fumigacion).permit(:cliente_id, :tecnico_id, :nro_ordfumigacion, :nro_certificado, :tipo_certificado, :fecha_aplicacion, :hora_aplicacion, :tratamiento, :vector, :superficie, :veneno, :droga, :observaciones_ordfumigacion, :fecha_vencimiento, :proximo_tratamiento, :importe, :estado, :baja)
   end
