@@ -4,62 +4,120 @@
   <div class="center-block form-inputs cliente-new-form">
 
     <div class="row">
-      <div class="col-sm">
-        <div >
+      <div class="col-md-12">
           <%= f.label  'Nro Certificado' %>
-          <%= collection_select :queja, :orden_fumigacion_id, OrdenFumigacion.where(baja: true).collect { |t| [ t.id, "#:#{t.nro_certificado}  -Fecha Aplicacion: #{t.fecha_aplicacion} - #{t.cliente.apellido} - #{t.cliente.nombre}" ] }, :first, :last, { prompt: "Seleccionar un Certificado" }, {class: "form-control"} %>
-        </div>
+          <%= collection_select :queja, :orden_fumigacion_id, OrdenFumigacion.where(baja: true).order("nro_certificado DESC").collect { |t| [ t.id, "#:#{t.nro_certificado}  -Fecha Aplicacion: #{t.fecha_aplicacion} - #{t.cliente.apellido} - #{t.cliente.nombre}" ] }, :first, :last, { prompt: "Seleccionar un Certificado" }, {class: "form-control"} %>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm">
-        <div>
-          <%= f.label  'Fecha Reclamo' %>
-          <%= f.input :fecha_queja, :class => 'datepicker', as: :date, html5: true, label: false, :input_html => { :class => "form-control"} %>
-        </div>
-        
-      </div>
-    </div>    
     <div class="row"> 
-      <div class="col-sm">
-        <div>
-          <%= f.input :observaciones_queja, :label => "Observaciones Reclamo", :as => :text, :input_html => { :class => "form-control", :rows => 7, :placeholder => "Observaciones"}%>
-        </div>
-        <div>
+      <div class="col-md-3">
           <script >
             //Cambia los valores de la cadena de proceso
             $(function () {
-              $("#queja_estado").change(function () {
-                
+              $("#queja_orden_fumigacion_id").change(function () {
+                 
                 var ValorSeleccionadoDropdown = $(this).val();
+                $(document).ready(function(){$("#usuario_inicia_id").val(<%=current_user.id%>)});
                 
-                if (ValorSeleccionadoDropdown == "En proceso"){
-                    document.getElementById('queja_observacion_final').style.display = "none";
-                    console.log("ValorSeleccionadoDropdown-en proceso-: ",ValorSeleccionadoDropdown);
-                  } else
-                    document.getElementById('queja_observacion_final').style.display = "block";
-                    console.log("ValorSeleccionadoDropdown-finalizado-: ",ValorSeleccionadoDropdown);
-                  {
-
-                }
-                });
               });
+            });
             //Fin de cambio los valores de la cadena de proceso
           </script>
-          <%= f.label  'Estado' %>
-          <%= f.input :estado, as: :select, :collection => ["En proceso", "Finalizado"], label: false, :default=> "En proceso", :input_html => { :class => "form-control"}%>
-        </div>
-        <div>
-          <%if (@queja.estado == "En proceso") or (@queja.estado.nil?)%>
-            <%= f.input :observacion_final, :label => false, :as => :text, :input_html => { :class => "form-control", :rows => 3, :placeholder => "Observacion final para cerrar el reclamo", :style=> "display: none"}%>
-          <%else%>  
-            <%= f.input :observacion_final, :label => false, :as => :text, :input_html => { :class => "form-control", :rows => 3, :placeholder => "Observacion final para cerrar el reclamo", :style=> "display: block"}%>
+          <%= f.label 'Generado por: '%> 
+          <div>
+            <strong  style="color:green;"><%=User.find_by(id: current_user.id).apellido%>  <%=User.find_by(id: current_user.id).nombre%></strong>
+          </div>
+          <%= f.input :usuario_inicia, :as => :hidden, :input_html => { :id => "usuario_inicia_id"} %>                            
+      </div>
+      <div class="col-md-4">
+          <%= f.label 'Fecha Reclamo' %>
+          <%= f.input :fecha_queja, :class => 'datepicker', as: :date, html5: true, label: false, :input_html => { :class => "form-control"} %>
+      </div>
+        <script >
+          // Multiselect dropdown quejas.codificacion -->
+          $(document).ready(function() {
+            $("#queja_codificacion_queja_id").multiselect({allSelectedText: 'Showing All'});
+          });
+          //Fin del efecto multiselect quejas.codificacion -->
 
-            
-          <%end%>
+          //Cambia los valores de la cadena de proceso
+          $(function () {
+            $("#queja_codificacion_queja_id").change(function () {
+              var ValorSeleccionadoDropdown = $(this).val();
+              $(document).ready(function(){$("#queja_id").val(ValorSeleccionadoDropdown)});
+            });
+          });
+          //Fin de cambio los valores de la cadena de proceso
+        </script>
+      <div class="col-md-5">
+        <%= f.label 'Codificacion' %>
+        <div>  
+          <select id= "queja_codificacion_queja_id" multiple="multiple" class="form-control">
+            <% Queja::HASHRECLAMOS.each do  |key_codificacion,elemento_codificacion| %>
+              <%if queja.codificacion ==  key_codificacion %>
+                <option value = <%= key_codificacion %> selected ><%= elemento_codificacion %></option>
+              <%else%>
+                <option value = <%= key_codificacion %> ><%= elemento_codificacion %></option>
+              <%end%>
+            <%end%>
+          </select>
         </div>
+        <%= f.input :codificacion, :as => :hidden, :input_html => { :id => "queja_id"} %>                            
+      </div>
+    </div>  
+    <div class="row"> 
+      <div class="col-md-12">
+        <%= f.input :observaciones_queja, :label => "Observaciones Reclamo", :as => :text, :input_html => { :class => "form-control", :rows => 7, :placeholder => "Observaciones"}%>
       </div>
     </div>
+    <div class="row">     
+      <div class="col-md-12">
+        <script >
+          //Cambia los valores de la cadena de proceso
+          $(function () {
+            $("#queja_estado").change(function () {
+               
+              var ValorSeleccionadoDropdown = $(this).val();
+                
+              if (ValorSeleccionadoDropdown == "En proceso"){
+                  
+                  document.getElementById('finalizado_id').style.display = "none";
+                  $(document).ready(function(){$("#usuario_finaliza_id").val("")});
+                  console.log("ValorSeleccionadoDropdown-en proceso-: ",ValorSeleccionadoDropdown);
+                } else {
+                  
+                  document.getElementById('finalizado_id').style.display = "block";
+                  $(document).ready(function(){$("#usuario_finaliza_id").val(<%=current_user.id%>)});
+                  console.log("ValorSeleccionadoDropdown-finalizado-: ",ValorSeleccionadoDropdown);
+                }
+              });
+            });
+          //Fin de cambio los valores de la cadena de proceso
+        </script>
+        <%= f.label  'Estado' %>
+        <%= f.input :estado, as: :select, :collection => ["En proceso", "Finalizado"], label: false, :default=> "En proceso", :input_html => { :class => "form-control"}%>
+      </div>
+    </div>    
+    <div class="row">     
+      <div class="col-md-12">
+        <%if (@queja.estado == "En proceso") or (@queja.estado.nil?)%>
+          <div id="finalizado_id" style="display: none;">
+            <%= f.input :observacion_final, :label => false, :as => :text, :input_html => { :class => "form-control", :rows => 3, :placeholder => "Observacion final para cerrar el reclamo", :style=> "display: block"}%>
+            <%= f.label 'Finalizado por: '%> <strong  style="color:green;"><%=User.find_by(id: current_user.id).apellido%>  <%=User.find_by(id: current_user.id).nombre%></strong>
+
+          </div>
+        <%else%>  
+          <div id="finalizado_id" style="display: block;">           
+            <%= f.input :observacion_final, :label => false, :as => :text, :input_html => { :class => "form-control", :rows => 3, :placeholder => "Observacion final para cerrar el reclamo", :style=> "display: block"}%>
+
+          </div>
+        <%end%>
+        
+        <%= f.input :usuario_finaliza, :as => :hidden, :input_html => { :id => "usuario_finaliza_id"} %>
+
+      </div>
+    </div>  
+  </div>
       
   <!-- div form-inputs cliente-new-form -->
    <div class= "d-flex my-3">

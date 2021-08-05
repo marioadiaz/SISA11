@@ -1,3 +1,4 @@
+e
 rails new SISA11 -d postgresql
 cd SISA11
 yarn add bootstrap jquery popper.js
@@ -70,6 +71,9 @@ AGREGAR CAMPOS CODIFICACION A QUEJAS
     rails generate migration AddObservacionFinalToQueja
 AGREGAR CAMPO ANULAR A ORDENFUMIGACIONS
     rails generate migration AddAnuladoToOrdenFumigacions
+
+AGREGAR CAMPOS CODIFICACION A QUEJAS
+    rails generate migration AddFechaCodificacionToQueja
 
 CREACION Y MIGRACION DEL MODELO DE DATOS A LA BD
 

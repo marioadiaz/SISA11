@@ -20,30 +20,20 @@ class Cliente < ApplicationRecord
 
     TIPO_CLIENTE = ['COMERCIAL', 'INDUSTRIAL', 'PARTICULAR', 'EDUCACIONAL', 'ESTATAL', 'OTROS']
 
-	def self.search1(hashcadena)
-		
-	
-		puts "---------------hashcadena: "
-        puts hashcadena
-     
-		if hashcadena 
-    		
-
-    		search = hashcadena.upcase
+	def self.search(cadena)
+    	if cadena 
+    		search = cadena.upcase
     		vectorsearch = search.split(" ")
     		puts "---------------vectorsearch.length(): "
         	puts vectorsearch.length()
         	puts "---------------vectorsearch: "
         	puts vectorsearch
-        else 
-        end
-        where('id <> ?',0)	
-	end    
+
+        	case vectorsearch.length()
+    	end
+    end
 
     def self.search(cadena)
-
-    	puts "---------------cadena: "
-        puts cadena
     	if cadena 
     		search = cadena.upcase
     		vectorsearch = search.split(" ")
@@ -83,12 +73,12 @@ class Cliente < ApplicationRecord
 	        	where('(nombre LIKE ? and apellido LIKE ?) or nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ? or localidad LIKE ?',  
 		        	"%#{vectorsearch[0]}" +" %" +"%#{vectorsearch[1]}%",
 		        	"%#{vectorsearch[2]}%",
-		        	"%#{vectorsearch[0]}%" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%" +" %" +"%#{vectorsearch[3]}%",
-		        	"%#{vectorsearch[0]}%" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%" +" %" +"%#{vectorsearch[3]}%",
-		        	"%#{vectorsearch[0]}%" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%" +" %" +"%#{vectorsearch[3]}%",
-		        	"%#{vectorsearch[0]}%" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%" +" %" +"%#{vectorsearch[3]}%",
-		        	"%#{vectorsearch[0]}%" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%" +" %" +"%#{vectorsearch[3]}%",
-		        	"%#{vectorsearch[0]}%" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%" +" %" +"%#{vectorsearch[3]}%")
+		        	"%#{vectorsearch[0]}" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%",
+		        	"%#{vectorsearch[0]}" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%",
+		        	"%#{vectorsearch[0]}" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%",
+		        	"%#{vectorsearch[0]}" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%",
+		        	"%#{vectorsearch[0]}" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%",
+		        	"%#{vectorsearch[0]}" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%")
 	        when 4
 
 	        	where('apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or localidad LIKE ?',  

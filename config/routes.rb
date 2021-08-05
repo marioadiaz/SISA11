@@ -31,7 +31,7 @@ end
   delete '/tecnico/:id', to: 'tecnicos#delete'
 
   #ORDEN FUMIGACION
-  get '/orden_fumigacions/proximas_fumigaciones'
+  get '/orden_fumigacions/proximas_fumigaciones', to: 'orden_fumigacions#proximas_fumigaciones', as: 'orden_fumigacions_proximas_fumigaciones'
   get '/orden_fumigacions/fumigaciones_por_cliente', to: 'orden_fumigacions#fumigaciones_por_cliente' 
 
   get '/orden_fumigacions', to: 'orden_fumigacions#index'
@@ -67,6 +67,7 @@ end
   
   #DIARIO
   get '/diario', to: 'diario#index'
+  get '/diario/proximas_fumigaciones', to: 'diario#proximas_fumigaciones', as: 'diario_proximas_fumigaciones'
 
   #REMITOS
   get 'remitos/new'

@@ -5,11 +5,14 @@
       <%= link_to "Crear Cliente", clientes_new_path, :class => 'btn btn-warning my-3'%>
       
       <%= form_tag clientes_path, :method => 'get', :id => "clientes_search" do %>
-        <%= text_field_tag :search, params[:search] %>
-        <%= submit_tag "Buscar", :name => nil, :class => 'btn btn-success my-3' %>
         
-      
+        <%= text_field_tag :search, params[:search] %>
+
+
+        <%= submit_tag "Buscar", :name => nil, :class => 'btn btn-success my-3' %>      
       <% end %>
+
+
 
 <table class=" table-striped table table-responsive">
   <tr>

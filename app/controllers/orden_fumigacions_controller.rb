@@ -48,10 +48,19 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
         puts @date_method
       else
         @orden_fumigacions = params[:search].present? ? OrdenFumigacion.where(@date_method => @start..@end) : OrdenFumigacion.none        
-      end
-
- 
-      
+        puts "en el else -----@date_method : "
+        puts @date_method
+        respond_to do |format|
+          format.html
+          format.js
+          format.pdf do
+              render pdf: "listado_fumigaciones", :template => 'diario/proximas_fumigaciones.pdf.erb',
+              encoding: 'utf8',
+              orientation: 'Landscape',
+              page_size: 'A4',:print_media_type => true
+          end
+        end
+      end      
   end
 
   def new
