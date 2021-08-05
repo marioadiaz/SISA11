@@ -28,9 +28,9 @@
     </div>  
   <div class="card-body">
       <ul class="list-unstyled mt-3 mb-4 text-center">
-      <h3>
+          <h3>
             <strong>Cliente:</strong>
-            <%= @orden_fumigacion.cliente.apellido %>
+            <%= @orden_fumigacion.cliente.nombre %> - <%= @orden_fumigacion.cliente.apellido %>
           </h3>
           <h3>
             <strong>Tipo Cliente:</strong>
@@ -39,6 +39,10 @@
           <h3>
             <strong>Rubro:</strong>
             <%= @orden_fumigacion.cliente.rubro %>
+          </h3>
+          <h3>
+            <strong>Datos domicilio:</strong>
+            <%= @orden_fumigacion.cliente.domicilio %> - <%= @orden_fumigacion.cliente.barrio %> - <%= @orden_fumigacion.cliente.localidad %>
           </h3>
           <h3>
             <strong>Tecnico:</strong>

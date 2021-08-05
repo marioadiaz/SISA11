@@ -49,7 +49,7 @@ $(document).ready(function(){
           <td></td>
         <%else%>
           <td><strong  style="color:green;"><%= queja.estado%></strong></td>
-          <td><strong  style="color:green;"><%= queja.fecha_finalizacion.strftime("%d-%m-%Y") %></strong></td>
+          <td><strong  style="color:green;"><%= queja.fecha_finalizacion%></strong></td>
         <%end%>
         <td><%= link_to 'Eliminar', queja, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Reclamo?" }  %>
         </td>

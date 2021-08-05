@@ -15,16 +15,35 @@ class Cliente < ApplicationRecord
 
 	before_update { |cliente| cliente.apellido = cliente.apellido.upcase }
 	before_update { |cliente| cliente.nombre = cliente.nombre.upcase }
-	before_update{ |cliente| cliente.rubro = cliente.rubro.upcase }
+	before_update { |cliente| cliente.rubro = cliente.rubro.upcase }
 	before_update { |cliente| cliente.domicilio = cliente.domicilio.upcase }
 
     TIPO_CLIENTE = ['COMERCIAL', 'INDUSTRIAL', 'PARTICULAR', 'EDUCACIONAL', 'ESTATAL', 'OTROS']
 
-    MUNICIPIO = ['AGAURAY', 'CAFAYATE', 'CERRILLOS', 'COLONIA SANTA ROSA', 'EMBARCACION', 'GENERAL GÜEMES','GENERAL MOSCONI','HIPOLITO YRIGOYEN','JOAQUIN V. GONZÁLEZ','LA MERCED','PICHANAL','SALVADOR MAZZA','ROSARIO DE LA FRONTERA','ROSARIO DE LERMA','SALTA','METÁN','SAN LORENZO','ORÁN','SANTIA VICTORIA ESTE','TARTAGAL']
+	def self.search1(hashcadena)
+		
+	
+		puts "---------------hashcadena: "
+        puts hashcadena
+     
+		if hashcadena 
+    		
 
-    MUNICIPIO_NN = ['AGUAS BLANCAS','ANGASTACO','ANIMANÁ','APLINARIO SARAVIA','CACHI','CAMPO QUIJANO','CAMPO SANTO','CHICONANA','CORONEL MOLDES','EL BORDO','CARRIL','GALPÓN','JARDÌN','POTRERO','QUEBRACHAL','TALA','BALLIVIÁN','GENERAL PIZARRO','IRUYA','ISLA DE CAÑAS','LA CALDERA','LA CANDELARIA','LA POMA','LA VIÑA','LAS LAJITAS','LOS TOLDOS','MOLINOS','NAZARENO','PAYOGASTA','RIO PIEDRAS','RIVADAVIA BANDA NORTE','RIVADAVIA BANDA SUR','SAN ANTONIO DE LOS COBRES','SAN CARLOS','SANTA VICTORIA OESTE','SECLANTÀS','TOLAR GRANDE','URUNDEL','VAQUEROS']
+    		search = hashcadena.upcase
+    		vectorsearch = search.split(" ")
+    		puts "---------------vectorsearch.length(): "
+        	puts vectorsearch.length()
+        	puts "---------------vectorsearch: "
+        	puts vectorsearch
+        else 
+        end
+        where('id <> ?',0)	
+	end    
 
     def self.search(cadena)
+
+    	puts "---------------cadena: "
+        puts cadena
     	if cadena 
     		search = cadena.upcase
     		vectorsearch = search.split(" ")
@@ -64,12 +83,12 @@ class Cliente < ApplicationRecord
 	        	where('(nombre LIKE ? and apellido LIKE ?) or nombre LIKE ? or apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or barrio LIKE ? or localidad LIKE ?',  
 		        	"%#{vectorsearch[0]}" +" %" +"%#{vectorsearch[1]}%",
 		        	"%#{vectorsearch[2]}%",
-		        	"%#{vectorsearch[0]}" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%",
-		        	"%#{vectorsearch[0]}" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%",
-		        	"%#{vectorsearch[0]}" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%",
-		        	"%#{vectorsearch[0]}" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%",
-		        	"%#{vectorsearch[0]}" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%",
-		        	"%#{vectorsearch[0]}" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%")
+		        	"%#{vectorsearch[0]}%" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%" +" %" +"%#{vectorsearch[3]}%",
+		        	"%#{vectorsearch[0]}%" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%" +" %" +"%#{vectorsearch[3]}%",
+		        	"%#{vectorsearch[0]}%" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%" +" %" +"%#{vectorsearch[3]}%",
+		        	"%#{vectorsearch[0]}%" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%" +" %" +"%#{vectorsearch[3]}%",
+		        	"%#{vectorsearch[0]}%" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%" +" %" +"%#{vectorsearch[3]}%",
+		        	"%#{vectorsearch[0]}%" +" %" +"%#{vectorsearch[1]}%" +" %" +"%#{vectorsearch[2]}%" +" %" +"%#{vectorsearch[3]}%")
 	        when 4
 
 	        	where('apellido LIKE ? or rubro LIKE ? or domicilio LIKE ? or localidad LIKE ?',  

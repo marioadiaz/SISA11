@@ -3,7 +3,7 @@ class OrdenFumigacion < ApplicationRecord
   belongs_to :tecnico
   has_many :quejas
 
-  validates :nro_certificado, presence: true, :numericality => { :greater_than_or_equal_to => 0 }
+  validates :nro_certificado, presence: true
   validates :hora_aplicacion, presence: true
   validates :fecha_aplicacion, presence: true
   validates :fecha_vencimiento, presence: true

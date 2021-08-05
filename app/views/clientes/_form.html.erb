@@ -37,22 +37,44 @@
       <div class="col-sm">
         <div>  <%= f.input :celular %> </div>
       </div>
-      
-      <div>
     </div>
       </div>
     <div class="row">
       <div class="col-sm">
         <%= f.input :calificacion %>
       </div>
-
       <div class="col-sm">
+        <%= f.input :rubro  ,label: "Razon Social"%>
+      </div>
+    </div>
+    <div class="row">
+      <script >
+        //Cambia los valores de la cadena de proceso
+          $(function () {
+            $("#cliente_tipo_cliente").change(function () {
+               
+              var ValorSeleccionadoDropdown = $(this).val();
+                
+              if (ValorSeleccionadoDropdown == "OTROS"){
+                  document.getElementById('select_tipo_cliente').style.display = "block";
+                  console.log("ValorSeleccionadoDropdown-en proceso-: ",ValorSeleccionadoDropdown);
+                } else {
+                  document.getElementById('select_tipo_cliente').style.display = "none";
+                  console.log("ValorSeleccionadoDropdown-finalizado-: ",ValorSeleccionadoDropdown);
+              }
+            });
+          });
+        //Fin de cambio los valores de la cadena de proceso
+      </script>      
+
+      <div id="field_tipo_cliente" style="display: block;" class="col-sm">
         <%= f.input :tipo_cliente, as: :select, collection: Cliente::TIPO_CLIENTE,  label:'Tipo Cliente', prompt: "Seleccione tipo de Cliente" %>
       </div>
       
-      <div class="col-sm">
-        <%= f.input :rubro  ,label: "Rubro"%>
+      <div id="select_tipo_cliente" style="display: none;" class="col-sm">
+        <%= f.input :tipo_cliente, :input_html => { :id => "usuario_finaliza_id"} %>
       </div>
+
     </div>
     <div class="row">
       <div class="col-sm">
