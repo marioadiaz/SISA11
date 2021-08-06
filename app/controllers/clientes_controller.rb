@@ -112,4 +112,6 @@ before_action :set_cliente, only: [:show, :edit, :update, :delete]
     def cliente_params
       params.require(:cliente).permit(:cuit, :rubro, :apellido, :nombre, :domicilio, :barrio, :localidad, :celular, :telefono, :correo, :observaciones_cliente, :tipo_cliente, :calificacion, :baja)
     end
+
+    
 end

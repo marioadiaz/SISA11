@@ -20,27 +20,27 @@ class Cliente < ApplicationRecord
 
     TIPO_CLIENTE = ['COMERCIAL', 'INDUSTRIAL', 'PARTICULAR', 'EDUCACIONAL', 'ESTATAL', 'OTROS']
 
-	def self.search1(hashcadena)
-		
-	
-		puts "---------------hashcadena: "
-        puts hashcadena
-     
-		if hashcadena 
-    		
-
-    		search = hashcadena.upcase
-    		vectorsearch = search.split(" ")
-    		puts "---------------vectorsearch.length(): "
-        	puts vectorsearch.length()
-        	puts "---------------vectorsearch: "
-        	puts vectorsearch
-        else 
-        end
-        where('id <> ?',0)	
-	end    
+    
 
     def self.search(cadena)
+      
+ 		if cadena.nil? 
+ 			puts "--------nil---------------cadena: "
+        	puts cadena
+ 			where('id <> ?',0)
+ 		else	
+ 			vectorsearch = cadena["nombre"].split(" ")
+ 			if vectorsearch > 0
+		   		nombre = cadena["nombre"].upcase
+	        	where(['nombre LIKE ?', nombre])
+        	end
+        end
+
+    end  
+
+
+
+    def self.search1(cadena)
 
     	puts "---------------cadena: "
         puts cadena
