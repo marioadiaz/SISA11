@@ -1,5 +1,6 @@
 class Cliente < ApplicationRecord
-	
+
+
 	has_many :remitos
 	
 	has_many :orden_fumigacions
@@ -20,20 +21,33 @@ class Cliente < ApplicationRecord
 
     TIPO_CLIENTE = ['COMERCIAL', 'INDUSTRIAL', 'PARTICULAR', 'EDUCACIONAL', 'ESTATAL', 'OTROS']
 
-    
-
-    def self.search(cadena)
+    def self.search(hashcadena)
       
- 		if cadena.nil? 
- 			puts "--------nil---------------cadena: "
-        	puts cadena
+ 		if hashcadena.nil? 
+ 			puts "--------nil---------------hashcadena[nombre]: "
+        	puts hashcadena
  			where('id <> ?',0)
- 		else	
- 			vectorsearch = cadena["nombre"].split(" ")
- 			if vectorsearch > 0
-		   		nombre = cadena["nombre"].upcase
-	        	where(['nombre LIKE ?', nombre])
-        	end
+ 		else
+ 			puts "--------not nil---------------hashcadena[nombre]: "
+        	puts hashcadena["nombre"].squeeze(' ').strip
+
+        	
+
+ 			nombre = ApplicationController.helpers.procesarelemento(hashcadena["nombre"])
+ 			apellido = ApplicationController.helpers.procesarelemento(hashcadena["apellido"])
+ 			domicilio = ApplicationController.helpers.procesarelemento(hashcadena["domicilio"])
+ 			barrio = ApplicationController.helpers.procesarelemento(hashcadena["barrio"])
+ 			localidad = ApplicationController.helpers.procesarelemento(hashcadena["localidad"])
+
+ 			clientes = Cliente.all
+
+ 			clientes = clientes.where(['nombre LIKE ?', "%#{nombre.upcase}%"]) if nombre.present?
+ 			clientes = clientes.where(['apellido LIKE ?', "%#{apellido.upcase}%"]) if apellido.present?
+ 			clientes = clientes.where(['domicilio LIKE ?', "%#{domicilio.upcase}%"]) if domicilio.present?
+ 			clientes = clientes.where(['barrio LIKE ?', "%#{barrio.upcase}%"]) if barrio.present?
+ 			clientes = clientes.where(['localidad LIKE ?', "%#{localidad.upcase}%"]) if localidad.present?
+
+ 			return clientes
         end
 
     end  
