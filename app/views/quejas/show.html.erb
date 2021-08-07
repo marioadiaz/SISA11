@@ -21,17 +21,9 @@
             <%= @queja.orden_fumigacion.nro_certificado %>
           </h3>
           <h3>
-            <strong>CUIT:</strong>
-            <%= @queja.orden_fumigacion.cliente.cuit %>
-          <h3>
-          <h3>
-            <strong>Nombre:</strong>
-            <%= @queja.orden_fumigacion.cliente.nombre %>
-          <h3>
-          <h3>
-            <strong>Apellido:</strong>
-            <%= @queja.orden_fumigacion.cliente.apellido %>
-          <h3>
+            <label>Cliente:</label>
+            <strong> <%= @queja.orden_fumigacion.cliente.cuit%> - <%= @queja.orden_fumigacion.cliente.nombre%> - <%= @queja.orden_fumigacion.cliente.apellido%> - <%= @queja.orden_fumigacion.cliente.rubro%></strong>
+          </h3>
           <h3>
             <strong>Tipo Cliente:</strong>
             <%= @queja.orden_fumigacion.cliente.tipo_cliente %>
@@ -44,7 +36,10 @@
             <strong>Fecha de reclamo:</strong>
             <%= @queja.fecha_queja%>
           </h3>
-          
+          <h3>
+            <strong>Generado por:</strong>
+            <strong  style="color:green;"><%=User.find_by(id: @queja.usuario_inicia.to_i).apellido%>  <%=User.find_by(id: @queja.usuario_inicia.to_i).nombre%></strong>
+          </h3>
           
           <%if @queja.estado == "En proceso"%>
             <h3>
@@ -66,6 +61,10 @@
 
               <strong>Fecha finalizacion:</strong>
               <strong style="color:green;"><%= @queja.fecha_finalizacion%></strong>
+            </h3>
+            <h3>
+              <strong>Finalizado por:</strong>
+              <strong  style="color:green;"><%=User.find_by(id: @queja.usuario_finaliza.to_i).apellido%>  <%=User.find_by(id: @queja.usuario_finaliza.to_i).nombre%></strong>
             </h3>
             <h3>
               <strong  style="color:green;">Observacion Final:</strong>
