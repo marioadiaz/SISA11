@@ -3,12 +3,15 @@
 
       <%= link_to 'Listado PDF', clientes_path(format: 'pdf'), :class => 'btn btn-success my-3' %>
       <%= link_to "Crear Cliente", clientes_new_path, :class => 'btn btn-warning my-3'%>
-      
-      <%= form_tag clientes_path, :method => 'get', :id => "clientes_search" do %>
-        <%= text_field_tag :search, params[:search] %>
-        <%= submit_tag "Buscar", :name => nil, :class => 'btn btn-success my-3' %>
+
+      <%= form_for :search, method: :get do |f| %>  
         
-      
+        <%= f.text_field :nombre, placeholder: "Nombre.." %>
+        <%= f.text_field :apellido, placeholder: "Apellido.." %>
+        <%= f.text_field :domicilio, placeholder: "Domicilio.." %>
+        <%= f.text_field :barrio, placeholder: "Barrio.." %>
+        <%= f.text_field :localidad, placeholder: "Localidad.." %>
+        <%= submit_tag "Buscar", :name => nil, :class => 'btn btn-success my-3' %>      
       <% end %>
 
 <table class=" table-striped table table-responsive">
@@ -17,7 +20,7 @@
       <th>CUIT</th>
       <th>Nombre</th>
       <th>Apellido</th>
-      <th>Rubro</th>
+      <th>Razon Social</th>
       <th>Domicilio</th>
       <th>Celular</th>
       <th>Telefono</th>

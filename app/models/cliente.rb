@@ -1,5 +1,6 @@
 class Cliente < ApplicationRecord
-	
+
+
 	has_many :remitos
 	
 	has_many :orden_fumigacions
@@ -20,27 +21,40 @@ class Cliente < ApplicationRecord
 
     TIPO_CLIENTE = ['COMERCIAL', 'INDUSTRIAL', 'PARTICULAR', 'EDUCACIONAL', 'ESTATAL', 'OTROS']
 
-	def self.search1(hashcadena)
-		
-	
-		puts "---------------hashcadena: "
-        puts hashcadena
-     
-		if hashcadena 
-    		
+    def self.search(hashcadena)
+      
+ 		if hashcadena.nil? 
+ 			puts "--------nil---------------hashcadena[nombre]: "
+        	puts hashcadena
+ 			where('id <> ?',0)
+ 		else
+ 			puts "--------not nil---------------hashcadena[nombre]: "
+        	puts hashcadena["nombre"].squeeze(' ').strip
 
-    		search = hashcadena.upcase
-    		vectorsearch = search.split(" ")
-    		puts "---------------vectorsearch.length(): "
-        	puts vectorsearch.length()
-        	puts "---------------vectorsearch: "
-        	puts vectorsearch
-        else 
+        	
+
+ 			nombre = ApplicationController.helpers.procesarelemento(hashcadena["nombre"])
+ 			apellido = ApplicationController.helpers.procesarelemento(hashcadena["apellido"])
+ 			domicilio = ApplicationController.helpers.procesarelemento(hashcadena["domicilio"])
+ 			barrio = ApplicationController.helpers.procesarelemento(hashcadena["barrio"])
+ 			localidad = ApplicationController.helpers.procesarelemento(hashcadena["localidad"])
+
+ 			clientes = Cliente.all
+
+ 			clientes = clientes.where(['nombre LIKE ?', "%#{nombre.upcase}%"]) if nombre.present?
+ 			clientes = clientes.where(['apellido LIKE ?', "%#{apellido.upcase}%"]) if apellido.present?
+ 			clientes = clientes.where(['domicilio LIKE ?', "%#{domicilio.upcase}%"]) if domicilio.present?
+ 			clientes = clientes.where(['barrio LIKE ?', "%#{barrio.upcase}%"]) if barrio.present?
+ 			clientes = clientes.where(['localidad LIKE ?', "%#{localidad.upcase}%"]) if localidad.present?
+
+ 			return clientes
         end
-        where('id <> ?',0)	
-	end    
 
-    def self.search(cadena)
+    end  
+
+
+
+    def self.search1(cadena)
 
     	puts "---------------cadena: "
         puts cadena
