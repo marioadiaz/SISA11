@@ -56,24 +56,39 @@
               var ValorSeleccionadoDropdown = $(this).val();
                 
               if (ValorSeleccionadoDropdown == "OTROS"){
+                  $(document).ready(function(){$("#tipo_cliente_id").val("")});
                   document.getElementById('select_tipo_cliente').style.display = "block";
                   console.log("ValorSeleccionadoDropdown-en proceso-: ",ValorSeleccionadoDropdown);
                 } else {
                   document.getElementById('select_tipo_cliente').style.display = "none";
                   console.log("ValorSeleccionadoDropdown-finalizado-: ",ValorSeleccionadoDropdown);
+                  $(document).ready(function(){$("#tipo_cliente_id").val(ValorSeleccionadoDropdown)});
               }
             });
           });
         //Fin de cambio los valores de la cadena de proceso
-      </script>      
 
-      <div id="field_tipo_cliente" style="display: block;" class="col-sm">
-        <%= f.input :tipo_cliente, as: :select, collection: Cliente::TIPO_CLIENTE,  label:'Tipo Cliente', prompt: "Seleccione tipo de Cliente" %>
-      </div>
+      </script>      
+      <%if Cliente::TIPO_CLIENTE.include?  @cliente.tipo_cliente%>
+        <div id="field_tipo_cliente" style="display: block;" class="col-sm">
+          <%= f.input :tipo_cliente, as: :select, collection: Cliente::TIPO_CLIENTE,  label:'Tipo Cliente', prompt: "Seleccione tipo de Cliente"%>
+        </div>
+        
+        <div id="select_tipo_cliente" style="display: none;" class="col-sm">
+          <%= f.input :tipo_cliente, :input_html => { :id => "tipo_cliente_id"} %>
+        </div>
+      <%else%>
+        <div id="field_tipo_cliente" style="display: block;" class="col-sm">
+          
+          <%= f.input :tipo_cliente, as: :select, collection: Cliente::TIPO_CLIENTE,  label:'Tipo Cliente', prompt: "Seleccione tipo de Cliente", selected: "OTROS" %>
+        </div>
+        
+        <div id="select_tipo_cliente" style="display: block;" class="col-sm">
+          <%= f.input :tipo_cliente, :input_html => { :id => "tipo_cliente_id"} %>
+        </div>
+      <%end%>
+
       
-      <div id="select_tipo_cliente" style="display: none;" class="col-sm">
-        <%= f.input :tipo_cliente, :input_html => { :id => "usuario_finaliza_id"} %>
-      </div>
 
     </div>
     <div class="row">
@@ -85,6 +100,6 @@
 
   <!-- div form-inputs cliente-new-form -->
    <div class= "d-flex my-3">
-     <div> <%= f.button :submit,name="Confirmar",:class => "btn btn-success"  %> </div>
+     <div> <%= f.button :submit,name="Confirmar", :class => "btn btn-success"  %> </div>
   </div>
 <% end %>

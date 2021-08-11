@@ -37,36 +37,41 @@
           <%= f.label 'Fecha Reclamo' %>
           <%= f.input :fecha_queja, :class => 'datepicker', as: :date, html5: true, label: false, :input_html => { :class => "form-control"} %>
       </div>
-        <script >
-          // Multiselect dropdown quejas.codificacion -->
-          $(document).ready(function() {
-            $("#queja_codificacion_queja_id").multiselect({allSelectedText: 'Showing All'});
-          });
-          //Fin del efecto multiselect quejas.codificacion -->
+      <script >
+        // Multiselect dropdown queja.codificacion -->
+        $(document).ready(function() {
+          $("#queja_codificacion_queja_id").multiselect({allSelectedText: 'Showing All'});
+        });
+        //Fin del efecto multiselect orden_trabajo.post
 
           //Cambia los valores de la cadena de proceso
           $(function () {
             $("#queja_codificacion_queja_id").change(function () {
               var ValorSeleccionadoDropdown = $(this).val();
               $(document).ready(function(){$("#queja_id").val(ValorSeleccionadoDropdown)});
+              console.log("ValorSeleccionadoDropdown: ",ValorSeleccionadoDropdown);
             });
           });
           //Fin de cambio los valores de la cadena de proceso
-        </script>
+      </script>
       <div class="col-md-5">
         <%= f.label 'Codificacion' %>
-        <div>  
-          <select id= "queja_codificacion_queja_id" multiple="multiple" class="form-control">
-            <% Queja::HASHRECLAMOS.each do  |key_codificacion,elemento_codificacion| %>
-              <%if @queja.codificacion ==  key_codificacion %>
-                <option value = <%= key_codificacion %> selected ><%= elemento_codificacion %></option>
-              <%else%>
-                <option value = <%= key_codificacion %> ><%= elemento_codificacion %></option>
+        <div> 
+            <select id= "queja_codificacion_queja_id" multiple="multiple" class="form-control">
+              <% Queja::HASHRECLAMOS.each do  |key_codificacion,elemento_codificacion| %>
+                <%puts "edit cadenatovector  queja.codificacion: " %>
+                  <%puts cadenatovector(@queja.codificacion) %>
+                  <%puts "key_codificacion: " %>
+                  <%puts key_codificacion %>
+                <%if cadenatovector(@queja.codificacion).include?  key_codificacion %>
+                  <option value = <%= key_codificacion %> selected ><%= elemento_codificacion %></option>
+                <%else%>
+                  <option value = <%= key_codificacion %> ><%= elemento_codificacion %></option>
+                <%end%>
               <%end%>
-            <%end%>
-          </select>
+            </select>
         </div>
-        <%= f.input :codificacion, :as => :hidden, :input_html => { :id => "queja_id"} %>                            
+        <%= f.input :codificacion, :as => :hidden, :input_html => { :id => "queja_id"} %>
       </div>
     </div>  
     <div class="row"> 
