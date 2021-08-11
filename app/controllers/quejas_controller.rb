@@ -26,6 +26,7 @@ before_action :set_queja, only: [:show, :edit, :update, :delete]
   def create
     @queja = Queja.new(queja_params)
 
+    
     @queja.update baja: true
 
     respond_to do |format|
@@ -99,6 +100,6 @@ before_action :set_queja, only: [:show, :edit, :update, :delete]
 
     # Only allow a list of trusted parameters through.
     def queja_params
-      params.require(:queja).permit(:orden_fumigacion_id, :nro_queja, :fecha_queja, :fecha_finalizacion, :observaciones_queja, :observacion_final, :estado, :baja)
+      params.require(:queja).permit(:orden_fumigacion_id, :nro_queja, :fecha_queja, :fecha_finalizacion, :codificacion, :observaciones_queja, :observacion_final, :estado, :usuario_inicia, :usuario_finaliza, :cliente_conforme, :revisado_gerencia, :baja)
     end
 end
