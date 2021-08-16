@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="card-header d-flex justify-content-between">
+    <%if @note.estado == "En proceso"%>
+      <div><h2 class="my-0 font-size:8vw"><strong style="color:red;">Detalle reclamo</strong></h2></div>
+    <%else%>
+      <div><h2 class="my-0 font-size:8vw"><strong style="color:green;">Detalle reclamo</strong></h2></div>
+    <%end%>   
+    <div class="col-md-8"> 
+        <%= link_to 'Editar', edit_note_path, class: "btn btn-primary mr-3" %>
+        <%= link_to 'Eliminar', note_path(@note), method: :delete, :class => 'btn btn-danger', :target => 'blank', data: { confirm: "¿Estás seguro/a de eliminar el Reclamo?" } %>
+    </div>
+  </div>
+  <div class="card-body">
+      <ul class="list-unstyled mt-3 mb-4 text-center">
+          <h3>
+            <strong>Nro Reclamo:</strong>
+            <%= @note.id%>
+          </h3>
+          <h3>
+            <strong>Iniciado por:</strong>
+            <%=User.find_by(id: @note.usuario_inicia.to_i).apellido%>  <%=User.find_by(id: @note.usuario_inicia.to_i).nombre%>
+          </h3>
+          <h3>
+            <strong>Fecha Inicio:</strong>
+            <%= @note.fecha_inicio%>
+          </h3>
+          
+          <%if @note.estado == "En proceso"%>
+            <h3>
+              <strong style="color:red;">Descripcion:</strong>
+              <%= @note.descripcion_novedad%>
+            </h3>
+            <h3>
+              <strong>Estado:</strong>
+              <strong style="color:red;"><%= @note.estado%></strong>
+            </h3>
+          <%else%>
+            <h3>
+              <strong>Observaciones:</strong>
+              <%= @note.descripcion_novedad%>
+            </h3>
+            <h3>
+              <strong>Estado:</strong>
+              <strong style="color:green;"><%= @note.estado%></strong> 
+
+              <strong>Fecha finalizacion:</strong>
+              <strong style="color:green;"><%= @note.fecha_finalizacion%></strong>
+            </h3>
+            <h3>
+              <strong>Finalizado por:</strong>
+              <strong  style="color:green;"><%=User.find_by(id: @note.usuario_finaliza.to_i).apellido%>  <%=User.find_by(id: @note.usuario_finaliza.to_i).nombre%></strong>
+            </h3>
+
+          <%end%>
+      </ul>
+    <a class="btn btn-lg btn-block btn-dark" href="/notes">Atrás</a>
+  </div>
+</div>
+
+

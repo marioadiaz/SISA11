@@ -44,7 +44,7 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link"href="/clientes">
-                    <i class="fas fa-user fa-tachometer-alt"></i>
+                    <i class="fa fa-database"></i>
                     <span >Clientes</span></a>
             </li>
             <li class="nav-item active">
@@ -67,10 +67,23 @@
 
             <li class="nav-item active">
                 <a class="nav-link"href="/quejas">
-              <i class="fas fa-id-badge"></i>
+              <i class="fa fa-exclamation-triangle"></i>
                     <span >Reclamos</span></a>
             </li>
 
+            <%if registrospendientes%>
+                <li class="nav-item active">
+                    <a class="nav-link"href="/notes">
+                  <i class="fa fa-sticky-note"></i>
+                        <span class="p-3 mb-2 bg-warning text-dark">Novedades</span></a>
+                </li>
+            <%else%>
+                <li class="nav-item active">
+                    <a class="nav-link"href="/notes">
+                  <i class="fa fa-sticky-note"></i>
+                        <span >Novedadess</span></a>
+                </li>
+            <%end%>
 
             <!-- Divider -->
             <hr class="sidebar-divider">

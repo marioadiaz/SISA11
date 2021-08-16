@@ -1,0 +1,52 @@
+<div class="container">
+<h1>Listado de Novedades</h1>
+<%= link_to 'Listado PDF', notes_path(format: 'pdf'), :class => 'btn btn-success my-3' %>
+<%= link_to "Generar Novedad", notes_new_path, :class => 'btn btn-warning my-3'%>
+  <script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  </script>
+  <input class="ml-3 w-50" id="myInput" type="text" placeholder="Buscar..">
+<table class="table table-responsive">
+  <tr>
+    <thead  class="thead-dark">
+   	  <th>#Nov.</th>
+      <th>#Turno</th>
+   	  <th>F. Inicio</th>
+      <th>Descripcion</th>
+      <th>Estado</th>
+      <th>F. Final.</th>
+      <th colspan="3"></th>
+      <th colspan="3"></th>
+    </thead>
+  </tr>
+
+  <tbody id="myTable">
+  <% @notes.each do |note| %>
+  	<%if note.baja == true %>
+	  	<tr>
+        <td><%= note.id %></td>
+        <td><%= note.turno %></td>
+        <td><%= note.fecha_inicio %></td>
+        <td><%= link_to "#{note.descripcion_novedad}", note_path(note) %></td>
+        <%if note.estado == "En proceso"%>
+          <td><strong  style="color:red;"><%= note.estado%></strong></td>
+          <td></td>
+        <%else%>
+          <td><strong  style="color:green;"><%= note.estado%></strong></td>
+          <td><strong  style="color:green;"><%= note.fecha_finalizacion %></strong></td>
+        <%end%>
+	      <td><%= link_to 'Eliminar', note, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar la novedad?" }  %>
+	      </td>
+	  	</tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+</div>

@@ -44,6 +44,17 @@
             <strong>Datos domicilio:</strong>
             <%= @orden_fumigacion.cliente.domicilio %> - <%= @orden_fumigacion.cliente.barrio %> - <%= @orden_fumigacion.cliente.localidad %>
           </h3>
+          <%if (@orden_fumigacion.cliente.observaciones_cliente.length > 0) && (@orden_fumigacion.cliente.observaciones_cliente !=" ")%>
+            <h3 class="p-3 mb-2 bg-info text-white">
+              <strong>Observaciones Cliente:</strong>
+              <%= @orden_fumigacion.cliente.observaciones_cliente%>
+            </h3>
+          <%else%>
+            <h3>
+              <strong>Observaciones Cliente:</strong>
+              <%= @orden_fumigacion.cliente.observaciones_cliente%>
+            </h3>
+          <%end%>
           <h3>
             <strong>Tecnico:</strong>
             <%= @orden_fumigacion.tecnico.apellido %>
@@ -106,9 +117,10 @@
           </h3>
           
           <h3>
-            <strong>Observaciones:</strong>
+            <strong>Observaciones Cert:</strong>
             <%= @orden_fumigacion.observaciones_ordfumigacion%>
           </h3>
+
       </ul>
             
       

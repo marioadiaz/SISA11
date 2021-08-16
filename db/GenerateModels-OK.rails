@@ -64,6 +64,9 @@ ALTA DE REMITOS
 ALTA DE SEGUIMIENTO USUARIO
     rails generate model Seguimiento usuario:string controlador:string registro_procesado:string accion:string baja:boolean
 
+ALTA DE NOVEDADES
+    rails generate model Note usuario_inicia:string turno:string fecha_inicio descripcion_novedad:string usuario_finaliza:string finalizado:boolean baja:boolean
+
 AGREGAR CAMPO CODIFICACION A TECNICOS
     rails generate migration AddCodificacionToTecnicos
 AGREGAR CAMPOS CODIFICACION A QUEJAS
@@ -74,6 +77,9 @@ AGREGAR CAMPO ANULAR A ORDENFUMIGACIONS
 
 AGREGAR CAMPOS CODIFICACION A QUEJAS
     rails generate migration AddFechaCodificacionToQueja
+
+AGREGAR CAMPOS FECHAFINALIZACION A NOTES
+    rails generate migration AddFechaFinalizacionToNote
 
 CREACION Y MIGRACION DEL MODELO DE DATOS A LA BD
 
@@ -97,6 +103,8 @@ AGREGAR CONTROLADORES
   rails generate controller Fajas new index show create edit update destroy
 
   rails generate controller Diario index
+
+  rails generate controller Notes new index show create edit update destroy
 
 
 git init

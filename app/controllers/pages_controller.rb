@@ -11,5 +11,6 @@ class PagesController < ApplicationController
     @seguimiento.accion = Time.now.to_s + " "
     @seguimiento.save
 
+
   end
 end

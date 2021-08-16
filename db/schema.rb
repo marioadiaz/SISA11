@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_01_154646) do
+ActiveRecord::Schema.define(version: 2021_08_15_143347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,11 +34,24 @@ ActiveRecord::Schema.define(version: 2021_08_01_154646) do
     t.string "localidad"
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.string "usuario_inicia"
+    t.string "turno"
+    t.string "fecha_inicio"
+    t.string "descripcion_novedad"
+    t.string "usuario_finaliza"
+    t.string "fecha_finalizacion"
+    t.string "estado"
+    t.boolean "baja"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "orden_fumigacions", force: :cascade do |t|
     t.bigint "cliente_id", null: false
     t.bigint "tecnico_id", null: false
     t.integer "nro_ordfumigacion"
-    t.integer "nro_certificado"
+    t.string "nro_certificado"
     t.string "tipo_certificado"
     t.date "fecha_aplicacion"
     t.time "hora_aplicacion"
@@ -74,7 +87,7 @@ ActiveRecord::Schema.define(version: 2021_08_01_154646) do
     t.string "codificacion"
     t.string "usuario_inicia"
     t.string "usuario_finaliza"
-    t.string "cliente_conforme"
+    t.boolean "cliente_conforme"
     t.boolean "revisado_gerencia"
     t.index ["orden_fumigacion_id"], name: "index_quejas_on_orden_fumigacion_id"
   end
@@ -125,8 +138,8 @@ ActiveRecord::Schema.define(version: 2021_08_01_154646) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "apellido"
     t.string "nombre"
+    t.string "apellido"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

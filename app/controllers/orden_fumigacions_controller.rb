@@ -49,7 +49,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
         puts "en el if -----params[:search] : "
         puts params[:search]
       else
-        @orden_fumigacions = params[:search].present? ? OrdenFumigacion.where(@date_method => @start..@end) : OrdenFumigacion.none        
+        @orden_fumigacions = params[:search].present? ? OrdenFumigacion.where(@date_method => @start..@end).order("nro_certificado DESC") : OrdenFumigacion.none        
         puts "en el else -----@date_method : "
         puts @date_method
         puts "en el else -----params[:search] : "
