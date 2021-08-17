@@ -33,14 +33,17 @@
             <%= @queja.orden_fumigacion.cliente.rubro %>
           <h3>
           <h3>
+            <strong>Generado por:</strong>
+            <strong  style="color:green;"><%=User.find_by(id: @queja.usuario_inicia.to_i).apellido%>  <%=User.find_by(id: @queja.usuario_inicia.to_i).nombre%></strong>
+          </h3>
+          <h3>
             <strong>Fecha de reclamo:</strong>
             <%= @queja.fecha_queja%>
           </h3>
           <h3>
-            <strong>Generado por:</strong>
-            <strong  style="color:green;"><%=User.find_by(id: @queja.usuario_inicia.to_i).apellido%>  <%=User.find_by(id: @queja.usuario_inicia.to_i).nombre%></strong>
+            <strong>Codificacion:</strong>
+            <%= Queja::HASHRECLAMOS[@queja.codificacion]%>
           </h3>
-          
           <%if @queja.estado == "En proceso"%>
             <h3>
               <strong style="color:red;">Observaciones:</strong>

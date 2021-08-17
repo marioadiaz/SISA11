@@ -116,6 +116,7 @@
         <%else%>  
           <div id="finalizado_id" style="display: block;">           
             <%= f.input :observacion_final, :label => false, :as => :text, :input_html => { :class => "form-control", :rows => 3, :placeholder => "Observacion final para cerrar el reclamo", :style=> "display: block"}%>
+            <%= f.input :fecha_finalizacion, :class => 'datepicker', as: :date, :as => :hidden, html5: true, label: false, :input_html => { :value => Date.today,:class => "form-control"} %>
 
           </div>
         <%end%>

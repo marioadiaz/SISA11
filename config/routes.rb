@@ -61,6 +61,16 @@ end
   put '/queja/:id', to: 'quejas#update'
   delete '/queja/:id', to: 'quejas#delete'
   
+  #NOVEDADES
+  get '/notes', to: 'notes#index'
+  get 'notes/new', to: 'notes#new'
+  post '/notes', to: 'notes#create'
+  get '/note/:id', to: 'notes#show', as: 'note'
+  get '/notes/:id/edit', to: 'notes#edit', as: 'edit_note'
+  patch '/note/:id', to: 'notes#update'
+  put '/note/:id', to: 'notes#update'
+  delete '/note/:id', to: 'notes#delete'
+
   #FAJAS
   get '/fajas', to: 'fajas#index'
   get '/faja/:id', to: 'fajas#show', as: 'faja'
