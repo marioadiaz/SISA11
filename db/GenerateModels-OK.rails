@@ -57,6 +57,9 @@ ALTA DE ORDEN_FUMICAGION (CERTIFICADOS)
 ALTA DE QUEJAS
     rails generate model Queja orden_fumigacion:references nro_queja:integer fecha_queja:date observaciones_queja:string estado:string baja:boolean
 
+AGREGAR CAMPO ULTIMAOF A ORDENFUMIGACIONS
+    rails generate migration AddUltimaOrdenFumigacionToOrdenFumigacions
+
 CREACION Y MIGRACION DEL MODELO DE DATOS A LA BD
 
   rails db:create
