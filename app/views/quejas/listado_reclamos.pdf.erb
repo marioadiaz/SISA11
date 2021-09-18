@@ -27,7 +27,8 @@
             <th>Cliente</th>
             <th>Tecnico</th>
             <th>Fecha</th>
-            <th>Observaciones</th>
+            <th>Codificacion</th>
+            <th>Estado</th>
           </thead>
         </tr>
           <tbody>
@@ -39,7 +40,8 @@
                   <td><%= queja.orden_fumigacion.cliente.apellido %></td>
                   <td><%= queja.orden_fumigacion.tecnico.apellido %></td>
                   <td><%= queja.fecha_queja %></td>
-                  <td><%= queja.observaciones_queja %></td>
+                  <td><%= queja.codificacion %></td>
+                  <td><%= queja.estado %></td>
                 </tr>
               <% end %>
             <% end %>
