@@ -1,39 +1,32 @@
 <div class="container">
-  <div class="d-flex justify-content-between">
+  
     <h1>Listado Fumigaciones</h1>
-  </div>
-<%= link_to 'Listado Hoy', diario_path(format: 'pdf'), class: "btn btn-secondary",:target => 'blank'%>
-
-<%= link_to 'Listado PDF', orden_fumigacions_path(format: 'pdf'), :class => 'btn btn-success my-3' %>
-
-<script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
-
-
-<input class="ml-3 w-25" id="myInput" type="text" placeholder="Buscar certificado..">
+        <%= link_to 'Listado Hoy', diario_path(format: 'pdf'), class: "btn btn-secondary",:target => 'blank'%>
+        <%= link_to 'Listado PDF', orden_fumigacions_path(format: 'pdf'), :class => 'btn btn-success my-3' %>
+        <%= form_for :search, method: :get do |f| %>  
+          <%= f.text_field :nro_certificado, placeholder: "#Cert. .. " %>
+          <%= f.text_field :cli_nombre, placeholder: "Nombre cliente.." %>
+          <%= f.text_field :cli_apellido, placeholder: "Apellido cliente.." %>
+          <%= f.text_field :cli_rubro, placeholder: "Rubro cliente.." %>
+          <%= f.text_field :tec_codificacion, placeholder: "Cod. tecnico.." %>
+          <%= f.text_field :tec_apellido, placeholder: "Apellido tecnico.." %>
+          <%= f.text_field :importe, placeholder: "Importe.." %>
+        <%= submit_tag "Buscar", :name => nil, :class => 'btn btn-success my-3' %>      
+      <% end %>
 
 <table class=" table-striped table table-responsive">
   <tr>
     <thead  class="thead-dark">
       <th>#Cert.</th>
+      <th>Nombre</th>
       <th>Cliente</th>
+      <th>Rubro</th>
+      <th>Cod.</th>
       <th>Tecnico</th>
-      <th>Tratamiento</th>
-      <th>Droga</th>
       <th>Importe</th>
       <th>F. Aplicacion</th>
-      <th>F. Vencimiento</th>
-      
+      <th>F. Vencimiento</th>     
       <th colspan="3"></th>
-
     </thead>
   </tr>
    <tbody id="myTable" >
@@ -42,10 +35,11 @@ $(document).ready(function(){
         <%if orden_fumigacion.anulado == true %>
           <tr>
             <td><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
+            <td><%= orden_fumigacion.cliente.nombre%></td>
             <td><%= orden_fumigacion.cliente.apellido%></td>
+            <td><%= orden_fumigacion.cliente.rubro%></td>
+            <td><%= orden_fumigacion.tecnico.codificacion %></td>
             <td><%= orden_fumigacion.tecnico.apellido %></td>
-            <td><%= orden_fumigacion.tratamiento %></td>
-            <td><%= orden_fumigacion.droga %></td>
             <td><%= orden_fumigacion.importe %></td>
             <td><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
             <td><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
@@ -57,10 +51,10 @@ $(document).ready(function(){
         <% else %>
           <tr >
             <td ><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.cliente.nombre%></td>
             <td style="background-color:#ff0000;"><%= orden_fumigacion.cliente.apellido%></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.tecnico.codificacion %></td>
             <td style="background-color:#ff0000;"><%= orden_fumigacion.tecnico.apellido %></td>
-            <td style="background-color:#ff0000;"><%= orden_fumigacion.tratamiento %></td>
-            <td style="background-color:#ff0000;"><%= orden_fumigacion.droga %></td>
             <td style="background-color:#ff0000;"><%= orden_fumigacion.importe %></td>
             <td style="background-color:#ff0000;"><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
             <td style="background-color:#ff0000;"><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
@@ -74,4 +68,5 @@ $(document).ready(function(){
     <% end %>
 </tbody>
 </table>
+<%= will_paginate @orden_fumigacions%>
 </div>

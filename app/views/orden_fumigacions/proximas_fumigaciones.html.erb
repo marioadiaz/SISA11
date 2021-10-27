@@ -31,10 +31,11 @@
   <tr>
     <thead  class="thead-dark">
       <th>#Cert.</th>
+      <th>Nombre</th>
       <th>Cliente</th>
+      <th>Rubro</th>
+      <th>Cod.</th>
       <th>Tecnico</th>
-      <th>Tratamiento</th>
-      <th>Droga</th>
       <th>Importe</th>
       <th>F. Aplicacion</th>
       <th>F. Vencimiento</th>
@@ -49,14 +50,15 @@
         <%if orden_fumigacion.anulado == true %>
           <tr>
             <td><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
+            <td><%= orden_fumigacion.cliente.nombre%></td>
             <td><%= orden_fumigacion.cliente.apellido%></td>
+            <td><%= orden_fumigacion.cliente.rubro%></td>
+            <td><%= orden_fumigacion.tecnico.codificacion %></td>
             <td><%= orden_fumigacion.tecnico.apellido %></td>
-            <td><%= orden_fumigacion.tratamiento %></td>
-            <td><%= orden_fumigacion.droga %></td>
             <td><%= orden_fumigacion.importe %></td>
             <td><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
             <td><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
-            
+
             <td>
                 <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
             </td>
@@ -64,10 +66,11 @@
         <% else %>
           <tr >
             <td ><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.cliente.nombre%></td>
             <td style="background-color:#ff0000;"><%= orden_fumigacion.cliente.apellido%></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.cliente.rubro%></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.tecnico.codificacion %></td>
             <td style="background-color:#ff0000;"><%= orden_fumigacion.tecnico.apellido %></td>
-            <td style="background-color:#ff0000;"><%= orden_fumigacion.tratamiento %></td>
-            <td style="background-color:#ff0000;"><%= orden_fumigacion.droga %></td>
             <td style="background-color:#ff0000;"><%= orden_fumigacion.importe %></td>
             <td style="background-color:#ff0000;"><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
             <td style="background-color:#ff0000;"><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>

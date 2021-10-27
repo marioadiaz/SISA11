@@ -2,7 +2,10 @@ class OrdenFumigacionsController < ApplicationController
 before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, :anular, :delete, :copy]
 
   def index
-    @orden_fumigacions = OrdenFumigacion.all.order("nro_certificado DESC")
+    #@orden_fumigacions = OrdenFumigacion.all.order("nro_certificado DESC")
+    @orden_fumigacions = OrdenFumigacion.search(params[:search]).paginate(:page => params[:page], :per_page => 50 )
+                         .order("nro_certificado DESC")
+    
     respond_to do |format|
       format.html
       format.js
