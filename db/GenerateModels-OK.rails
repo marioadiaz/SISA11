@@ -59,6 +59,8 @@ ALTA DE QUEJAS
 
 AGREGAR CAMPO ULTIMAOF A ORDENFUMIGACIONS
     rails generate migration AddUltimaOrdenFumigacionToOrdenFumigacions
+AGREGAR CAMPOS REFUERZO Y REPASO A ORDENFUMIGACIONS
+    rails generate migration AddRefuerzoyRepasoOrdfumigacionToOrdenFumigacions
 
 CREACION Y MIGRACION DEL MODELO DE DATOS A LA BD
 
