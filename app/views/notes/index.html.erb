@@ -16,9 +16,9 @@
 <table class="table table-responsive">
   <tr>
     <thead  class="thead-dark">
-   	  <th>#Nov.</th>
+      <th>#Nov.</th>
       <th>#Turno</th>
-   	  <th>F. Inicio</th>
+      <th>F. Inicio</th>
       <th>Descripcion</th>
       <th>Estado</th>
       <th>F. Final.</th>
@@ -29,8 +29,8 @@
 
   <tbody id="myTable">
   <% @notes.each do |note| %>
-  	<%if note.baja == true %>
-	  	<tr>
+    <%if note.baja == true %>
+      <tr>
         <td><%= note.id %></td>
         <td><%= note.turno %></td>
         <td><%= note.fecha_inicio %></td>
@@ -42,9 +42,9 @@
           <td><strong  style="color:green;"><%= note.estado%></strong></td>
           <td><strong  style="color:green;"><%= note.fecha_finalizacion %></strong></td>
         <%end%>
-	      <td><%= link_to 'Eliminar', note, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar la novedad?" }  %>
-	      </td>
-	  	</tr>
+        <td><%= link_to 'Eliminar', note, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar la novedad?" }  %>
+        </td>
+      </tr>
     <% end %>
   <% end %>
   </tbody>
