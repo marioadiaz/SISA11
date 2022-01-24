@@ -202,9 +202,34 @@
                                 </div>
                               </div>
                           </div>
+
                           <div class="form-group">
                               <div class="col-md-8">
                                   <%= f.input :importe, :label => false, :input_html => { :class => "form-control", :placeholder => "Importe"}%>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :fecha_refuerzo, :class => 'datepicker', as: :date, html5: true, :input_html => { :class => "form-control", :id => "orden_fumigacion_fecha_refuerzo"} %> 
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :importe_refuerzo, :label => false, :input_html => { :class => "form-control", :placeholder => "Importe Refuerzo"}%>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :fecha_repaso, :class => 'datepicker', as: :date, html5: true, :input_html => { :class => "form-control", :id => "orden_fumigacion_fecha_repaso"} %> 
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :importe_repaso, :label => false, :input_html => { :class => "form-control", :placeholder => "Importe Repaso"}%>
                               </div>
                           </div>
 

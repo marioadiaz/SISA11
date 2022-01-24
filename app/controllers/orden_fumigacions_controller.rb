@@ -196,7 +196,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
 
     # Only allow a list of trusted parameters through.
     def orden_fumigacion_params
-      params.require(:orden_fumigacion).permit(:cliente_id, :tecnico_id, :nro_ordfumigacion, :nro_certificado, :tipo_certificado, :fecha_aplicacion, :hora_aplicacion, :tratamiento, :vector, :superficie, :veneno, :droga, :observaciones_ordfumigacion, :fecha_vencimiento, :proximo_tratamiento, :importe, :estado, :anulado, :baja)
+      params.require(:orden_fumigacion).permit(:cliente_id, :tecnico_id, :nro_ordfumigacion, :nro_certificado, :tipo_certificado, :fecha_aplicacion, :hora_aplicacion, :tratamiento, :vector, :superficie, :veneno, :droga, :observaciones_ordfumigacion, :fecha_vencimiento, :proximo_tratamiento, :importe, :fecha_refuerzo, :importe_refuerzo, :fecha_repaso, :importe_repaso, :estado, :anulado, :baja)
     end
 
     def selected_date(symbol)

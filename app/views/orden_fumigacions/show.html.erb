@@ -106,6 +106,7 @@
             <strong>Droga:</strong>
             <%= @orden_fumigacion.droga%>
           </h3>
+          
           <h3>
             <strong>Fecha Vencimiento:</strong>
             <%= @orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %>
@@ -115,15 +116,59 @@
             <strong>Importe:</strong>
             <%= @orden_fumigacion.importe%>
           </h3>
+
+          <h3>
+            <strong>Fecha Vencimiento:</strong>
+            <%= @orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %>
+          </h3>
           
+          <h3>
+            <strong>Importe:</strong>
+            <%= @orden_fumigacion.importe%>
+          </h3>
+
+          <%if @orden_fumigacion.fecha_refuerzo == nil%>
+            <h3>
+              <strong>Fecha Refuerzo:</strong>
+              <%= @orden_fumigacion.fecha_refuerzo %>
+            </h3>            
+            <h3>
+              <strong>Importe Refuerzo:</strong>
+              <%= @orden_fumigacion.importe_refuerzo%>
+            </h3>
+            <h3>
+              <strong>Fecha Repaso:</strong>
+              <%= @orden_fumigacion.fecha_repaso %>
+            </h3>            
+            <h3>
+              <strong>Importe Repaso:</strong>
+              <%= @orden_fumigacion.importe_repaso %>
+            </h3>
+          <% else %>
+            <h3 style="color:green">
+              <strong>Fecha Refuerzo:</strong>
+              <%= @orden_fumigacion.fecha_refuerzo.strftime("%d-%m-%Y") %>
+            </h3>            
+            <h3 style="color:green">
+              <strong>Importe Refuerzo:</strong>
+              <%= @orden_fumigacion.importe_refuerzo%>
+            </h3>
+            <h3 style="color:green">
+              <strong>Fecha Repaso:</strong>
+              <%= @orden_fumigacion.fecha_repaso.strftime("%d-%m-%Y") %>
+            </h3>            
+            <h3 style="color:green">
+              <strong>Importe Repaso:</strong>
+              <%= @orden_fumigacion.importe_repaso%>
+            </h3>
+
+          <%end%>
           <h3>
             <strong>Observaciones Cert:</strong>
             <%= @orden_fumigacion.observaciones_ordfumigacion%>
           </h3>
-
       </ul>
-            
-      
+
       <div class="card-header d-flex justify-content-between">
         <div class="col-md-4">
           <a class="btn btn-lg btn-block btn-dark" href="/orden_fumigacions">Atrás</a>
