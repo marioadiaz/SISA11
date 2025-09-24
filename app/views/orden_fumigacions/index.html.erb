@@ -26,10 +26,6 @@
       <th>Importe</th>
       <th>F. Aplic.</th>
       <th>F. Venc.</th>
-      <th>F. Ref.</th>
-      <th>$ Ref.</th>
-      <th>F. Rep.</th>
-      <th>$ Rep.</th>
       <th colspan="3"></th>
     </thead>
  
@@ -46,17 +42,7 @@
             <td><%= orden_fumigacion.importe %></td>
             <td><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
             <td><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
-            <%if orden_fumigacion.fecha_refuerzo == nil%>
-              <td><%= orden_fumigacion.fecha_refuerzo %></td>
-              <td><%= orden_fumigacion.importe_refuerzo %></td>
-              <td><%= orden_fumigacion.fecha_repaso %></td>
-              <td><%= orden_fumigacion.importe_repaso %></td>
-            <% else %>
-              <td><%= orden_fumigacion.fecha_refuerzo.strftime("%d-%m-%Y") %></td>
-              <td><%= orden_fumigacion.importe_refuerzo %></td>
-              <td><%= orden_fumigacion.fecha_repaso.strftime("%d-%m-%Y") %></td>
-              <td><%= orden_fumigacion.importe_repaso %></td>
-            <%end%>
+            
             <td>
                 <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
             </td>

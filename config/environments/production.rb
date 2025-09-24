@@ -120,6 +120,6 @@ Rails.application.configure do
 config.serve_static_assets = true
 config.assets.digest = true
 
-config.hosts = ["192.168.1.250","sisa-md.duckdns.org"]
+config.hosts = ["itservices-md.duckdns.org","localhost","sisadev-md.duckdns.org","192.168.0.250","192.168.2.250"]
 
 end

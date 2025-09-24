@@ -3,8 +3,8 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
 
   def index
     #@orden_fumigacions = OrdenFumigacion.all.order("nro_certificado DESC")
-    @orden_fumigacions = OrdenFumigacion.search(params[:search]).paginate(:page => params[:page], :per_page => 25 )
-                         .order("nro_certificado DESC")
+    @orden_fumigacions = OrdenFumigacion.search(params[:search]).paginate(:page => params[:page], :per_page => 35 )
+                         .order('nro_ordfumigacion DESC, ltr_of DESC')
 
     respond_to do |format|
       format.html
@@ -32,7 +32,7 @@ before_action :set_orden_fumigacion, only: [ :show, :showfajas, :edit, :update, 
       @cliente_id = params[:id]
       @cliente = Cliente.find(@cliente_id)
 
-      @orden_fumigacions = OrdenFumigacion.where(cliente_id:@cliente_id).order("updated_at DESC, nro_certificado DESC").all
+      @orden_fumigacions = OrdenFumigacion.where(cliente_id:@cliente_id).order("updated_at DESC, nro_ordfumigacion DESC, ltr_of DESC").all
 
   end
 
