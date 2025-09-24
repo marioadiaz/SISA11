@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="card-header d-flex justify-content-between">
+    <div class="col-md-6">
+      <h3 class="my-0 font-size:8vw"><strong>Fumigaciones por cliente</strong></h3>
+    </div>
+    <div class="col-md-6">
+      <%= link_to 'Detalle Cliente', cliente_path(@cliente), class: "btn btn-primary custom", style: "width: 50%;" %>
+    
+    </div>
+  </div>
+  <div class="card-body">
+    
+      <div class="row">
+        <div class="col-md-6">
+          <h4>
+            <label class="md-lg-2 control-label">CUIT: </label>
+            <strong><%= @cliente.cuit %></strong>
+          </h4>
+        </div>
+        <div class="col-md-6">
+          <h4>
+            <label>Calificacion: </label>
+            <strong><%= @cliente.calificacion %></strong>
+          </h4>  
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h4>
+            <label>Nombre: </label>
+            <strong><%= @cliente.nombre %></strong>
+          </h4>
+        </div>
+        <div class="col-md-6">
+          <h4>
+            <label>Apellido: </label>
+            <strong><%= @cliente.apellido %></strong>
+          </h4>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <h4>
+            <label>Celular: </label>
+            <strong><%= @cliente.celular %></strong>          
+          </h4>
+        </div>
+        <div class="col-md-3">
+          <h4>
+            <label>Telefono: </label>
+            <strong><%= @cliente.telefono %></strong>
+          </h4>
+        </div>
+        <div class="col-md-6">
+          <h4>
+            <label>Correo: </label>
+            <strong><%= @cliente.correo %></strong>
+          </h4>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <h4>
+            <label>Rubro: </label>
+            <strong><%= @cliente.rubro %></strong>
+          </h4>
+        </div>
+        <div class="col-md-4">
+          <h4>
+            <label>Tipo Cliente: </label>
+            <strong><%= @cliente.tipo_cliente %></strong>
+          </h4>
+        </div>
+      </div>
+  </div>
+  
+  <table class="table-striped table table-responsive">
+    <tr>
+      <thead class="thead-dark">
+        <th>#Cert.</th>
+        <th>Cliente</th>
+        <th>Rubro</th>
+        <th>#Tec</th>
+        <th>Importe</th>
+        <th>F. Aplicacion</th>
+        <th>F. Vencimiento</th>
+        
+        <th colspan="3"></th>
+
+      </thead>
+    </tr>
+     <tbody id="myTable" >
+    <% @orden_fumigacions.each do |orden_fumigacion| %>
+      <%if orden_fumigacion.baja == true %>
+        <%if orden_fumigacion.anulado == true %>
+          <tr>
+            <td><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
+            <td><%= orden_fumigacion.cliente.apellido%></td>
+            <td><%= orden_fumigacion.cliente.rubro%></td>
+            <td><%= orden_fumigacion.tecnico.codificacion %></td>
+            <td><%= orden_fumigacion.importe %></td>
+            <td><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
+            <td><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
+            
+            <td>
+                <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
+            </td>
+          </tr>
+        <% else %>
+          <tr >
+            <td ><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.cliente.apellido%></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.cliente.rubro%></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.tecnico.codificacion %></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.importe %></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
+            
+            <td>
+                <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+</div>

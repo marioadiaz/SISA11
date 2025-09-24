@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  usuario_inicia: MyString
+  turno: MyString
+  fecha_inicio: MyString
+  descripcion_novedad: MyString
+  usuario_finaliza: MyString
+  fecha_finalizacion: MyString
+  estado: MyString
+  baja: false
+
+two:
+  usuario_inicia: MyString
+  turno: MyString
+  fecha_inicio: MyString
+  descripcion_novedad: MyString
+  usuario_finaliza: MyString
+  fecha_finalizacion: MyString
+  estado: MyString
+  baja: false

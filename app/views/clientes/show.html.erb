@@ -1,11 +1,23 @@
 <div class="container">
-    <div class="card-header d-flex justify-content-between">
-      <div><h2 class="my-0 font-size:8vw">Detalle del cliente</h2></div>
-      <div> <%= link_to 'Editar Cliente', edit_cliente_path(@cliente), class: "btn btn-primary mr-3" %></div>
-    </div>
+  <div class="card-header d-flex justify-content-between">
+    <%if @cliente.baja%>
+      <div class="col-md-4"><h2 class="my-0 font-size:8vw"><strong  style="color:green">Detalle cliente</strong></h2></div>
+      <div class="col-md-8">
+      <%= link_to 'Certificados generados', orden_fumigacions_fumigaciones_por_cliente_path(:id => @cliente.id) , :class => 'btn btn-info'%>
+      <%= link_to 'Crear Certificado', orden_fumigacions_new_path(:id => @cliente.id) , :class => 'btn btn-warning'%>
+      <%= link_to 'Editar Cliente', edit_cliente_path(@cliente), class: 'btn btn-primary' %>
+      <%= link_to 'Eliminar', cliente_path(@cliente), method: :delete, :class => 'btn btn-danger', :target => 'blank', data: { confirm: "¿Estás seguro/a de eliminar el Cliente?" } %>
+      </div>
+    <%else%>
+      <div class="col-md-4"><h2 class="my-0 font-size:8vw">Detalle cliente: <strong><span style="color:red">Cliente anulado en el sistema!<span></strong></h2></div>     
+      <div class="col-md-8">
+        <%= link_to 'Certificados generados', orden_fumigacions_fumigaciones_por_cliente_path(:id => @cliente.id) , :class => 'btn btn-info'%>
+      </div>
+    <%end%>   
+  </div>
+
   <div class="card-body">
     <ul class="list-unstyled mt-3 mb-4 text-center">
-
       <h3>
         <strong>Nombre:</strong>
         <%= @cliente.nombre %>
@@ -31,30 +43,25 @@
         <%= @cliente.domicilio %>
       </h3>
 
-
       <h3>
         <strong>Barrio:</strong>
         <%= @cliente.barrio %>
       </h3>
 
       <h3>
-        <strong>Celular:</strong>
-        <%= @cliente.celular %>
+        <strong>Localidad:</strong>
+        <%= @cliente.localidad %>
       </h3>
 
       <h3>
+        <strong>Celular:</strong>
+        <%= @cliente.celular %>
         <strong>Telefono:</strong>
         <%= @cliente.telefono %>
       </h3>
-
       <h3>
         <strong>Correo:</strong>
         <%= @cliente.correo %>
-      </h3>
-
-      <h3>
-        <strong>Observaciones:</strong>
-        <%= @cliente.observaciones_cliente %>
       </h3>
       <h3>
         <strong>Tipo Cliente:</strong>
@@ -64,8 +71,13 @@
         <strong>Calificación:</strong>
         <%= @cliente.calificacion %>
       </h3>
+      <h3>
+        <strong>Observaciones:</strong>
+        <%= @cliente.observaciones_cliente %>
+      </h3>
     </ul>
 
-    <a  class="btn btn-lg btn-block btn-dark" href="/clientes">Atrás</a>
+    <a class="btn btn-lg btn-block btn-dark" href="/clientes">Atrás</a>
+
   </div>
 </div>

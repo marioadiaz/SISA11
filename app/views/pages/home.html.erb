@@ -1,52 +1,70 @@
-
-    <div class="container">
-      <div class="my-5">
-          <a class="weatherwidget-io" href="https://forecast7.com/es/n24d78n65d42/salta/" data-label_1="SALTA" data-label_2="WEATHER" data-theme="original" >Clima Salta</a>
-        <script>
+<div class="containerzero">
+    <div class="my-5">
+      <a class="weatherwidget-io" href="https://forecast7.com/es/n24d78n65d42/salta/" data-label_1="SALTA" data-label_2="WEATHER" data-theme="original" >Clima Salta</a>
+      <script>
         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-        </script>
-      </div>
+      </script>
+    </div>
 
-
-
-
-<div class="container">
-  <h3 class="text-center card-header my-2"><strong>Fumigaciones que vencen hoy</strong></h3>
+    <h3 class="text-center card-header my-2"><strong>Fumigaciones que vencen hoy</strong></h3>
+      
     <table class=" table-striped table table-responsive">
-    <thead  class="thead-dark">
       <tr>
-          <th>Nro de Certificado</th>
+        <thead  class="thead-dark">
+          <th>#Cert.</th>
           <th>Nombre</th>
-          <th>Apellido</th>
-          <th>Domicilio</th>
-          <th>Barrio</th>
-          <th>Telefono</th>
-          <th>Tratamiento</th>
-          <th>Vectores</th>
-          <th>Veneno</th>
-          <th>Detalle</th>
+          <th>Cliente</th>
+          <th>Rubro</th>
+          <th>Cod.</th>
+          <th>Tecnico</th>
+          <th>Importe</th>
+          <th>F. Aplicacion</th>
+          <th>F. Vencimiento</th>
+          
           <th colspan="3"></th>
-        </tr>
-      </thead>
 
-      <tbody>
+        </thead>
+      </tr>
+      <tbody id="myTable" >
         <% @orden_fumigacions.each do |orden_fumigacion| %>
-          <%if orden_fumigacion.estado == true &&  orden_fumigacion.fecha_vencimiento == Date.today%>
-            <tr>
-              <td><%= orden_fumigacion.nro_certificado %></td>
-              <td><%= orden_fumigacion.cliente.nombre %></td>
-              <td><%= orden_fumigacion.cliente.apellido %></td>
-              <td> <%= orden_fumigacion.cliente.domicilio %></td>
-              <td><%= orden_fumigacion.cliente.barrio %></td>
-              <td><%= orden_fumigacion.cliente.telefono %></td>
-              <td><%= orden_fumigacion.tratamiento %></td>
-              <td><%= orden_fumigacion.vector %></td>
-              <td><%= orden_fumigacion.droga  %></td>
-              <td><%= link_to 'Detalle', orden_fumigacion, class:"text-info"%></td>
-            </tr>
+          <%if orden_fumigacion.baja == true &&  orden_fumigacion.ultima_ordfumigacion == true %>
+            <%if orden_fumigacion.fecha_vencimiento.to_date == Date.today.to_date%>
+              <tr class="p-3 mb-2 bg-warning text-dark">
+                <td><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
+                <td><%= link_to "#{orden_fumigacion.cliente.nombre}", cliente_path(orden_fumigacion.cliente)%></td>
+                <td><%= link_to "#{orden_fumigacion.cliente.apellido}", cliente_path(orden_fumigacion.cliente)%></td>
+                <td><%= orden_fumigacion.cliente.rubro%></td>
+                <td><%= orden_fumigacion.tecnico.codificacion %></td>
+                <td><%= orden_fumigacion.tecnico.apellido %></td>
+                <td><%= orden_fumigacion.importe %></td>
+                <td><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
+                <td><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
+                <td>
+                    <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
+                </td>
+              </tr>
+            <%elsif orden_fumigacion.fecha_vencimiento.to_date > Date.today.to_date%>  
+              <tr>
+                <td><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
+                <td><%= link_to "#{orden_fumigacion.cliente.nombre}", cliente_path(orden_fumigacion.cliente)%></td>
+                <td><%= link_to "#{orden_fumigacion.cliente.apellido}", cliente_path(orden_fumigacion.cliente)%></td>
+                <td><%= orden_fumigacion.cliente.rubro%></td>
+                <td><%= orden_fumigacion.tecnico.codificacion %></td>
+                <td><%= orden_fumigacion.tecnico.apellido %></td>
+                <td><%= orden_fumigacion.importe %></td>
+                <td><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
+                <td><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
+                <td>
+                    <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
+                </td>
+              </tr>
+            <%end%>
           <% end %>
         <% end %>
       </tbody>
-</div>
-</table>
-</div>
+    </table>
+    <%= will_paginate @orden_fumigacions%>
+  </div>
+
+
+

@@ -1,25 +1,28 @@
 <%= simple_form_for(@orden_fumigacion) do |f| %>
   <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
+  
   <div class="center-block form-inputs cliente-new-form">
       <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12">                          
+                          <div class="form-group">                           
+                              <div class="col-md-8">
+                                  <h3 class="text-center card-header my-2"><strong><%= @orden_fumigacion.cliente.nombre%> <%= @orden_fumigacion.cliente.apellido%> <%= @orden_fumigacion.cliente.rubro%></strong></h3>
+                              </div>
+                              <div class="col-md-8">
+                                  <%= f.input :cliente_id, :as => :hidden, :label => false, :input_html => { :class => "form-control"}%>
+                              </div>
+                          </div>
+                          
                           <div class="form-group">
                               <div class="col-md-8">
-                                  <%= collection_select :orden_fumigacion, :cliente_id, Cliente.all.order(:apellido).collect { |t| [ t.id, "#{t.apellido} - #{t.nombre} - #{t.cuit}" ] }, :first, :last, { prompt: "Seleccionar un Cliente" }, {class: "form-control"} %>
+                                  <%= collection_select :orden_fumigacion, :tecnico_id, Tecnico.where("baja = ?", true).order("updated_at DESC, nombre DESC").collect { |t| [ t.id, "#{t.apellido} - #{t.nombre} - #{t.dni}" ] }, :first, :last, { prompt: "Seleccionar un Tecnico" }, {class: "form-control"} %>
                               </div>
                           </div>
 
                           <div class="form-group">
                               <div class="col-md-8">
-                                  <%= collection_select :orden_fumigacion, :tecnico_id, Tecnico.all.order(:apellido).collect { |t| [ t.id, "#{t.apellido} - #{t.nombre} - #{t.dni}" ] }, :first, :last, { prompt: "Seleccionar un Tecnico" }, {class: "form-control"} %>
-                              </div>
-                          </div>
-
-                          <div class="form-group">
-                              <div class="col-md-8">
-                                  <%= f.input :nro_certificado, :label => false, :input_html => { :class => "form-control", :placeholder => "Nro Certificado"}%>
+                                  <%= f.input :nro_certificado, :label => false, required: true,
+                autofocus: true, :input_html => { :class => "form-control", :placeholder => "Nro Certificado"}%>
                               </div>
                           </div>
 
@@ -32,22 +35,17 @@
 
                           <div class="form-group">
                               <div class="col-md-8">
-                                  <%= f.input :fecha_aplicacion, :class => 'datepicker', as: :date, html5: true, :input_html => { :class => "form-control"} %>
+                                  <%= f.input :fecha_aplicacion, :class => 'datepicker', as: :date, html5: true, :input_html => { :class => "form-control", :id => "orden_fumigacion_fecha_aplicacion"} %> 
                               </div>
                           </div>
+
 
                           <div class="form-group">
                               <div class="col-md-8">
                                   <%= f.input :hora_aplicacion, :class => 'datepicker', as: :time, html5: true, :input_html => { :class => "form-control"} %>
                               </div>
                           </div>
-
-                          <%if orden_fumigacion.id.nil?   %>
-                              <%orden_fumigacion_id=1   %>
-                          <%else%>
-                            <% orden_fumigacion_id=orden_fumigacion.id   %>
-                          <%end%>
-
+                          <%orden_fumigacion_id=1%>
                           <div class="form-group">
                               <script >
                                 // Multiselect dropdown orden_fumigacion.tratamiento -->
@@ -57,7 +55,6 @@
                                     });
                                   });
                                 //Fin del efecto multiselect orden_trabajo.post
-
                                 //Cambia los valores de la cadena de proceso
                                   $(function () {
                                     $("#orden_fumigacion_tratamiento_<%=orden_fumigacion_id%>").change(function () {
@@ -122,37 +119,9 @@
                               </div>
                           </div>
                           <div class="form-group">
-                              <script >
-                                // Multiselect dropdown orden_fumigacion.tratamiento -->
-                                    $(document).ready(function() {
-                                    $("#orden_fumigacion_veneno_<%=orden_fumigacion_id*3%>").multiselect({
-                                      allSelectedText: 'Showing All'
-                                    });
-                                  });
-                                //Fin del efecto multiselect orden_trabajo.post
-
-                                //Cambia los valores de la cadena de proceso
-                                  $(function () {
-                                    $("#orden_fumigacion_veneno_<%=orden_fumigacion_id*3%>").change(function () {
-                                      var ValorSeleccionadoDropdown = $(this).val();
-                                      $(document).ready(function(){$("#<%=orden_fumigacion_id*3%>").val(ValorSeleccionadoDropdown)});
-                                    });
-                                  });
-                                //Fin de cambio los valores de la cadena de proceso
-                              </script>
                               <div class="col-md-8">
-                                <label for="veneno">Veneno</label>
-                                <select id= "orden_fumigacion_veneno_<%=orden_fumigacion_id*3%>" multiple="multiple" class="form-control">
-                                  <% OrdenFumigacion::VENENO.each do  |elemento_veneno| %>
-                                      <%if cadenatovector(orden_fumigacion.veneno).include?  elemento_veneno %>
-                                        <option value = <%= elemento_veneno %> selected ><%= elemento_veneno %></option>
-                                      <%else%>
-                                        <option value = <%= elemento_veneno %> ><%= elemento_veneno %></option>
-                                      <%end%>
-                                  <%end%>
-                                </select>
+                                <%= f.input :veneno, as: :select, :collection => ["C"], label: "Veneno", :default=> "C", :input_html => { :class => "form-control"}%>
                               </div>
-                              <%= f.input :veneno, :as => :hidden, :input_html => { :id => orden_fumigacion_id*3} %>
                           </div>
 
                           <div class="form-group">
@@ -190,14 +159,47 @@
                           </div>
 
                           <div class="form-group">
-                              <div class="col-md-8">
-                                  <%= f.input :fecha_vencimiento, :class => 'datepicker', as: :date, html5: true, :input_html => { :class => "form-control"} %>
-                              </div>
-                          </div>
 
-                          <div class="form-group">
                               <div class="col-md-8">
-                                  <%= f.input :proximo_tratamiento, :class => 'datepicker', as: :date, html5: true, :input_html => { :class => "form-control"} %>
+                                <div id="contenedor_fecha_vencimiento">
+
+                                  <script >
+                                    //Cambia los valores de la cadena de proceso
+                                      $(function () {
+                                        $("#orden_fumigacion_fecha_aplicacion").change(function () {
+                                          var ValorSeleccionadoDropdown = $(this).val();
+                                          var fechatrimestral =new Date(ValorSeleccionadoDropdown);
+                                          
+                                          $('#orden_fumigacion_fecha_vencimiento').val(sumarDias(fechatrimestral,31));
+
+                                        });
+                                      });
+                                    //Fin de cambio los valores de la cadena de proceso
+                                    function sumarDias(fecha, dias){
+                                      
+                                      fecha.setDate(fecha.getDate() + dias);
+
+                                      var meses = ["01", "02", "03","04", "05", "06", "07","08", "09", "10","11", "12"]
+                                      
+                                      var dia = fecha.getDate();
+                                      var mes = fecha.getMonth();
+                                      var yyy = fecha.getFullYear();
+                                      
+                                      var fecha_formateada = "";
+
+                                      if (fecha.getDate()<10){
+                                        fecha_formateada = yyy + '-' + meses[mes] + '-0' + dia;
+                                      } else{
+                                        fecha_formateada = yyy + '-' + meses[mes] + '-' + dia;
+                                      }
+                                      
+                                      return fecha_formateada;
+                                    }
+                                  </script>
+
+                                  <%= f.input :fecha_vencimiento, :class => 'datepicker', as: :date, html5: true, :input_html => {:class => "form-control", :id => "orden_fumigacion_fecha_vencimiento"} %>  
+                                  
+                                </div>
                               </div>
                           </div>
 
@@ -209,15 +211,33 @@
 
                           <div class="form-group">
                               <div class="col-md-8">
-                                <label for="estado">Estado</label>
-                                <%= f.input :estado, as: :select, :collection => ["En proceso", "Finalizado"], label: false, :default=> "En proceso", :input_html => { :class => "form-control"}%>
+                                  <%= f.input :fecha_refuerzo, :class => 'datepicker', as: :date, html5: true, :input_html => { :class => "form-control", :id => "orden_fumigacion_fecha_refuerzo"} %> 
                               </div>
                           </div>
 
                           <div class="form-group">
                               <div class="col-md-8">
-                                  <%= f.input :observaciones_ordfumigacion, :label => false, :input_html => { :class => "form-control", :placeholder => "Observaciones"}%>
+                                  <%= f.input :importe_refuerzo, :label => false, :input_html => { :class => "form-control", :placeholder => "Importe Refuerzo"}%>
                               </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :fecha_repaso, :class => 'datepicker', as: :date, html5: true, :input_html => { :class => "form-control", :id => "orden_fumigacion_fecha_repaso"} %> 
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :importe_repaso, :label => false, :input_html => { :class => "form-control", :placeholder => "Importe Repaso"}%>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-8">
+                                  <%= f.input :observaciones_ordfumigacion, :label => "Observaciones Certificado (No figura en el impreso)", :as => :text, :input_html => { :class => "form-control", :rows => 10, :placeholder => "Observaciones"}%>
+                              </div>
+                                  
                           </div>
 
 

@@ -1,44 +1,59 @@
-<div class="container">
+<div class="containerzero">
 <h1>Listado de Reclamos</h1>
+<%= link_to 'Listado PDF', quejas_path(format: 'pdf'), :class => 'btn btn-success my-3' %>
 <%= link_to "Generar Reclamo", quejas_new_path, :class => 'btn btn-warning my-3'%>
-<script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+  <script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
     });
   });
-});
-</script>
-
-
-<input class="ml-3 w-25" id="myInput" type="text" placeholder="Buscar..">
-<table class=" table-striped table table-responsive">
+  </script>
+  <input class="ml-3 w-50" id="myInput" type="text" placeholder="Buscar..">
+<table class="table table-responsive">
   <tr>
     <thead  class="thead-dark">
-   		<th>Nro Reclamo</th>
-      <th>Nro Certificado</th>
-   		<th>Cliente</th>
-   		<th>Tecnico</th>
-        <th>FechaQueja</th>
-        <th colspan="3"></th>
+      <th>#Rec.</th>
+      <th>#Cert.</th>
+      <th>#CUIT</th>
+      <th>Nombre</th>
+      <th>Apellido </th>
+      <th>Rubro</th>
+      <th>Tecnico</th>
+      <th>F. Inicio</th>
+      <th>Estado</th>
+      <th>F. Final.</th>
+      <th colspan="3"></th>
     </thead>
   </tr>
 
   <tbody id="myTable">
   <% @quejas.each do |queja| %>
-  	<%if queja.baja == true %>
-	  	<tr>
+    <%if queja.baja == true %>
+      <tr>
         <td><%= link_to "#{queja.id}", queja_path(queja) %></td>
-        <td><%= link_to "#{queja.orden_fumigacion.nro_certificado}", queja_path(queja)  %></td>
-  	    <td><%= link_to "#{queja.orden_fumigacion.cliente.apellido}", queja_path(queja) %></td>
+        <td><%= queja.orden_fumigacion.nro_certificado  %></td>
+        <td><%= queja.orden_fumigacion.cliente.cuit %></td>
+        <td><%= link_to "#{queja.orden_fumigacion.cliente.apellido}", queja_path(queja) %></td>
+        <td><%= link_to "#{queja.orden_fumigacion.cliente.nombre}", queja_path(queja) %></td>
+        <td><%= queja.orden_fumigacion.cliente.rubro %></td>
+        
         <td><%= queja.orden_fumigacion.tecnico.apellido %></td>
-	      <td><%= queja.fecha_queja %></td>
-	      <td><%= link_to 'Eliminar', queja, method: :delete, data: { confirm: "¿Estás seguro/a?" }  %>
-	      </td>
-	  	</tr>
-  <% end %>
+        <td><%= queja.fecha_queja.strftime("%d-%m-%Y") %></td>
+        <%if queja.estado == "En proceso"%>
+          <td><strong  style="color:red;"><%= queja.estado%></strong></td>
+          <td></td>
+        <%else%>
+          <td><strong  style="color:green;"><%= queja.estado%></strong></td>
+          <td><strong  style="color:green;"><%= queja.fecha_finalizacion %></strong></td>
+        <%end%>
+        <td><%= link_to 'Eliminar', queja, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Reclamo?" }  %>
+        </td>
+      </tr>
+    <% end %>
   <% end %>
   </tbody>
 </table>

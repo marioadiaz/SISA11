@@ -22,6 +22,9 @@
         <div><%= f.input :barrio %></div>
       </div>
       <div class="col-sm">
+        <%= f.input :localidad %>
+      </div>
+      <div class="col-sm">
         <div><%= f.input :correo %></div>
       </div>
     </div>
@@ -34,26 +37,69 @@
       <div class="col-sm">
         <div>  <%= f.input :celular %> </div>
       </div>
-      <div class="col-sm">
-        <%= f.input :tipo_cliente, as: :select, collection: Cliente::TIPO_CLIENTE,  label:'Tipo Cliente', prompt: "Seleccione tipo de Cliente" %>
-      </div>
-      <div>
     </div>
       </div>
     <div class="row">
       <div class="col-sm">
         <%= f.input :calificacion %>
       </div>
-        <div class="col-sm">
-        <%= f.input :observaciones_cliente %>
+      <div class="col-sm">
+        <%= f.input :rubro  ,label: "Rubro"%>
       </div>
-    <div class="col-sm">
-      <%= f.input :rubro  ,label: "Razon Social"%>
     </div>
+    <div class="row">
+      <script >
+        //Cambia los valores de la cadena de proceso
+          $(function () {
+            $("#cliente_tipo_cliente").change(function () {
+               
+              var ValorSeleccionadoDropdown = $(this).val();
+                
+              if (ValorSeleccionadoDropdown == "OTROS"){
+                  $(document).ready(function(){$("#tipo_cliente_id").val("")});
+                  document.getElementById('select_tipo_cliente').style.display = "block";
+                  console.log("ValorSeleccionadoDropdown-en proceso-: ",ValorSeleccionadoDropdown);
+                } else {
+                  document.getElementById('select_tipo_cliente').style.display = "none";
+                  console.log("ValorSeleccionadoDropdown-finalizado-: ",ValorSeleccionadoDropdown);
+                  $(document).ready(function(){$("#tipo_cliente_id").val(ValorSeleccionadoDropdown)});
+              }
+            });
+          });
+        //Fin de cambio los valores de la cadena de proceso
+
+      </script>      
+      <%if Cliente::TIPO_CLIENTE.include?  @cliente.tipo_cliente%>
+        <div id="field_tipo_cliente" style="display: block;" class="col-sm">
+          <%= f.input :tipo_cliente, as: :select, collection: Cliente::TIPO_CLIENTE,  label:'Tipo Cliente', prompt: "Seleccione tipo de Cliente"%>
+        </div>
+        
+        <div id="select_tipo_cliente" style="display: none;" class="col-sm">
+          <%= f.input :tipo_cliente, :input_html => { :id => "tipo_cliente_id"} %>
+        </div>
+      <%else%>
+        <div id="field_tipo_cliente" style="display: block;" class="col-sm">
+          
+          <%= f.input :tipo_cliente, as: :select, collection: Cliente::TIPO_CLIENTE,  label:'Tipo Cliente', prompt: "Seleccione tipo de Cliente", selected: "OTROS" %>
+        </div>
+        
+        <div id="select_tipo_cliente" style="display: block;" class="col-sm">
+          <%= f.input :tipo_cliente, :input_html => { :id => "tipo_cliente_id"} %>
+        </div>
+      <%end%>
+
+      
+
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        
+        <%= f.input :observaciones_cliente, :label => "Observaciones Cliente (Informacion de relevancia o para tener el perfil de cliente)", :as => :text, :input_html => { :class => "form-control", :rows => 10, :placeholder => "Observaciones"}%>
       </div>
+    </div>
 
   <!-- div form-inputs cliente-new-form -->
    <div class= "d-flex my-3">
-     <div> <%= f.button :submit,name="Confirmar",:class => "btn btn-success"  %> </div>
+     <div> <%= f.button :submit,name="Confirmar", :class => "btn btn-success"  %> </div>
   </div>
 <% end %>

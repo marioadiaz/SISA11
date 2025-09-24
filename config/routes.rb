@@ -1,16 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'fajas/new'
-
-  get '/fajas', to: 'fajas#index'
-  get '/faja/:id', to: 'fajas#show', as: 'faja'
-  get 'fajas/create'
-  get 'fajas/edit'
-  get 'fajas/update'
-  get 'fajas/destroy'
-
 root 'pages#home'
-
 
 devise_for :users
 devise_scope :user do
@@ -21,6 +11,8 @@ end
   get '/clientes', to: 'clientes#index'
   get 'clientes/new', to: 'clientes#new'
   post '/clientes', to: 'clientes#create'
+
+  get 'buscador_clientes/:termino', to: 'clientes#buscador'
 
   get '/cliente/:id', to: 'clientes#show', as: 'cliente'
   get '/clientes/:id/edit', to: 'clientes#edit', as: 'edit_cliente'
@@ -39,7 +31,9 @@ end
   delete '/tecnico/:id', to: 'tecnicos#delete'
 
   #ORDEN FUMIGACION
-   get '/orden_fumigacions/proximas_fumigaciones'
+  get '/orden_fumigacions/proximas_fumigaciones'
+  get '/orden_fumigacions/fumigaciones_por_cliente', to: 'orden_fumigacions#fumigaciones_por_cliente' 
+
   get '/orden_fumigacions', to: 'orden_fumigacions#index'
 
   get 'orden_fumigacions/new', to: 'orden_fumigacions#new'
@@ -47,16 +41,15 @@ end
 
   get '/orden_fumigacion/:id', to: 'orden_fumigacions#show', as: 'orden_fumigacion'
 
+  get '/orden_fumigacions/:id/copy', to: 'orden_fumigacions#copy', as: 'copy_orden_fumigacion'
   get '/orden_fumigacions/:id/edit', to: 'orden_fumigacions#edit', as: 'edit_orden_fumigacion'
   patch '/orden_fumigacion/:id', to: 'orden_fumigacions#update'
   put '/orden_fumigacion/:id', to: 'orden_fumigacions#update'
+  
+  patch '/orden_fumigacion/:id', to: 'orden_fumigacions#anular'
+  post '/orden_fumigacion/:id', to: 'orden_fumigacions#anular'
+  
   delete '/orden_fumigacion/:id', to: 'orden_fumigacions#delete'
-
-
-  get 'buscador_clientes/:termino', to: 'clientes#buscador'
-  post '/add_cliente_orden_fumigacion/', to: 'orden_fumigacions#add_cliente'
-  get 'buscador_tecnicos/:termino', to: 'tecnicos#buscador'
-  post '/add_tecnico_orden_fumigacion/', to: 'orden_fumigacions#add_tecnico'
 
   #QUEJAS
   get '/quejas', to: 'quejas#index'
@@ -67,5 +60,36 @@ end
   patch '/queja/:id', to: 'quejas#update'
   put '/queja/:id', to: 'quejas#update'
   delete '/queja/:id', to: 'quejas#delete'
+  
+  #NOVEDADES
+  get '/notes', to: 'notes#index'
+  get 'notes/new', to: 'notes#new'
+  post '/notes', to: 'notes#create'
+  get '/note/:id', to: 'notes#show', as: 'note'
+  get '/notes/:id/edit', to: 'notes#edit', as: 'edit_note'
+  patch '/note/:id', to: 'notes#update'
+  put '/note/:id', to: 'notes#update'
+  delete '/note/:id', to: 'notes#delete'
+
+  #FAJAS
+  get '/fajas', to: 'fajas#index'
+  get '/faja/:id', to: 'fajas#show', as: 'faja'
+  get 'fajas/create'
+  get 'fajas/edit'
+  get 'fajas/update'
+  get 'fajas/destroy'
+
+  #DIARIO
+  get '/diario', to: 'diario#index'
+  
+  #REMITOS
+  get 'remitos/new'
+  get '/remitos', to: 'remitos#index'
+  get 'remitos/show'
+  get 'remitos/create'
+  get 'remitos/edit'
+  get 'remitos/update'
+  get 'remitos/destroy'
+  get 'fajas/new'
 
 end

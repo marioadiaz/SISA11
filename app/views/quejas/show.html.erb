@@ -1,28 +1,79 @@
 <div class="container">
   <div class="card-header d-flex justify-content-between">
-      <div><h2 class="my-0 font-size:8vw">Detalle Reclamo</h2></div>
-      <div> <%= link_to 'Editar', edit_queja_path, class: "btn btn-primary mr-3" %></div>
+    <%if @queja.estado == "En proceso"%>
+      <div><h2 class="my-0 font-size:8vw"><strong style="color:red;">Detalle reclamo</strong></h2></div>
+    <%else%>
+      <div><h2 class="my-0 font-size:8vw"><strong style="color:green;">Detalle reclamo</strong></h2></div>
+    <%end%>   
+    <div class="col-md-8"> 
+        <%= link_to 'Editar', edit_queja_path, class: "btn btn-primary mr-3" %>
+        <%= link_to 'Eliminar', queja_path(@queja), method: :delete, :class => 'btn btn-danger', :target => 'blank', data: { confirm: "¿Estás seguro/a de eliminar el Reclamo?" } %>
     </div>
+  </div>
   <div class="card-body">
       <ul class="list-unstyled mt-3 mb-4 text-center">
-
           <h3>
             <strong>Nro Reclamo:</strong>
             <%= @queja.id%>
           </h3>
-        <h3>
+          <h3>
             <strong>Nro Certificado:</strong>
             <%= @queja.orden_fumigacion.nro_certificado %>
           </h3>
-
+          <h3>
+            <label>Cliente:</label>
+            <strong> <%= @queja.orden_fumigacion.cliente.cuit%> - <%= @queja.orden_fumigacion.cliente.nombre%> - <%= @queja.orden_fumigacion.cliente.apellido%> - <%= @queja.orden_fumigacion.cliente.rubro%></strong>
+          </h3>
+          <h3>
+            <strong>Tipo Cliente:</strong>
+            <%= @queja.orden_fumigacion.cliente.tipo_cliente %>
+          <h3>
+          <h3>
+            <strong>Rubro:</strong>
+            <%= @queja.orden_fumigacion.cliente.rubro %>
+          <h3>
+          <h3>
+            <strong>Generado por:</strong>
+            <strong  style="color:green;"><%=User.find_by(id: @queja.usuario_inicia.to_i).apellido%>  <%=User.find_by(id: @queja.usuario_inicia.to_i).nombre%></strong>
+          </h3>
           <h3>
             <strong>Fecha de reclamo:</strong>
             <%= @queja.fecha_queja%>
           </h3>
           <h3>
-            <strong>Observaciones:</strong>
-            <%= @queja.observaciones_queja%>
+            <strong>Codificacion:</strong>
+            <%= Queja::HASHRECLAMOS[@queja.codificacion]%>
           </h3>
+          <%if @queja.estado == "En proceso"%>
+            <h3>
+              <strong style="color:red;">Observaciones:</strong>
+              <%= @queja.observaciones_queja%>
+            </h3>
+            <h3>
+              <strong>Estado:</strong>
+              <strong style="color:red;"><%= @queja.estado%></strong>
+            </h3>
+          <%else%>
+            <h3>
+              <strong>Observaciones:</strong>
+              <%= @queja.observaciones_queja%>
+            </h3>
+            <h3>
+              <strong>Estado:</strong>
+              <strong style="color:green;"><%= @queja.estado%></strong> 
+
+              <strong>Fecha finalizacion:</strong>
+              <strong style="color:green;"><%= @queja.fecha_finalizacion%></strong>
+            </h3>
+            <h3>
+              <strong>Finalizado por:</strong>
+              <strong  style="color:green;"><%=User.find_by(id: @queja.usuario_finaliza.to_i).apellido%>  <%=User.find_by(id: @queja.usuario_finaliza.to_i).nombre%></strong>
+            </h3>
+            <h3>
+              <strong  style="color:green;">Observacion Final:</strong>
+              <%= @queja.observacion_final%>
+            </h3>
+          <%end%>
       </ul>
     <a class="btn btn-lg btn-block btn-dark" href="/quejas">Atrás</a>
   </div>

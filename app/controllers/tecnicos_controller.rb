@@ -2,12 +2,15 @@ class TecnicosController < ApplicationController
 before_action :set_tecnico, only: [:show, :edit, :update, :delete]
 
   def index
-      @tecnicos = Tecnico.all.order(:apellido)
+      @tecnicos = Tecnico.all.order("updated_at DESC, nombre DESC")
       respond_to do |format|
       format.html
       format.json
       format.pdf do
-      render template: 'tecnicos/pdf', pdf: 'Reporte'
+          render pdf: "file_name", :template => 'tecnicos/listado_tecnicos.pdf.erb',
+          encoding: 'utf8',
+          orientation: 'Landscape',
+          page_size: 'A4',:print_media_type => true
       end
     end
   end
@@ -79,6 +82,6 @@ before_action :set_tecnico, only: [:show, :edit, :update, :delete]
 
     # Only allow a list of trusted parameters through.
     def tecnico_params
-      params.require(:tecnico).permit(:dni, :apellido, :nombre, :domicilio, :barrio, :celular, :telefono, :correo, :observaciones_tecnico, :baja)
+      params.require(:tecnico).permit(:dni, :codificacion, :apellido, :nombre, :domicilio, :barrio, :celular, :telefono, :correo, :observaciones_tecnico, :baja)
     end
 end

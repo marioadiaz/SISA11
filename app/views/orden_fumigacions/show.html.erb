@@ -1,81 +1,181 @@
 <div class="container">
-	<div class="card-header d-flex justify-content-between">
-    	<div><h2 class="my-0 font-size:8vw">Detalle Fumigacion</h2></div>
-    	<div> <%= link_to 'Editar', edit_orden_fumigacion_path, class: "btn btn-primary mr-3" %></div>
-    </div>
-	<div class="card-body">
-	    <ul class="list-unstyled mt-3 mb-4 text-center">
-			<h3>
-	        	<strong>Cliente:</strong>
-	        	<%= @orden_fumigacion.cliente.apellido %>
-	      	</h3>
-	    	<h3>
-	        	<strong>Tecnico:</strong>
-	        	<%= @orden_fumigacion.tecnico.apellido %>
-	      	</h3>
-	      	<h3>
-	        	<strong>NroCertificado:</strong>
-	        	<%= @orden_fumigacion.nro_certificado%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Tipo Certificado:</strong>
-	        	<%= @orden_fumigacion.tipo_certificado%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Fecha Aplicacion:</strong>
-	        	<%= @orden_fumigacion.fecha_aplicacion%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Tratamiento:</strong>
-	        	<%= @orden_fumigacion.tratamiento%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Vector:</strong>
-	        	<%= @orden_fumigacion.vector%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Superficie:</strong>
-	        	<%= @orden_fumigacion.superficie%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Veneno:</strong>
-	        	<%= @orden_fumigacion.veneno%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Droga:</strong>
-	        	<%= @orden_fumigacion.droga%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Fecha Vencimiento:</strong>
-	        	<%= @orden_fumigacion.fecha_vencimiento%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Proximo Tratamiento:</strong>
-	        	<%= @orden_fumigacion.proximo_tratamiento%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Importe:</strong>
-	        	<%= @orden_fumigacion.importe%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Estado:</strong>
-	        	<%= @orden_fumigacion.estado%>
-	      	</h3>
-	      	<h3>
-	        	<strong>Observaciones:</strong>
-	        	<%= @orden_fumigacion.observaciones_ordfumigacion%>
-	      	</h3>
-	    </ul>
-	    <table class="default">
-		  <tr>
-		    <td>
-		    	<div class="col-sm ml-5"><h3><%= link_to 'Imprimir Certificado', orden_fumigacion_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %></h3></div>
-		    </td>
-		    <td>
-		    	<div class="col-sm ml-5"><h3><%= link_to 'Imprimir Faja', faja_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %></h3></div>
-		    </td>
-		  </tr>
-  		</table>
-  		<a class="btn btn-lg btn-block btn-dark" href="/orden_fumigacions">Atrás</a>
-	</div>
+  <div class="card-header d-flex justify-content-between">
+      <%if @orden_fumigacion.anulado==true%>
+        <div class="col-md-4">
+          <h3 class="my-0 font-size:8vw">Detalle Fumigacion <strong  style="color:green"></strong></h2>
+        </div>
+        <div class="col-md-8">
+            <%= link_to 'Baja', orden_fumigacion_path, method: :anular, class: "btn btn-secondary" %>
+            <%= link_to 'Editar', edit_orden_fumigacion_path, class: "btn btn-primary" %>
+            <%= link_to 'Renovar', copy_orden_fumigacion_path, class: "btn btn-primary" %>
+            <%= link_to 'Imprimir Cert.', orden_fumigacion_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
+          <%= link_to 'Imprimir Faja', faja_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
+          <%= link_to 'Eliminar', orden_fumigacion_path, method: :delete, :class => 'btn btn-danger', :target => 'blank', data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
+          </div>
+      <% else %>
+        <div class="col-md-4">
+          <h3 class="my-0 font-size:8vw">Detalle Fumigacion: <strong  style="color:red">Dado de baja!</strong></h2>
+        </div>
+        <div class="col-md-8">
+            <%= link_to 'Editar', edit_orden_fumigacion_path, class: "btn btn-primary" %>
+            <%= link_to 'Renovar', copy_orden_fumigacion_path, class: "btn btn-primary" %>
+            <%= link_to 'Imprimir Cert.', orden_fumigacion_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
+          <%= link_to 'Imprimir Faja', faja_path(format: 'pdf'), :class => 'btn btn-success', :target => 'blank' %>
+          <%= link_to 'Eliminar', orden_fumigacion_path, method: :delete, :class => 'btn btn-danger', :target => 'blank', data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
+          </div>
+      <% end %>
+      
+    </div>  
+  <div class="card-body">
+      <ul class="list-unstyled mt-3 mb-4 text-center">
+          <h3>
+            <strong>Cliente:</strong>
+            <%= @orden_fumigacion.cliente.nombre %> - <%= @orden_fumigacion.cliente.apellido %>
+          </h3>
+          <h3>
+            <strong>Tipo Cliente:</strong>
+            <%= @orden_fumigacion.cliente.tipo_cliente %>
+          </h3>
+          <h3>
+            <strong>Rubro:</strong>
+            <%= @orden_fumigacion.cliente.rubro %>
+          </h3>
+          <h3>
+            <strong>Datos domicilio:</strong>
+            <%= @orden_fumigacion.cliente.domicilio %> - <%= @orden_fumigacion.cliente.barrio %> - <%= @orden_fumigacion.cliente.localidad %>
+          </h3>
+          <%if (@orden_fumigacion.cliente.observaciones_cliente.length > 0) && (@orden_fumigacion.cliente.observaciones_cliente !=" ")%>
+            <h3 class="p-3 mb-2 bg-info text-white">
+              <strong>Observaciones Cliente:</strong>
+              <%= @orden_fumigacion.cliente.observaciones_cliente%>
+            </h3>
+          <%else%>
+            <h3>
+              <strong>Observaciones Cliente:</strong>
+              <%= @orden_fumigacion.cliente.observaciones_cliente%>
+            </h3>
+          <%end%>
+          <h3>
+            <strong>Tecnico:</strong>
+            <%= @orden_fumigacion.tecnico.apellido %>
+          </h3>
+          
+          <%if @orden_fumigacion.anulado==true%>
+            <h3 style="color:green">
+              <strong  style="color:green">NroCertificado:</strong>
+              <%= @orden_fumigacion.nro_certificado%>
+            </h3>
+            <h3 style="color:green">
+              <strong>Tipo Certificado:</strong>
+              <%= @orden_fumigacion.tipo_certificado%>
+            </h3>
+          <% else %>
+            <h3 style="color:red">
+              <strong>Nro. Certificado:</strong>
+              <%= @orden_fumigacion.nro_certificado%>
+            </h3>
+            <h3 style="color:red">
+              <strong>Tipo Certificado:</strong>
+              <%= @orden_fumigacion.tipo_certificado%>
+            </h3>
+          <% end %>
+
+          <h3>
+            <strong>Fecha Aplicacion:</strong>
+            <%= @orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %>
+            <strong>Hora Aplicacion:</strong>
+            <%= @orden_fumigacion.hora_aplicacion.strftime("%H:%M") %>
+          </h3>
+          <h3>
+            <strong>Tratamiento:</strong>
+            <%= @orden_fumigacion.tratamiento%>
+          </h3>
+          <h3>
+            <strong>Vector:</strong>
+            <%= @orden_fumigacion.vector%>
+          </h3>
+          <h3>
+            <strong>Superficie:</strong>
+            <%= @orden_fumigacion.superficie%>
+          </h3>
+          <h3>
+            <strong>Veneno:</strong>
+            <%= @orden_fumigacion.veneno%>
+          </h3>
+          <h3>
+            <strong>Droga:</strong>
+            <%= @orden_fumigacion.droga%>
+          </h3>
+          
+          <h3>
+            <strong>Fecha Vencimiento:</strong>
+            <%= @orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %>
+          </h3>
+          
+          <h3>
+            <strong>Importe:</strong>
+            <%= @orden_fumigacion.importe%>
+          </h3>
+
+          <h3>
+            <strong>Fecha Vencimiento:</strong>
+            <%= @orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %>
+          </h3>
+          
+          <h3>
+            <strong>Importe:</strong>
+            <%= @orden_fumigacion.importe%>
+          </h3>
+
+          <%if @orden_fumigacion.fecha_refuerzo == nil%>
+            <h3>
+              <strong>Fecha Refuerzo:</strong>
+              <%= @orden_fumigacion.fecha_refuerzo %>
+            </h3>            
+            <h3>
+              <strong>Importe Refuerzo:</strong>
+              <%= @orden_fumigacion.importe_refuerzo%>
+            </h3>
+            <h3>
+              <strong>Fecha Repaso:</strong>
+              <%= @orden_fumigacion.fecha_repaso %>
+            </h3>            
+            <h3>
+              <strong>Importe Repaso:</strong>
+              <%= @orden_fumigacion.importe_repaso %>
+            </h3>
+          <% else %>
+            <h3 style="color:green">
+              <strong>Fecha Refuerzo:</strong>
+              <%= @orden_fumigacion.fecha_refuerzo.strftime("%d-%m-%Y") %>
+            </h3>            
+            <h3 style="color:green">
+              <strong>Importe Refuerzo:</strong>
+              <%= @orden_fumigacion.importe_refuerzo%>
+            </h3>
+            <h3 style="color:green">
+              <strong>Fecha Repaso:</strong>
+              <%= @orden_fumigacion.fecha_repaso.strftime("%d-%m-%Y") %>
+            </h3>            
+            <h3 style="color:green">
+              <strong>Importe Repaso:</strong>
+              <%= @orden_fumigacion.importe_repaso%>
+            </h3>
+
+          <%end%>
+          <h3>
+            <strong>Observaciones Cert:</strong>
+            <%= @orden_fumigacion.observaciones_ordfumigacion%>
+          </h3>
+      </ul>
+
+      <div class="card-header d-flex justify-content-between">
+        <div class="col-md-4">
+          <a class="btn btn-lg btn-block btn-dark" href="/orden_fumigacions">Atrás</a>
+        </div>
+        <div class="col-md-8">
+          <%= link_to 'Más Certificados de este Cliente', orden_fumigacions_fumigaciones_por_cliente_path(:id => @orden_fumigacion.cliente.id) , :class=>"btn btn-lg btn-block btn-dark"%>
+        </div>
+      </div>
+  </div>
 </div>

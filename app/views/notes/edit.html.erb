@@ -1,0 +1,82 @@
+<div class="container">
+  <h1 class="text-center card-header my-2">Editar Novedad</h1>
+<%= simple_form_for(@note) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="center-block form-inputs cliente-new-form">
+    <div class="row"> 
+      <div class="col-md-3">
+          <%= f.label 'Iniciado por: '%> 
+          <div>
+            <strong>
+            <%=User.find_by(id: @note.usuario_inicia.to_i).apellido%>  <%=User.find_by(id: @note.usuario_inicia.to_i).nombre%></strong>
+          </div>    
+      </div>
+      <div class="col-md-4">
+        <%= f.label 'Iniciado por: '%> 
+          <div>
+            <strong><%=@note.turno%></strong>
+          </div>    
+        
+      </div>
+      <div class="col-md-5">
+          <%= f.label 'Fecha Inicio' %>
+          <div><strong><%= @note.fecha_inicio %></strong></div>
+      </div>  
+    </div>
+    <div class="row"> 
+      <div class="col-md-12">
+        <%= f.input :descripcion_novedad, :label => "Descripcion Novedad", :as => :text, :input_html => { :class => "form-control", :rows => 7, :placeholder => "Descripcion Novedad"}%>
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col-md-12">
+        <script >
+          //Cambia los valores de la cadena de proceso
+          $(function () {
+            $("#note_estado").change(function () {
+               
+              var ValorSeleccionadoDropdown = $(this).val();
+                
+              if (ValorSeleccionadoDropdown == "En proceso"){
+                  document.getElementById('finalizado_id').style.display = "none";
+                  $(document).ready(function(){$("#usuario_finaliza_id").val("")});
+                  console.log("ValorSeleccionadoDropdown-en proceso-: ",ValorSeleccionadoDropdown);
+                } else {
+                  document.getElementById('finalizado_id').style.display = "block";
+                  $(document).ready(function(){$("#usuario_finaliza_id").val(<%=current_user.id%>)});
+                  console.log("ValorSeleccionadoDropdown-finalizado-: ",ValorSeleccionadoDropdown);
+              }
+            });
+          });
+          //Fin de cambio los valores de la cadena de proceso
+        </script>
+        <%= f.label 'Estado' %>
+        <%= f.input :estado, as: :select, :collection => ["En proceso", "Finalizado"], label: false, :default=> "En proceso", :input_html => { :class => "form-control"}%>
+      </div>
+    </div>  
+  </div>
+  <div class="row">     
+      <div class="col-md-12">
+        <%if (@note.estado == "En proceso") or (@note.estado.nil?)%>
+          <div id="finalizado_id" style="display: none;">
+            <%= f.label 'Finalizado por: '%> <strong  style="color:green;"><%=User.find_by(id: current_user.id).apellido%>  <%=User.find_by(id: current_user.id).nombre%></strong>
+          </div>
+        <%else%>  
+          <div id="finalizado_id" style="display: block;">           
+            <%= f.label 'Finalizado por: '%> <strong  style="color:green;"><%=User.find_by(id: current_user.id).apellido%>  <%=User.find_by(id: current_user.id).nombre%></strong>
+          </div>
+        <%end%>
+
+        <%= f.input :usuario_finaliza, :as => :hidden, :input_html => { :id => "usuario_finaliza_id"} %>
+      </div>
+  </div>    
+  <!-- div form-inputs cliente-new-form -->
+   <div class= "d-flex my-3">
+     <div> <%= f.button :submit,name="Confirmar",:class => "btn btn-success"  %> </div>
+  </div>
+<% end %>
+
+
+  <%= link_to 'Atras',  notes_path, :class => "center-block btn btn-dark btn-lg btn-block w-75 mt-5"  %>
+</div>
