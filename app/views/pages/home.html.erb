@@ -28,7 +28,8 @@
       <tbody id="myTable" >
         <% @orden_fumigacions.each do |orden_fumigacion| %>
           <%if orden_fumigacion.baja == true &&  orden_fumigacion.ultima_ordfumigacion == true %>
-            <%if orden_fumigacion.fecha_vencimiento.to_date == Date.today.to_date%>
+            <% if orden_fumigacion.fecha_vencimiento.present? && orden_fumigacion.fecha_vencimiento.to_date.between?(Date.today, Date.today + 90.days) %>
+
               <tr class="p-3 mb-2 bg-warning text-dark">
                 <td><%= link_to "#{orden_fumigacion.nro_certificado}", orden_fumigacion_path(orden_fumigacion)%></td>
                 <td><%= link_to "#{orden_fumigacion.cliente.nombre}", cliente_path(orden_fumigacion.cliente)%></td>
@@ -37,8 +38,8 @@
                 <td><%= orden_fumigacion.tecnico.codificacion %></td>
                 <td><%= orden_fumigacion.tecnico.apellido %></td>
                 <td><%= orden_fumigacion.importe %></td>
-                <td><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
-                <td><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
+                <td><%= orden_fumigacion.fecha_aplicacion ? orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") : "" %></td>
+                <td><%= orden_fumigacion.fecha_vencimiento ? orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") : "" %></td>
                 <td>
                     <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
                 </td>
@@ -52,8 +53,8 @@
                 <td><%= orden_fumigacion.tecnico.codificacion %></td>
                 <td><%= orden_fumigacion.tecnico.apellido %></td>
                 <td><%= orden_fumigacion.importe %></td>
-                <td><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
-                <td><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
+                <td><%= orden_fumigacion.fecha_aplicacion ? orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") : "" %></td>
+                <td><%= orden_fumigacion.fecha_vencimiento ? orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") : "" %></td>
                 <td>
                     <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
                 </td>

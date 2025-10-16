@@ -45,75 +45,44 @@
                                   <%= f.input :hora_aplicacion, :class => 'datepicker', as: :time, html5: true, :input_html => { :class => "form-control"} %>
                               </div>
                           </div>
-                          <%orden_fumigacion_id=1%>
+                          <!-- === CAMPO TRATAMIENTO === -->
                           <div class="form-group">
-                              <script >
-                                // Multiselect dropdown orden_fumigacion.tratamiento -->
-                                    $(document).ready(function() {
-                                    $("#orden_fumigacion_tratamiento_<%=orden_fumigacion_id%>").multiselect({
-                                      allSelectedText: 'Showing All'
-                                    });
-                                  });
-                                //Fin del efecto multiselect orden_trabajo.post
-                                //Cambia los valores de la cadena de proceso
-                                  $(function () {
-                                    $("#orden_fumigacion_tratamiento_<%=orden_fumigacion_id%>").change(function () {
-                                      var ValorSeleccionadoDropdown = $(this).val();
-                                      $(document).ready(function(){$("#<%=orden_fumigacion_id%>").val(ValorSeleccionadoDropdown)});
-                                    });
-                                  });
-                                //Fin de cambio los valores de la cadena de proceso
-                              </script>
-                              <div class="col-md-8">
-                                <label for="Tratamiento">Tratamiento</label>
-                                <select id= "orden_fumigacion_tratamiento_<%=orden_fumigacion_id%>" multiple="multiple" class="form-control">
-                                  <% OrdenFumigacion::TRATAMIENTO.each do  |elemento_tratamiento| %>
-                                      <%if cadenatovector(orden_fumigacion.tratamiento).include?  elemento_tratamiento %>
-                                        <option value = <%= elemento_tratamiento %> selected ><%= elemento_tratamiento %></option>
-                                      <%else%>
-                                        <option value = <%= elemento_tratamiento %> ><%= elemento_tratamiento %></option>
-                                      <%end%>
-                                  <%end%>
-                                </select>
+                            <div class="col-md-8">
+                              <%= f.label :tratamiento, "Tratamiento", class: "control-label" %>
+                              <%= f.hidden_field :tratamiento, id: "orden_trabajo_tratamiento" %>
+
+                              <div class="multi-select" id="multiSelectTratamiento">
+                                <div class="selected-items" id="selectedItemsTratamiento"></div>
+                                <div class="dropdown-arrow">&#9662;</div>
+                                <div class="dropdown" id="dropdownTratamiento">
+                                  <div data-value="Aspersión">Aspersión</div>
+                                  <div data-value="Humo">Humo</div>
+                                  <div data-value="Niebla">Niebla</div>
+                                  <div data-value="Otros">Otros</div>
+                                </div>
                               </div>
-                              <%= f.input :tratamiento, :as => :hidden, :input_html => { :id => orden_fumigacion_id} %>
+                            </div>
                           </div>
 
+                          <!-- === CAMPO VECTOR === -->
                           <div class="form-group">
-                              <script >
-                                // Multiselect dropdown orden_fumigacion.tratamiento -->
-                                    $(document).ready(function() {
-                                    $("#orden_fumigacion_vector_<%=orden_fumigacion_id*2%>").multiselect({
-                                      allSelectedText: 'Showing All'
-                                    });
-                                  });
-                                //Fin del efecto multiselect orden_trabajo.post
-
-                                //Cambia los valores de la cadena de proceso
-                                  $(function () {
-                                    $("#orden_fumigacion_vector_<%=orden_fumigacion_id*2%>").change(function () {
-                                      var ValorSeleccionadoDropdown = $(this).val();
-                                      $(document).ready(function(){$("#<%=orden_fumigacion_id*2%>").val(ValorSeleccionadoDropdown)});
-                                    });
-                                  });
-                                //Fin de cambio los valores de la cadena de proceso
-                              </script>
-                              <div class="col-md-8">
-                                <label for="Vector">Vector</label>
-                                <select id= "orden_fumigacion_vector_<%=orden_fumigacion_id*2%>" multiple="multiple" class="form-control">
-                                  <% OrdenFumigacion::VECTOR.each do  |elemento_vector| %>
-                                      <%if cadenatovector(orden_fumigacion.vector).include?  elemento_vector %>
-                                        <option value = <%= elemento_vector %> selected ><%= elemento_vector %></option>
-                                      <%else%>
-                                        <option value = <%= elemento_vector %> ><%= elemento_vector %></option>
-                                      <%end%>
-                                  <%end%>
-                                </select>
+                            <div class="col-md-8">
+                              <%= f.label :vector, "Vector", class: "control-label" %>
+                              <%= f.hidden_field :vector, id: "orden_trabajo_vector" %>
+                              <div class="multi-select" id="multiSelectVector">
+                                <div class="selected-items" id="selectedItemsVector"></div>
+                                <div class="dropdown-arrow">&#9662;</div>
+                                <div class="dropdown" id="dropdownVector">
+                                  <div data-value="Insectos">Insectos</div>
+                                  <div data-value="Roedores">Roedores</div>
+                                  <div data-value="Voladores">Voladores</div>
+                                  <div data-value="Bacterias">Bacterias</div>
+                                  <div data-value="Otros">Otros</div>
+                                </div>
                               </div>
-                              <%= f.input :vector, :as => :hidden, :input_html => { :id => orden_fumigacion_id*2} %>
+                            </div>
                           </div>
-
-                          <div class="form-group">
+                        <div class="form-group">
                               <div class="col-md-8">
                                   <%= f.input :superficie, :label => false, :input_html => { :class => "form-control", :placeholder => "Superficie"}%>
                               </div>
@@ -123,40 +92,23 @@
                                 <%= f.input :veneno, as: :select, :collection => ["C"], label: "Veneno", :default=> "C", :input_html => { :class => "form-control"}%>
                               </div>
                           </div>
-
+                          <!-- === CAMPO DROGA === -->
                           <div class="form-group">
-                              <script >
-                                // Multiselect dropdown orden_fumigacion.tratamiento -->
-                                    $(document).ready(function() {
-                                    $("#orden_fumigacion_droga_<%=orden_fumigacion_id*4%>").multiselect({
-                                      allSelectedText: 'Showing All'
-                                    });
-                                  });
-                                //Fin del efecto multiselect orden_trabajo.post
-
-                                //Cambia los valores de la cadena de proceso
-                                  $(function () {
-                                    $("#orden_fumigacion_droga_<%=orden_fumigacion_id*4%>").change(function () {
-                                      var ValorSeleccionadoDropdown = $(this).val();
-                                      $(document).ready(function(){$("#<%=orden_fumigacion_id*4%>").val(ValorSeleccionadoDropdown)});
-                                    });
-                                  });
-                                //Fin de cambio los valores de la cadena de proceso
-                              </script>
-                              <div class="col-md-8">
-                                <label for="droga">Droga</label>
-                                <select id= "orden_fumigacion_droga_<%=orden_fumigacion_id*4%>" multiple="multiple" class="form-control">
-                                  <% OrdenFumigacion::DROGA.each do  |elemento_droga| %>
-                                      <%if cadenatovector(orden_fumigacion.droga).include?  elemento_droga %>
-                                        <option value = <%= elemento_droga %> selected ><%= elemento_droga %></option>
-                                      <%else%>
-                                        <option value = <%= elemento_droga %> ><%= elemento_droga %></option>
-                                      <%end%>
-                                  <%end%>
-                                </select>
+                            <div class="col-md-8">
+                              <%= f.label :droga, "Droga", class: "control-label" %>
+                              <%= f.hidden_field :droga, id: "orden_trabajo_droga" %>
+                              <div class="multi-select" id="multiSelectDroga">
+                                <div class="selected-items" id="selectedItemsDroga"></div>
+                                <div class="dropdown-arrow">&#9662;</div>
+                                <div class="dropdown" id="dropdownDroga">
+                                  <div data-value="Piretroydes">Piretroydes</div>
+                                  <div data-value="Bromadilone">Bromadilone</div>
+                                  <div data-value="Otros">Otros</div>
+                                </div>
                               </div>
-                              <%= f.input :droga, :as => :hidden, :input_html => { :id => orden_fumigacion_id*4} %>
+                            </div>
                           </div>
+    
 
                           <div class="form-group">
 
@@ -251,3 +203,139 @@
   </div>
 
 <% end %>
+<style >
+
+.multi-select {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 40px 10px 10px;
+  background: white;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 100;
+  display: none;
+}
+
+.multi-select.active .dropdown {
+  display: block;
+}
+
+.dropdown div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown div:hover {
+  background: #f0f0f0;
+}
+
+.selected-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-height: 30px;
+  width: 100%;
+}
+
+.selected-items span {
+  background: #007bff;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.selected-items span i {
+  cursor: pointer;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.multi-select.active .dropdown-arrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  function initMultiSelect(multiSelectId, dropdownId, selectedItemsId, hiddenFieldId) {
+    const multiSelect = document.getElementById(multiSelectId);
+    const dropdown = document.getElementById(dropdownId);
+    const selectedItems = document.getElementById(selectedItemsId);
+    const hiddenField = document.getElementById(hiddenFieldId);
+    const selectedValues = new Set();
+
+    multiSelect.addEventListener('click', () => {
+      multiSelect.classList.toggle('active');
+    });
+
+    dropdown.addEventListener('click', (e) => {
+      const value = e.target.getAttribute('data-value');
+      const label = e.target.textContent;
+      if (!selectedValues.has(value)) {
+        selectedValues.add(value);
+        const tag = document.createElement('span');
+        tag.innerHTML = `${label} <i data-remove="${value}">&times;</i>`;
+        selectedItems.appendChild(tag);
+        hiddenField.value = Array.from(selectedValues).join(',');
+      }
+    });
+
+    selectedItems.addEventListener('click', (e) => {
+      if (e.target.dataset.remove) {
+        const valueToRemove = e.target.dataset.remove;
+        selectedValues.delete(valueToRemove);
+        e.target.parentElement.remove();
+        hiddenField.value = Array.from(selectedValues).join(',');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!multiSelect.contains(e.target)) {
+        multiSelect.classList.remove('active');
+      }
+    });
+
+    // Si hay valores ya guardados (modo edición)
+    if (hiddenField.value) {
+      hiddenField.value.split(',').forEach(v => {
+        if (v.trim() !== '') {
+          selectedValues.add(v.trim());
+          const tag = document.createElement('span');
+          tag.innerHTML = `${v.trim()} <i data-remove="${v.trim()}">&times;</i>`;
+          selectedItems.appendChild(tag);
+        }
+      });
+    }
+  }
+
+  // Inicializar los tres selects
+  initMultiSelect('multiSelectTratamiento', 'dropdownTratamiento', 'selectedItemsTratamiento', 'orden_trabajo_tratamiento');
+  initMultiSelect('multiSelectVector', 'dropdownVector', 'selectedItemsVector', 'orden_trabajo_vector');
+  initMultiSelect('multiSelectDroga', 'dropdownDroga', 'selectedItemsDroga', 'orden_trabajo_droga');
+});
+</script>

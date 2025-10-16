@@ -82,7 +82,7 @@
 
           <h3>
             <strong>Fecha Aplicacion:</strong>
-            <%= @orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %>
+            <%= @orden_fumigacion.fecha_aplicacion ? @orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") : "" %>
             <strong>Hora Aplicacion:</strong>
             <%= @orden_fumigacion.hora_aplicacion.strftime("%H:%M") %>
           </h3>
@@ -109,7 +109,7 @@
           
           <h3>
             <strong>Fecha Vencimiento:</strong>
-            <%= @orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %>
+            <%= @orden_fumigacion.fecha_vencimiento ? @orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") : "" %>
           </h3>
           
           <h3>
@@ -119,7 +119,7 @@
 
           <h3>
             <strong>Fecha Vencimiento:</strong>
-            <%= @orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %>
+            <%= @orden_fumigacion.fecha_vencimiento ? @orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") : "" %>
           </h3>
           
           <h3>
@@ -147,7 +147,7 @@
           <% else %>
             <h3 style="color:green">
               <strong>Fecha Refuerzo:</strong>
-              <%= @orden_fumigacion.fecha_refuerzo.strftime("%d-%m-%Y") %>
+              <%= @orden_fumigacion.fecha_refuerzo ? @orden_fumigacion.fecha_refuerzo.strftime("%d-%m-%Y") : "" %>
             </h3>            
             <h3 style="color:green">
               <strong>Importe Refuerzo:</strong>
@@ -155,8 +155,9 @@
             </h3>
             <h3 style="color:green">
               <strong>Fecha Repaso:</strong>
-              <%= @orden_fumigacion.fecha_repaso.strftime("%d-%m-%Y") %>
-            </h3>            
+              <%= @orden_fumigacion.fecha_repaso ? @orden_fumigacion.fecha_repaso.strftime("%d-%m-%Y") : "" %>
+            </h3>
+            
             <h3 style="color:green">
               <strong>Importe Repaso:</strong>
               <%= @orden_fumigacion.importe_repaso%>

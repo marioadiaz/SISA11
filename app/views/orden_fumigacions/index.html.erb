@@ -40,8 +40,8 @@
             <td><%= orden_fumigacion.cliente.rubro%></td>
             <td><%= orden_fumigacion.tecnico.codificacion %></td>
             <td><%= orden_fumigacion.importe %></td>
-            <td><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
-            <td><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
+            <td><%= orden_fumigacion.fecha_aplicacion ? orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") : "" %></td>
+            <td><%= orden_fumigacion.fecha_vencimiento ? orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") : "" %></td>
             
             <td>
                 <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
@@ -55,8 +55,8 @@
             <td style="background-color:#ff0000;"><%= orden_fumigacion.tecnico.codificacion %></td>
             <td style="background-color:#ff0000;"><%= orden_fumigacion.tecnico.apellido %></td>
             <td style="background-color:#ff0000;"><%= orden_fumigacion.importe %></td>
-            <td style="background-color:#ff0000;"><%= orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") %></td>
-            <td style="background-color:#ff0000;"><%= orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") %></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.fecha_aplicacion ? orden_fumigacion.fecha_aplicacion.strftime("%d-%m-%Y") : "" %></td>
+            <td style="background-color:#ff0000;"><%= orden_fumigacion.fecha_vencimiento ? orden_fumigacion.fecha_vencimiento.strftime("%d-%m-%Y") : "" %></td>
             
             <td>
                 <%= link_to 'Eliminar', orden_fumigacion, method: :delete, data: { confirm: "¿Estás seguro/a de eliminar el Certificado?" } %>
